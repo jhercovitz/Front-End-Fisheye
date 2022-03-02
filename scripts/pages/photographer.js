@@ -1,9 +1,12 @@
+// import { displayModal, closeModal } from "/utils/contactForm.js"
+
+
 function photographerFactory(data) {
     const { name, portrait, city, country, tagline } = data;
     const picture = `assets/photographers/${portrait}`;
 
 
-    function getPhotographerInfoDOM() {
+    function getPhotographInfoDOM() {
         const header = document.getElementsByClassName('photograph-header');
         const img = document.createElement('img');
         img.setAttribute("src", picture)
@@ -19,7 +22,7 @@ function photographerFactory(data) {
         header.appendChild(p2);
         return (header);
     }
-    return { name, picture, getPhotographerInfoDOM }
+    return { name, picture, getPhotographInfoDOM }
 }
 
 // async function displayData(photographers) {
@@ -27,8 +30,8 @@ function photographerFactory(data) {
 
 //     photographers.forEach((photographer) => {
 //         const photographerModel = photographerFactory(photographer);
-//         const getPhotographerInfoDOM = photographerModel.getPhotographerInfoDOM();
-//         photographHeader.appendChild(getPhotographerInfoDOM);
+//         const getPhotographerInfoDOM = photographerModel.getPhotographInfoDOM();
+//         photographHeader.appendChild(getPhotographInfoDOM);
 //     });
 // };
 
@@ -45,3 +48,25 @@ function photographerFactory(data) {
 //     }
 //     photographerHeader();
 // }
+
+function contain() {
+    const work = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg`;
+
+    function getPhotographWork() {
+        const card = document.createElement('div');
+        const img = document.createElement('img');
+        img.setAttribute("src", work)
+        const p1 = document.createElement('p1');
+        p1.textContent = "Arc-en-ciel ";
+        card.appendChild(img);
+        card.appendChild(p1);
+        return (card);
+    }
+    return { work, getPhotographWork }
+}
+
+
+
+
+// displayModal();
+// closeModal();

@@ -1,9 +1,10 @@
-export function displayModal() {
+/////// LES EXPORT NE FONCTIONNENT PAS
+function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
 }
 
-export function closeModal() {
+function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
