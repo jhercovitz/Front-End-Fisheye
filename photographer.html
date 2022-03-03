@@ -11,29 +11,35 @@
 
 <body>
     <header>
-        <a href="index.html"><img src="assets/images/logo.png" class="logo" /></a>
+        <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" /></a>
     </header>
     <main id="main">
         <div class="photograph-header">
-            <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+            <button id="button" class="contact_button" name="Contact Me">Contactez-moi</button>
         </div>
     </main>
     <div id="contact_modal">
         <div class="modal">
             <header>
                 <h2>Contactez-moi</h2>
-                <img src="assets/icons/close.svg" onclick="closeModal()" />
+                <img src="assets/icons/close.svg" id="close" alt="Close Contact form" />
             </header>
             <form>
                 <div>
                     <label>Prénom</label>
-                    <input />
+                    <input type="text" name="First name" />
+                    <label>Nom</label>
+                    <input type="text" name="Last name" />
+                    <label>Email</label>
+                    <input type="email" name="Email" />
+                    <label>Votre message</label>
+                    <input id="message" type="text" name="Your message" />
                 </div>
-                <button class="contact_button">Envoyer</button>
+                <button class="contact_button" name="Send">Envoyer</button>
             </form>
         </div>
     </div>
-    <script src="scripts/utils/contactForm.js"></script>
+    <!-- <script src="scripts/utils/contactForm.js"></script> -->
     <script type="module" src="scripts/pages/photographer.js"></script>
 </body>
 

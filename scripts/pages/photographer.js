@@ -1,5 +1,12 @@
-// import { displayModal, closeModal } from "/utils/contactForm.js"
+import { displayModal, closeModal } from "../utils/contactForm.js"
 
+// async function init() {
+//     // Récupère les datas des photographes
+//     const { photographers } = await getPhotographers();
+//     displayData(photographers);
+// };
+
+// init();
 
 function photographerFactory(data) {
     const { name, portrait, city, country, tagline } = data;
@@ -24,6 +31,8 @@ function photographerFactory(data) {
     }
     return { name, picture, getPhotographInfoDOM }
 }
+// const pho = photographerFactory();
+// pho.getPhotographInfoDOM();
 
 // async function displayData(photographers) {
 //     const photographHeader = document.querySelector(".photograph-header");
@@ -67,6 +76,14 @@ function contain() {
 
 
 
+const button = document.getElementById("button");
+button.addEventListener("click", function() {
+    displayModal();
 
-// displayModal();
-// closeModal();
+});
+
+const close = document.getElementById("close");
+close.addEventListener("click", function() {
+    closeModal();
+
+});
