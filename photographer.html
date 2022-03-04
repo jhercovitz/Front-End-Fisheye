@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+
     <title>Fisheye - photographe </title>
 </head>
 
@@ -17,6 +19,21 @@
         <div class="photograph-header">
             <button id="button" class="contact_button" name="Contact Me">Contactez-moi</button>
         </div>
+        <div class="filter">
+            <p>Trier par</p>
+            <div class="select_filtre">
+                <p>Popularité
+                    <i id="chevronDown" class="fas fa-chevron-down"></i>
+                    <i id="chevronUp" class="fas fa-chevron-up"></i>
+                </p>
+                <div class="whiteLine" id="whiteLine1"></div>
+                <p id="p1">Date</p>
+                <div class="whiteLine" id="whiteLine2"></div>
+                <p id="p2">Titre</p>
+            </div>
+
+        </div>
+
     </main>
     <div id="contact_modal">
         <div class="modal">
@@ -27,13 +44,14 @@
             <form>
                 <div>
                     <label>Prénom</label>
-                    <input type="text" name="First name" />
+                    <input class="input" type="text" name="First name" />
                     <label>Nom</label>
-                    <input type="text" name="Last name" />
+                    <input class="input" type="text" name="Last name" />
                     <label>Email</label>
-                    <input type="email" name="Email" />
+                    <input class="input" type="email" name="Email" />
                     <label>Votre message</label>
-                    <input id="message" type="text" name="Your message" />
+                    <input class="input" id="message" type="text" name="Your message" />
+                    <!-- <textarea id="message" type="text" name="Your message"></textarea> -->
                 </div>
                 <button class="contact_button" name="Send">Envoyer</button>
             </form>

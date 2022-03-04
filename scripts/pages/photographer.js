@@ -1,5 +1,15 @@
 import { displayModal, closeModal } from "../utils/contactForm.js"
 
+const input = document.querySelector("form");
+const chevronDown = document.getElementById("chevronDown");
+const chevronUp = document.getElementById("chevronUp");
+const selectFiltre = document.querySelector('.select_filtre');
+const p1 = document.getElementById("p1");
+const p2 = document.getElementById("p2");
+const whiteLine1 = document.getElementById("whiteLine1");
+const whiteLine2 = document.getElementById("whiteLine2");
+
+
 // async function init() {
 //     // Récupère les datas des photographes
 //     const { photographers } = await getPhotographers();
@@ -75,15 +85,42 @@ function contain() {
 }
 
 
-
+// OUVERTURE ET FERMETURE DE LA MODALE
 const button = document.getElementById("button");
 button.addEventListener("click", function() {
     displayModal();
-
 });
 
 const close = document.getElementById("close");
 close.addEventListener("click", function() {
     closeModal();
-
 });
+
+
+// CONSOLE.LOG DES INPUTS
+input.addEventListener("input", function(e) {
+    const userInput = e.target.value;
+    console.log(userInput);
+});
+
+// OUVERTURE DU DROPDOWN
+chevronDown.addEventListener("click", function() {
+    selectFiltre.style.height = "170px";
+    p1.style.display = "block";
+    p2.style.display = "block";
+    whiteLine1.style.display = "block";
+    whiteLine2.style.display = "block";
+    chevronDown.style.display = "none";
+    chevronUp.style.display = "inline";
+})
+
+// FERMETURE DROPDOWN
+chevronUp.addEventListener("click", function() {
+    selectFiltre.style.height = "69px";
+    p1.style.display = "none";
+    p2.style.display = "none";
+    whiteLine1.style.display = "none";
+    whiteLine2.style.display = "none";
+    chevronDown.style.display = "inline";
+    chevronUp.style.display = "none";
+})

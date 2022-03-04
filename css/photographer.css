@@ -5,7 +5,6 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
 }
 
 .contact_button {
@@ -77,4 +76,58 @@ form input {
 
 #message {
     height: 170px;
+}
+
+main {
+    margin-left: 100px;
+}
+
+p {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#p1,
+#p2 {
+    display: none;
+    margin-left: -53%;
+}
+
+.filter {
+    display: flex;
+}
+
+.select_filtre {
+    background-color: #901C1C;
+    width: 170px;
+    height: 69px;
+    border-radius: 5px;
+    margin-left: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.select_filtre p {
+    text-align: center;
+}
+
+#chevronUp {
+    display: none;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+#chevronDown {
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.whiteLine {
+    width: 150px;
+    color: white;
+    border: solid 1px;
+    display: none;
 }
