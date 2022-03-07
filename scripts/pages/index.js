@@ -23,20 +23,9 @@
             ]
             // et bien retourner le tableau photographers seulement une fois
         return ({
-            photographers: [...photographers, ...photographers, ...photographers]
+            photographers: [...photographers, ]
         })
     }
-
-    /////////// FETCH PLUS TARD  
-    // const photographers = [];
-    // fetch('/data/photographers.json').then(response => {
-    //     return response.json();
-    // }).then(data => {
-    //     // Work with JSON data here
-    //     console.log(data);
-    // }).catch(err => {
-    //     this.dataError = true;
-    // });
 
     async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
@@ -55,3 +44,15 @@
     };
 
     init();
+
+
+    /////////// FETCH PLUS TARD  
+    // const photographers = [];
+    // fetch('/data/photographers.json').then(response => {
+    //     return response.json();
+    // }).then(data => {
+    //     // Work with JSON data here
+    //     console.log(data);
+    // }).catch(err => {
+    //     this.dataError = true;
+    // });
