@@ -5,6 +5,10 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .contact_button {
@@ -30,11 +34,15 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    margin-top: -400px;
+    position: relative;
 }
 
 .modal header {
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 100%;
+    display: flex;
+    align-items: baseline
 }
 
 .modal header img {
@@ -44,7 +52,20 @@
 .modal header h2 {
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
+    margin-top: -22px;
+    /* text-align: center; */
+}
+
+#modalHeader {
+    display: flex;
+    flex-direction: row;
+    height: 160px;
+    flex-wrap: wrap;
+    padding-bottom: 18px;
+}
+
+#name {
+    margin-top: -60px;
 }
 
 form {
@@ -52,6 +73,7 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 65px;
 }
 
 form label {
@@ -80,11 +102,50 @@ form input {
 
 main {
     margin-left: 100px;
+    margin-right: 100px;
 }
 
 p {
     font-weight: 700;
     font-size: 18px;
+}
+
+article h1 {
+    font-weight: 400;
+    font-size: 64px;
+    margin-bottom: -20px;
+    margin-top: -30px;
+    color: #D3573C;
+    width: 300px;
+}
+
+.p1 {
+    font-weight: 400;
+    color: #901C1C;
+    font-size: 24px;
+    width: 300px;
+}
+
+.p2 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #525252;
+    width: 300px;
+}
+
+.photograph-header img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 50px;
+}
+
+.contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 61%;
 }
 
 #p1,
@@ -95,6 +156,7 @@ p {
 
 .filter {
     display: flex;
+    margin-top: 10px;
 }
 
 .select_filtre {
@@ -102,12 +164,13 @@ p {
     width: 170px;
     height: 69px;
     border-radius: 5px;
-    margin-left: 30px;
+    margin-left: 90px;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: absolute;
 }
 
 .select_filtre p {
@@ -130,4 +193,13 @@ p {
     color: white;
     border: solid 1px;
     display: none;
+}
+
+.photograph_work {
+    margin-top: 40px;
+}
+
+.photograph_work img {
+    width: 350px;
+    height: 350px;
 }
