@@ -223,3 +223,19 @@ article h1 {
     height: 350px;
     object-fit: cover;
 }
+
+.photograph_work i {
+    background-color: #901C1C;
+    width: 17.5px;
+    height: 18.35px;
+}
+
+.tag {
+    width: 376px;
+    height: 89px;
+    border-radius: 5px;
+    background-color: #DB8876;
+    float: right;
+    margin-right: 40px;
+    color: black;
+}
