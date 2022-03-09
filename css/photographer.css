@@ -27,14 +27,14 @@
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 43%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
-    margin-top: -400px;
+    margin-top: -880px;
     position: relative;
 }
 
@@ -110,6 +110,10 @@ p {
     font-size: 18px;
 }
 
+article {
+    margin-left: 50px;
+}
+
 article h1 {
     font-weight: 400;
     font-size: 64px;
@@ -133,6 +137,14 @@ article h1 {
     width: 300px;
 }
 
+.p4 {
+    margin-left: 88%;
+    margin-top: -57px;
+    font-weight: 500;
+    color: #901C1C;
+    font-size: 24px;
+}
+
 .photograph-header img {
     width: 200px;
     height: 200px;
@@ -145,7 +157,7 @@ article h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 61%;
+    width: 57%;
 }
 
 #p1,
@@ -197,9 +209,17 @@ article h1 {
 
 .photograph_work {
     margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.work {
+    display: flex;
+    flex-direction: column;
 }
 
 .photograph_work img {
     width: 350px;
     height: 350px;
+    object-fit: cover;
 }

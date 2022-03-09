@@ -11,6 +11,9 @@ const whiteLine1 = document.getElementById("whiteLine1");
 const whiteLine2 = document.getElementById("whiteLine2");
 const photographWorkDiv = document.querySelector(".photograph_work");
 const main = document.querySelector('main');
+const workDiv1 = document.getElementById("work_div1");
+const workDiv2 = document.getElementById("work_div2");
+const workDiv3 = document.getElementById("work_div3");
 
 
 // AFFICHAGE DES INFOS PHOTOGRAPHE
@@ -78,29 +81,61 @@ init();
 
 // AFFICHAGE DU TRAVAIL DU PHOTOGRAPHE
 function contain() {
-    const work = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg`;
+    let work = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg`;
+    const work2 = `assets/FishEye_Photos/Sample Photos/Mimi/Event_BenevidesWedding.jpg`;
+    const work3 = `assets/FishEye_Photos/Sample Photos/Mimi/Event_PintoWedding.jpg`;
+    const work4 = `assets/FishEye_Photos/Sample Photos/Mimi/Event_SeasideWedding.jpg`;
+    const work5 = `assets/FishEye_Photos/Sample Photos/Mimi/Portrait_Background.jpg`;
+    const work6 = `assets/FishEye_Photos/Sample Photos/Mimi/Portrait_Wednesday.jpg`;
+    const work7 = `assets/FishEye_Photos/Sample Photos/Mimi/Travel_HillsideColor.jpg`;
+    const work8 = `assets/FishEye_Photos/Sample Photos/Mimi/Travel_Lonesome.jpg`;
+    const work9 = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Wild_Horses_in_the_mountains.mp4`;
+    const icon = `fa-solid fa-heart`;
 
     function getPhotographWork() {
         const img = document.createElement('img');
         img.setAttribute("src", work);
+        const img2 = document.createElement('img');
+        img2.setAttribute("src", work2);
+        const img3 = document.createElement('img');
+        img3.setAttribute("src", work3);
         const p1 = document.createElement('p');
         p1.classList.add("p1");
-        p1.textContent = "Arc-en-ciel ";
-        // const heart = document.createElement('i');
-        // heart.classList.add("fa-solid fa-heart");
-        photographWorkDiv.appendChild(img);
-        photographWorkDiv.appendChild(p1);
-        // photographWorkDiv.appendChild(heart);
+        p1.textContent = "Arc-en-ciel";
+        const p2 = document.createElement('p');
+        p2.classList.add("p1");
+        p2.textContent = "Picture";
+        const p3 = document.createElement('p');
+        p3.classList.add("p1");
+        p3.textContent = "Picture";
+        const p4 = document.createElement('p');
+        p4.classList.add('p4');
+        p4.textContent = ("12");
+        const heart = document.createElement('i'); // n'affiche pas le coeur
+        heart.setAttribute("class", icon);
+
+        p4.appendChild(heart);
+        workDiv1.appendChild(img);
+        workDiv1.appendChild(p1);
+        workDiv1.appendChild(p4);
+        workDiv2.appendChild(img2);
+        workDiv2.appendChild(p2);
+        // workDiv2.appendChild(p4);
+        workDiv3.appendChild(img3);
+        workDiv3.appendChild(p3);
+        // workDiv3.appendChild(p4);
+
+
         return (photographWorkDiv);
     }
-    return { work, getPhotographWork };
+    return { work, work2, work3, getPhotographWork };
 }
 
 async function displayPhotographerWork(photographers) {
 
     photographers.forEach((photographer) => {
-        const photographerModel = contain();
-        const PhotographWork = photographerModel.getPhotographWork();
+        const workModel = contain();
+        const PhotographWork = workModel.getPhotographWork();
         main.appendChild(PhotographWork);
     });
 };
@@ -120,7 +155,6 @@ const button = document.getElementById("button");
 button.addEventListener("click", function() {
     document.querySelector('header').style.opacity = "0.6";
     main.style.opacity = "0.6";
-    document.getElementById('button').style.display = "none";
     document.querySelector('.select_filtre').style.marginLeft = "0"
     displayModal();
 });
@@ -129,7 +163,6 @@ const close = document.getElementById("close");
 close.addEventListener("click", function() {
     document.querySelector('header').style.opacity = "1";
     main.style.opacity = "1";
-    document.getElementById('button').style.display = "block";
     document.querySelector('.select_filtre').style.marginLeft = "90px"
     closeModal();
 });
