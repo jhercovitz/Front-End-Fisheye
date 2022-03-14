@@ -4,16 +4,14 @@ const input = document.querySelector("form");
 const chevronDown = document.getElementById("chevronDown");
 const chevronUp = document.getElementById("chevronUp");
 const selectFiltre = document.querySelector('.select_filtre');
-const p1 = document.getElementById("p1");
-const p2 = document.getElementById("p2");
-const p3 = document.getElementById("p3");
+const idP1 = document.getElementById("p1");
+const idP2 = document.getElementById("p2");
+const idP3 = document.getElementById("p3");
 const whiteLine1 = document.getElementById("whiteLine1");
 const whiteLine2 = document.getElementById("whiteLine2");
 const photographWorkDiv = document.querySelector(".photograph_work");
 const main = document.querySelector('main');
-const workDiv1 = document.getElementById("work_div1");
-const workDiv2 = document.getElementById("work_div2");
-const workDiv3 = document.getElementById("work_div3");
+
 
 
 // AFFICHAGE DES INFOS PHOTOGRAPHE
@@ -93,6 +91,12 @@ function contain() {
     const icon = `fa-solid fa-heart`;
 
     function getPhotographWork() {
+        const workDiv1 = document.createElement('div');
+        workDiv1.classList.add("work");
+        const workDiv2 = document.createElement('div');
+        workDiv2.classList.add("work");
+        const workDiv3 = document.createElement('div');
+        workDiv3.classList.add("work");
         const img = document.createElement('img');
         img.setAttribute("src", work);
         const img2 = document.createElement('img');
@@ -111,10 +115,12 @@ function contain() {
         const p4 = document.createElement('p');
         p4.classList.add('p4');
         p4.textContent = ("12");
-        const heart = document.createElement('i'); // n'affiche pas le coeur
-        heart.setAttribute("class", icon);
-
+        const heart = document.createElement('i');
+        heart.classList.add("fa", "fa-solid", "fa-heart");
         p4.appendChild(heart);
+        photographWorkDiv.appendChild(workDiv1);
+        photographWorkDiv.appendChild(workDiv2);
+        photographWorkDiv.appendChild(workDiv3);
         workDiv1.appendChild(img);
         workDiv1.appendChild(p1);
         workDiv1.appendChild(p4);
@@ -188,9 +194,9 @@ displayName();
 // OUVERTURE DU DROPDOWN
 chevronDown.addEventListener("click", function() {
     selectFiltre.style.height = "170px";
-    p1.style.display = "block";
-    p2.style.display = "block";
-    p3.style.marginTop = "39px";
+    idP1.style.display = "block";
+    idP2.style.display = "block";
+    idP3.style.marginTop = "30px";
     whiteLine1.style.display = "block";
     whiteLine2.style.display = "block";
     chevronDown.style.display = "none";
@@ -200,11 +206,21 @@ chevronDown.addEventListener("click", function() {
 // FERMETURE DROPDOWN
 chevronUp.addEventListener("click", function() {
     selectFiltre.style.height = "69px";
-    p1.style.display = "none";
-    p2.style.display = "none";
-    p3.style.marginTop = "18px";
+    idP1.style.display = "none";
+    idP2.style.display = "none";
+    idP3.style.marginTop = "18px";
     whiteLine1.style.display = "none";
     whiteLine2.style.display = "none";
     chevronDown.style.display = "inline";
     chevronUp.style.display = "none";
+})
+
+
+const tagContain =
+    `<p class="p5">297 081 <i class="fa fa-solid fa-heart"></i></p> 
+    <p class="p5">300€ / jour</p>`;
+document.querySelector('.tag').innerHTML += tagContain;
+//INCREMENTATION DES LIKES
+document.querySelector(".fa").addEventListener("click", function() {
+
 })
