@@ -11,7 +11,8 @@ const whiteLine1 = document.getElementById("whiteLine1");
 const whiteLine2 = document.getElementById("whiteLine2");
 const photographWorkDiv = document.querySelector(".photograph_work");
 const main = document.querySelector('main');
-
+const heart = document.createElement('i');
+heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
 
 
 // AFFICHAGE DES INFOS PHOTOGRAPHE
@@ -82,13 +83,7 @@ function contain() {
     let work = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg`;
     const work2 = `assets/FishEye_Photos/Sample Photos/Mimi/Event_BenevidesWedding.jpg`;
     const work3 = `assets/FishEye_Photos/Sample Photos/Mimi/Event_PintoWedding.jpg`;
-    const work4 = `assets/FishEye_Photos/Sample Photos/Mimi/Event_SeasideWedding.jpg`;
-    const work5 = `assets/FishEye_Photos/Sample Photos/Mimi/Portrait_Background.jpg`;
-    const work6 = `assets/FishEye_Photos/Sample Photos/Mimi/Portrait_Wednesday.jpg`;
-    const work7 = `assets/FishEye_Photos/Sample Photos/Mimi/Travel_HillsideColor.jpg`;
-    const work8 = `assets/FishEye_Photos/Sample Photos/Mimi/Travel_Lonesome.jpg`;
     const work9 = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Wild_Horses_in_the_mountains.mp4`;
-    const icon = `fa-solid fa-heart`;
 
     function getPhotographWork() {
         const workDiv1 = document.createElement('div');
@@ -115,8 +110,7 @@ function contain() {
         const p4 = document.createElement('p');
         p4.classList.add('p4');
         p4.textContent = ("12");
-        const heart = document.createElement('i');
-        heart.classList.add("fa", "fa-solid", "fa-heart");
+
         p4.appendChild(heart);
         photographWorkDiv.appendChild(workDiv1);
         photographWorkDiv.appendChild(workDiv2);
@@ -217,10 +211,16 @@ chevronUp.addEventListener("click", function() {
 
 
 const tagContain =
-    `<p class="p5">297 081 <i class="fa fa-solid fa-heart"></i></p> 
+    `<p class="like">297 081 <i class="fa fa-solid fa-heart"></i></p> 
     <p class="p5">300€ / jour</p>`;
 document.querySelector('.tag').innerHTML += tagContain;
-//INCREMENTATION DES LIKES
-document.querySelector(".fa").addEventListener("click", function() {
 
+
+//INCREMENTATION DES LIKES
+heart.addEventListener("click", function() {
+    var i = document.querySelector(".like");
+    i = 297081;
+    i++;
+    document.querySelector(".like").innerHTML = i;
+    console.log(i);
 })
