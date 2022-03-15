@@ -1,5 +1,6 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 
+
 const input = document.querySelector("form");
 const chevronDown = document.getElementById("chevronDown");
 const chevronUp = document.getElementById("chevronUp");
@@ -13,6 +14,7 @@ const photographWorkDiv = document.querySelector(".photograph_work");
 const main = document.querySelector('main');
 const heart = document.createElement('i');
 heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
+
 
 
 // AFFICHAGE DES INFOS PHOTOGRAPHE
@@ -45,15 +47,14 @@ function photographerFactory(data) {
 async function getPhotographers() {
     // Penser à remplacer par les données récupérées dans le json
     const photographers = [{
-            "name": "Mimi Keel",
-            "id": 243,
-            "city": "London",
-            "country": "UK",
-            "tagline": "Voir le beau dans le quotidien",
-            "price": 400,
-            "portrait": "MimiKeel.jpg",
-        }, ]
-        // et bien retourner le tableau photographers seulement une fois
+        "name": "Mimi Keel",
+        "id": 243,
+        "city": "London",
+        "country": "UK",
+        "tagline": "Voir le beau dans le quotidien",
+        "price": 400,
+        "portrait": "MimiKeel.jpg",
+    }, ]
     return ({
         photographers: [...photographers, ]
     });
@@ -61,7 +62,6 @@ async function getPhotographers() {
 
 async function displayData(photographers) {
     const header = document.querySelector('.photograph-header');
-
     photographers.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer);
         const PhotographInfoDOM = photographerModel.getPhotographInfoDOM();
@@ -75,15 +75,13 @@ async function init() {
     displayData(photographers);
 };
 
-init();
-
 
 // AFFICHAGE DU TRAVAIL DU PHOTOGRAPHE
 function contain() {
     let work = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Rainbow.jpg`;
     const work2 = `assets/FishEye_Photos/Sample Photos/Mimi/Event_BenevidesWedding.jpg`;
     const work3 = `assets/FishEye_Photos/Sample Photos/Mimi/Event_PintoWedding.jpg`;
-    const work9 = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Wild_Horses_in_the_mountains.mp4`;
+    const work4 = `assets/FishEye_Photos/Sample Photos/Mimi/Animals_Wild_Horses_in_the_mountains.mp4`;
 
     function getPhotographWork() {
         const workDiv1 = document.createElement('div');
@@ -92,29 +90,37 @@ function contain() {
         workDiv2.classList.add("work");
         const workDiv3 = document.createElement('div');
         workDiv3.classList.add("work");
+        const workDiv4 = document.createElement('div');
+        workDiv4.classList.add("work");
         const img = document.createElement('img');
         img.setAttribute("src", work);
-        const img2 = document.createElement('img');
-        img2.setAttribute("src", work2);
-        const img3 = document.createElement('img');
-        img3.setAttribute("src", work3);
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = "Arc-en-ciel";
+        const img2 = document.createElement('img');
+        img2.setAttribute("src", work2);
         const p2 = document.createElement('p');
         p2.classList.add("p1");
         p2.textContent = "Picture";
+        const img3 = document.createElement('img');
+        img3.setAttribute("src", work3);
         const p3 = document.createElement('p');
         p3.classList.add("p1");
         p3.textContent = "Picture";
+        const video = document.createElement('video');
+        video.setAttribute("controls", "src", work4, );
+        // video.play();
+        const p5 = document.createElement('p');
+        p5.classList.add("p1");
+        p5.textContent = "Video";
         const p4 = document.createElement('p');
         p4.classList.add('p4');
         p4.textContent = ("12");
-
         p4.appendChild(heart);
         photographWorkDiv.appendChild(workDiv1);
         photographWorkDiv.appendChild(workDiv2);
         photographWorkDiv.appendChild(workDiv3);
+        photographWorkDiv.appendChild(workDiv4);
         workDiv1.appendChild(img);
         workDiv1.appendChild(p1);
         workDiv1.appendChild(p4);
@@ -124,15 +130,24 @@ function contain() {
         workDiv3.appendChild(img3);
         workDiv3.appendChild(p3);
         // workDiv3.appendChild(p4);
-
-
+        workDiv4.appendChild(video)
+        workDiv4.appendChild(p5);
+        // workDiv4.appendChild(p4);
         return (photographWorkDiv);
     }
-    return { work, work2, work3, getPhotographWork };
+    // TRI DES ELEMENTS 
+    document.getElementById("p2").addEventListener("click", function() {
+        let workSorted = { work, work2, work3, work4 };
+        workSorted.sort(function(a, b) {
+            if (a.textContent < b.textContent) { return -1; }
+            if (a.textContent > b.textContent) { return 1; }
+            return 0;
+        })
+    })
+    return { work, work2, work3, work4, getPhotographWork };
 }
 
 async function displayPhotographerWork(photographers) {
-
     photographers.forEach((photographer) => {
         const workModel = contain();
         const PhotographWork = workModel.getPhotographWork();
@@ -145,8 +160,6 @@ async function WorkInit() {
     const { photographers } = await getPhotographers();
     displayPhotographerWork(photographers);
 };
-
-WorkInit();
 
 
 
@@ -175,14 +188,13 @@ input.addEventListener("input", function(e) {
 
 //INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
 // ne pas oublier de remplacer le nom
-function displayName() {
+function displayNameModal() {
     let photographerName = "";
     photographerName =
         photographerName +
         `<h2 id="name">Mimi Keel<h2>`;
     document.getElementById("modalHeader").innerHTML += photographerName;
 }
-displayName();
 
 
 // OUVERTURE DU DROPDOWN
@@ -210,17 +222,28 @@ chevronUp.addEventListener("click", function() {
 })
 
 
+
+
+// CONTENU DU TAG
+let count = 297081;
 const tagContain =
-    `<p class="like">297 081 <i class="fa fa-solid fa-heart"></i></p> 
+    `<p class="like">${count}</p>
+    <i class="fa fa-solid fa-heart"></i>
     <p class="p5">300€ / jour</p>`;
 document.querySelector('.tag').innerHTML += tagContain;
 
-
 //INCREMENTATION DES LIKES
 heart.addEventListener("click", function() {
-    var i = document.querySelector(".like");
-    i = 297081;
-    i++;
-    document.querySelector(".like").innerHTML = i;
-    console.log(i);
+    count++;
+    document.querySelector(".like").innerHTML = count;
 })
+
+
+// OUVERTURE DE LA LIGHTBOX
+
+
+
+
+init();
+WorkInit();
+displayNameModal();

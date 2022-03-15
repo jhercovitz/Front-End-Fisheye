@@ -117,7 +117,7 @@ article {
 article h1 {
     font-weight: 400;
     font-size: 64px;
-    margin-bottom: -20px;
+    margin-bottom: -10px;
     margin-top: -30px;
     color: #D3573C;
     width: 300px;
@@ -162,11 +162,17 @@ article h1 {
 #p1 {
     display: none;
     margin-left: -53%;
+    cursor: pointer;
 }
 
 #p2 {
     display: none;
     margin-left: -53%;
+    cursor: pointer;
+}
+
+#p3 {
+    cursor: pointer;
 }
 
 .filter {
@@ -211,6 +217,7 @@ article h1 {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .work {
@@ -218,10 +225,12 @@ article h1 {
     flex-direction: column;
 }
 
-.photograph_work img {
+.photograph_work img,
+video {
     width: 350px;
     height: 350px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 .photograph_work i {
@@ -242,4 +251,8 @@ article h1 {
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.tag i {
+    margin-left: -85px;
 }
