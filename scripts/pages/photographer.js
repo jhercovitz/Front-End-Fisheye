@@ -108,8 +108,8 @@ function contain() {
         p3.classList.add("p1");
         p3.textContent = "Picture";
         const video = document.createElement('video');
-        video.setAttribute("controls", "src", work4, );
-        // video.play();
+        video.setAttribute("src", work4);
+        video.controls = true;
         const p5 = document.createElement('p');
         p5.classList.add("p1");
         p5.textContent = "Video";
@@ -136,13 +136,19 @@ function contain() {
         return (photographWorkDiv);
     }
     // TRI DES ELEMENTS 
+    // voir créer une class avec currentIndex
     document.getElementById("p2").addEventListener("click", function() {
-        let workSorted = { work, work2, work3, work4 };
+        let workSorted = [work, work2]; //, work3, work4
         workSorted.sort(function(a, b) {
-            if (a.textContent < b.textContent) { return -1; }
-            if (a.textContent > b.textContent) { return 1; }
+            const textA = a.textContent, // probleme avec toLowerCase
+                textB = b.textContent;
+            if (textA < textB)
+                return -1;
+            if (textA > textB)
+                return 1;
+            console.log(workSorted)
             return 0;
-        })
+        });
     })
     return { work, work2, work3, work4, getPhotographWork };
 }
@@ -164,6 +170,7 @@ async function WorkInit() {
 
 
 // OUVERTURE ET FERMETURE DE LA MODALE
+// voir s'il faut changer de fichier 
 const button = document.getElementById("button");
 button.addEventListener("click", function() {
     document.querySelector('header').style.opacity = "0.6";
@@ -176,9 +183,21 @@ const close = document.getElementById("close");
 close.addEventListener("click", function() {
     document.querySelector('header').style.opacity = "1";
     main.style.opacity = "1";
-    document.querySelector('.select_filtre').style.marginLeft = "90px"
+    document.querySelector('.select_filtre').style.marginLeft = "90px";
     closeModal();
 });
+
+// FERMETURE DU MESSAGE D'ENVOI
+const closeConfirm = document.getElementById('close_confirm');
+closeConfirm.addEventListener("click", () => {
+    closeModal();
+    document.querySelector('header').style.opacity = "1";
+    main.style.opacity = "1";
+    document.getElementById('myForm').style.display = "block"; // ré-ouvre le formulaire au clic
+    document.getElementById('modalHeader').style.display = "flex";
+    document.getElementById('confirm_submit').style.display = "none"; // empeche la ré-ouverture automatique du message de confirmation
+})
+
 
 // CONSOLE.LOG DES INPUTS
 input.addEventListener("input", function(e) {
@@ -198,6 +217,7 @@ function displayNameModal() {
 
 
 // OUVERTURE DU DROPDOWN
+// voir mettre des buttons
 chevronDown.addEventListener("click", function() {
     selectFiltre.style.height = "170px";
     idP1.style.display = "block";

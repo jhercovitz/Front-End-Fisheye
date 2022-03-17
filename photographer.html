@@ -46,23 +46,34 @@
                 </div>
                 <img src="assets/icons/close.svg" id="close" alt="Close Contact form" />
             </header>
-            <form>
+            <form id="myForm">
                 <div>
-                    <label>Prénom</label>
-                    <input class="input" type="text" name="First name" />
-                    <label>Nom</label>
-                    <input class="input" type="text" name="Last name" />
-                    <label>Email</label>
-                    <input class="input" type="email" name="Email" />
-                    <label>Votre message</label>
-                    <input class="input" id="message" type="text" name="Your message" />
+                    <div class="formData">
+                        <label for="First name">Prénom</label>
+                        <input class="input" type="text" id="first" name="First name" minlength="2" required/>
+                    </div>
+                    <div class="formData">
+                        <label for="Last name">Nom</label>
+                        <input class="input" type="text" id="last" name="Last name" minlength="2" required />
+                    </div>
+                    <div class="formData">
+                        <label for="email">Email</label>
+                        <input class="input" type="email" id="email" name="Email" required />
+                    </div>
+                    <div class="formData">
+                        <label for="Your message">Votre message</label>
+                        <input class="input" id="message" type="text" name="Your message" minlength="2" required />
+                    </div>
                     <!-- <textarea id="message" type="text" name="Your message"></textarea> -->
                 </div>
-                <button class="contact_button" name="Send">Envoyer</button>
+                <button class="contact_button" id="send" name="Send">Envoyer</button>
             </form>
+            <div class="confirmation_envoi" id="confirm_submit">
+                <h2>Votre message a bien été envoyé</h2>
+                <button class="contact_button" id="close_confirm" class="button">fermer</button>
+            </div>
         </div>
-    </div>
-    <script type="module" src="scripts/pages/photographer.js"></script>
+        <script type="module" src="scripts/pages/photographer.js"></script>
 </body>
 
 </html>
