@@ -19,10 +19,10 @@ document.forms[0].addEventListener("submit", function(e) {
     const isFirstNameValid = checkFirstName(document.getElementById('first').value) // vérifie la valeur saisie par l'utlisateur
     const isLastNameValid = checkLastName(document.getElementById('last').value)
     const isEmailValid = checkEmail(document.getElementById('email').value)
-    const isMessage = checkMessage(document.getElementById('message').value)
+    const isMessageValid = checkMessage(document.getElementById('message').value)
 
     // on valide que tous les champs soient ok pour envoyer le formulaire
-    if (isFirstNameValid && isLastNameValid && isEmailValid && isMessage) {
+    if (isFirstNameValid && isLastNameValid && isEmailValid && isMessageValid) {
         form.style.display = "none";
         document.getElementById('modalHeader').style.display = "none";
         document.querySelector('header').style.opacity = "0.6";
@@ -34,7 +34,7 @@ document.forms[0].addEventListener("submit", function(e) {
 });
 
 
-//Messages d'erreur
+//MESSAGES D'ERREUR
 // ne fonctionnenent pas
 function minTwoChar(input) { // au moins deux charactères doivent être saisies
     if (input.length < 2) {
