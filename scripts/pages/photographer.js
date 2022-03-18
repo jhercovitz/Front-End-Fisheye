@@ -56,7 +56,7 @@ async function getPhotographers() {
         "portrait": "MimiKeel.jpg",
     }, ]
     return ({
-        photographers: [...photographers, ]
+        photographers: [...photographers]
     });
 }
 
@@ -64,8 +64,8 @@ async function displayData(photographers) {
     const header = document.querySelector('.photograph-header');
     photographers.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer);
-        const PhotographInfoDOM = photographerModel.getPhotographInfoDOM();
-        header.appendChild(PhotographInfoDOM);
+        const photographInfoDOM = photographerModel.getPhotographInfoDOM();
+        header.appendChild(photographInfoDOM);
     });
 };
 
@@ -79,12 +79,13 @@ async function init() {
 // AFFICHAGE DU TRAVAIL DU PHOTOGRAPHE
 function mediaFactory(data) {
     const { title, image, likes } = data;
+    const picture = `assets/FishEye_Photos/Sample Photos/Mimi/${image}`
 
     function getMediaInfoDOM() {
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
         const img = document.createElement('img');
-        img.setAttribute("src", image);
+        img.setAttribute("src", picture);
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = title;
@@ -112,20 +113,20 @@ async function getMedia() {
         "date": "2019-07-02"
     }, ]
     return ({
-        media: [...media, ]
+        media: [...media]
     });
 }
 
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
-        const workModel = mediaFactory();
-        const PhotographWork = workModel.getMediaInfoDOM();
-        main.appendChild(PhotographWork);
+        const workModel = mediaFactory(media);
+        const mediaInfoDOM = workModel.getMediaInfoDOM();
+        main.appendChild(mediaInfoDOM);
     });
 };
 
 async function WorkInit() {
-    // Récupère les datas des photographes
+    // Récupère les datas des medias
     const { media } = await getMedia();
     displayPhotographerWork(media);
 };
