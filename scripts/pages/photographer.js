@@ -78,7 +78,7 @@ async function init() {
 
 // AFFICHAGE DU TRAVAIL DU PHOTOGRAPHE
 function mediaFactory(data) {
-    const { title, image, likes } = data;
+    const { id, title, image, likes, date } = data;
     const picture = `assets/FishEye_Photos/Sample Photos/Mimi/${image}`
 
     function getMediaInfoDOM() {
@@ -130,6 +130,112 @@ async function WorkInit() {
     const { media } = await getMedia();
     displayPhotographerWork(media);
 };
+
+
+
+// OUVERTURE DU DROPDOWN
+// voir mettre des buttons
+chevronDown.addEventListener("click", function() {
+    selectFiltre.style.height = "170px";
+    idP1.style.display = "block";
+    idP2.style.display = "block";
+    idP3.style.marginTop = "30px";
+    whiteLine1.style.display = "block";
+    whiteLine2.style.display = "block";
+    chevronDown.style.display = "none";
+    chevronUp.style.display = "inline";
+})
+
+// FERMETURE DROPDOWN
+chevronUp.addEventListener("click", function() {
+    selectFiltre.style.height = "69px";
+    idP1.style.display = "none";
+    idP2.style.display = "none";
+    idP3.style.marginTop = "18px";
+    whiteLine1.style.display = "none";
+    whiteLine2.style.display = "none";
+    chevronDown.style.display = "inline";
+    chevronUp.style.display = "none";
+})
+
+
+// CONTENU DU TAG
+let likesTotalCount = 297081; //le nombre de likes du json  doivent s'additionner
+const tagContain =
+    `<p class="like">${likesTotalCount}</p>
+    <i class="fa fa-solid fa-heart"></i>
+    <p class="p5">300€ / jour</p>`;
+document.querySelector('.tag').innerHTML += tagContain;
+
+//INCREMENTATION DES LIKES
+heart.addEventListener("click", function() {
+    heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
+    likesTotalCount++;
+    document.querySelector(".like").innerHTML = likesTotalCount;
+})
+
+
+// OUVERTURE DE LA LIGHTBOX
+
+
+
+
+// OUVERTURE ET FERMETURE DE LA MODALE
+// voir s'il faut changer de fichier 
+const button = document.getElementById("button");
+button.addEventListener("click", function() {
+    document.querySelector('header').style.opacity = "0.6";
+    main.style.opacity = "0.6";
+    document.querySelector('.select_filtre').style.marginLeft = "0"
+    displayModal();
+});
+
+const close = document.getElementById("close");
+close.addEventListener("click", function() {
+    document.querySelector('header').style.opacity = "1";
+    main.style.opacity = "1";
+    document.querySelector('.select_filtre').style.marginLeft = "90px";
+    closeModal();
+});
+
+// FERMETURE DU MESSAGE D'ENVOI
+const closeConfirm = document.getElementById('close_confirm');
+closeConfirm.addEventListener("click", () => {
+    closeModal();
+    document.querySelector('header').style.opacity = "1";
+    main.style.opacity = "1";
+    document.getElementById('myForm').style.display = "block"; // ré-ouvre le formulaire au clic
+    document.getElementById('modalHeader').style.display = "flex";
+    document.getElementById('confirm_submit').style.display = "none"; // empeche la ré-ouverture automatique du message de confirmation
+})
+
+// CONSOLE.LOG DES INPUTS
+input.addEventListener("input", function(e) {
+    const userInput = e.target.value;
+    console.log(userInput);
+});
+
+//INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
+// ne pas oublier de remplacer le nom
+function displayNameModal() {
+    let photographerName = "";
+    photographerName =
+        photographerName +
+        `<h2 id="name">Mimi Keel<h2>`;
+    document.getElementById("modalHeader").innerHTML += photographerName;
+}
+
+
+
+init();
+WorkInit();
+displayNameModal();
+
+
+
+
+
+
 
 
 
@@ -222,104 +328,3 @@ async function WorkInit() {
 //     const { photographers } = await getPhotographers();
 //     displayPhotographerWork(photographers);
 // };
-
-
-// OUVERTURE DU DROPDOWN
-// voir mettre des buttons
-chevronDown.addEventListener("click", function() {
-    selectFiltre.style.height = "170px";
-    idP1.style.display = "block";
-    idP2.style.display = "block";
-    idP3.style.marginTop = "30px";
-    whiteLine1.style.display = "block";
-    whiteLine2.style.display = "block";
-    chevronDown.style.display = "none";
-    chevronUp.style.display = "inline";
-})
-
-// FERMETURE DROPDOWN
-chevronUp.addEventListener("click", function() {
-    selectFiltre.style.height = "69px";
-    idP1.style.display = "none";
-    idP2.style.display = "none";
-    idP3.style.marginTop = "18px";
-    whiteLine1.style.display = "none";
-    whiteLine2.style.display = "none";
-    chevronDown.style.display = "inline";
-    chevronUp.style.display = "none";
-})
-
-
-
-
-// CONTENU DU TAG
-let count = 297081; //le nombre de likes doivent s'additionner
-const tagContain =
-    `<p class="like">${count}</p>
-    <i class="fa fa-solid fa-heart"></i>
-    <p class="p5">300€ / jour</p>`;
-document.querySelector('.tag').innerHTML += tagContain;
-
-//INCREMENTATION DES LIKES
-heart.addEventListener("click", function() {
-    heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
-    count++;
-    document.querySelector(".like").innerHTML = count;
-})
-
-
-// OUVERTURE DE LA LIGHTBOX
-
-
-
-
-// OUVERTURE ET FERMETURE DE LA MODALE
-// voir s'il faut changer de fichier 
-const button = document.getElementById("button");
-button.addEventListener("click", function() {
-    document.querySelector('header').style.opacity = "0.6";
-    main.style.opacity = "0.6";
-    document.querySelector('.select_filtre').style.marginLeft = "0"
-    displayModal();
-});
-
-const close = document.getElementById("close");
-close.addEventListener("click", function() {
-    document.querySelector('header').style.opacity = "1";
-    main.style.opacity = "1";
-    document.querySelector('.select_filtre').style.marginLeft = "90px";
-    closeModal();
-});
-
-// FERMETURE DU MESSAGE D'ENVOI
-const closeConfirm = document.getElementById('close_confirm');
-closeConfirm.addEventListener("click", () => {
-    closeModal();
-    document.querySelector('header').style.opacity = "1";
-    main.style.opacity = "1";
-    document.getElementById('myForm').style.display = "block"; // ré-ouvre le formulaire au clic
-    document.getElementById('modalHeader').style.display = "flex";
-    document.getElementById('confirm_submit').style.display = "none"; // empeche la ré-ouverture automatique du message de confirmation
-})
-
-// CONSOLE.LOG DES INPUTS
-input.addEventListener("input", function(e) {
-    const userInput = e.target.value;
-    console.log(userInput);
-});
-
-//INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
-// ne pas oublier de remplacer le nom
-function displayNameModal() {
-    let photographerName = "";
-    photographerName =
-        photographerName +
-        `<h2 id="name">Mimi Keel<h2>`;
-    document.getElementById("modalHeader").innerHTML += photographerName;
-}
-
-
-
-init();
-WorkInit();
-displayNameModal();
