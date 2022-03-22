@@ -1,5 +1,5 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
-import { ImageMedia } from "./classTest.js";
+// import ImageMedia from "./classTest.js";
 
 const input = document.querySelector("form");
 const chevronDown = document.getElementById("chevronDown");
@@ -42,6 +42,22 @@ function photographerFactory(data) {
     }
     return { name, picture, getPhotographInfoDOM };
 }
+
+// RECUPERATION DES DONNEES DU FICHIER JSON
+// fetch("./data/photographers.json")
+//     .then(function(response) {
+//         if (response.ok) {
+//             response.json().then(function(json) {
+//                 photographData = json;
+//                 photographers = json.photographers;
+//                 photographMedia = json.medias;
+//                 showPhotographers(json)
+//             })
+//         } else {
+//             console.log("Network request for product.json failed with response")
+//         }
+//     })
+
 
 
 async function getPhotographers() {
@@ -230,8 +246,6 @@ function displayNameModal() {
 init();
 WorkInit();
 displayNameModal();
-
-
 
 
 

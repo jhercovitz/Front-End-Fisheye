@@ -39,5 +39,4 @@ export class ImageMedia {
   </div>
         `
     }
-    createHTML();
 }

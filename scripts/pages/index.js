@@ -1,30 +1,45 @@
-    // import { photographerFactory } from "/factories/photographer.js";
+    import { photographerFactory } from "../factories/photographer.js";
+
+    // async function getPhotographers() {
+    //     // Penser à remplacer par les données récupérées dans le json
+    //     const photographers = [{
+    //                 "name": "Mimi Keel",
+    //                 "id": 243,
+    //                 "city": "London",
+    //                 "country": "UK",
+    //                 "tagline": "Voir le beau dans le quotidien",
+    //                 "price": 400,
+    //                 "portrait": "MimiKeel.jpg",
+    //             },
+    //             {
+    //                 "name": "Ellie-Rose Wilkens",
+    //                 "id": 930,
+    //                 "city": "Paris",
+    //                 "country": "France",
+    //                 "tagline": "Capturer des compositions complexes",
+    //                 "price": 250,
+    //                 "portrait": "EllieRoseWilkens.jpg"
+    //             },
+    //         ]
+    //         // et bien retourner le tableau photographers seulement une fois
+    //     return ({
+    //         photographers: [...photographers ]
+    //     })
+    // }
 
     async function getPhotographers() {
-        // Penser à remplacer par les données récupérées dans le json
-        const photographers = [{
-                    "name": "Mimi Keel",
-                    "id": 243,
-                    "city": "London",
-                    "country": "UK",
-                    "tagline": "Voir le beau dans le quotidien",
-                    "price": 400,
-                    "portrait": "MimiKeel.jpg",
-                },
-                {
-                    "name": "Ellie-Rose Wilkens",
-                    "id": 930,
-                    "city": "Paris",
-                    "country": "France",
-                    "tagline": "Capturer des compositions complexes",
-                    "price": 250,
-                    "portrait": "EllieRoseWilkens.jpg"
-                },
-            ]
-            // et bien retourner le tableau photographers seulement une fois
-        return ({
-            photographers: [...photographers, ]
-        })
+        const photographers =
+            fetch("/data/photographers.json")
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(photographers) {
+                displayData(photographers);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+        return photographers
     }
 
     async function displayData(photographers) {
@@ -46,13 +61,15 @@
     init();
 
 
-    /////////// FETCH PLUS TARD  
-    // const photographers = [];
-    // fetch('/data/photographers.json').then(response => {
-    //     return response.json();
-    // }).then(data => {
-    //     // Work with JSON data here
-    //     console.log(data);
-    // }).catch(err => {
-    //     this.dataError = true;
-    // });
+
+    // function displayData(photographers) {
+    //     const photographersSection = document.querySelector(".photographer_section");
+    //     for (let i = 0; i < photographers.length; i++) {
+    //         const div = document.createElement("div");
+    //         div.innerHTML += photographers[i].name;
+    //         div.innerHTML += photographers[i].city + ' ,' + photographers[i].country;
+    //         div.innerHTML += photographers[i].tagline;
+    //         div.innerHTML += photographers[i].portrait;
+    //         photographersSection.appendChild(div);
+    //     }
+    // }
