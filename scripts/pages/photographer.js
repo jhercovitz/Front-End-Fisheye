@@ -1,5 +1,5 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
-
+import { ImageMedia } from "./classTest.js";
 
 const input = document.querySelector("form");
 const chevronDown = document.getElementById("chevronDown");
@@ -230,8 +230,6 @@ function displayNameModal() {
 init();
 WorkInit();
 displayNameModal();
-
-
 
 
 
