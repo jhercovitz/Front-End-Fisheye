@@ -1,7 +1,9 @@
 export function photographerFactory(data) {
-    const { name, portrait, city, country, tagline, price } = data;
+    const { name, portrait, city, country, tagline, price, id } = data;
 
     const picture = `/assets/photographers/${portrait}`;
+    // const myUrl = new URL("photographer.html");
+    // myUrl.searchParams.append (id = "243")
 
     function getUserCardDOM() {
         const article = document.createElement('article');

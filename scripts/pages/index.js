@@ -3,8 +3,8 @@
     async function getPhotographers() {
         const photographers =
             fetch("/data/photographers.json")
-            .then((response) => {
-                return response.json();
+            .then((data) => {
+                return data.json();
             })
             .then((photographers) => {
                 displayData(photographers.photographers);

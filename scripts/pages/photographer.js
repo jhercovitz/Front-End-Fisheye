@@ -19,10 +19,10 @@ heart.classList.add("far", "fa-heart", "increment");
 
 // AFFICHAGE DES INFOS PHOTOGRAPHE
 function photographerFactory(data) {
-    const { name, portrait, city, country, tagline } = data;
+    const { name, portrait, city, country, tagline, id } = data;
     const picture = `assets/photographers/${portrait}`;
 
-    function getPhotographInfoDOM() {
+    function getPhotographerInfoDOM() {
         const article = document.createElement('article');
         const img = document.createElement('img');
         img.setAttribute("src", picture);
@@ -40,55 +40,52 @@ function photographerFactory(data) {
         document.querySelector('.contact').appendChild(img);
         return (article);
     }
-    return { name, picture, getPhotographInfoDOM };
+    return { name, picture, getPhotographerInfoDOM };
 }
 
 // RECUPERATION DES DONNEES DU FICHIER JSON
-// fetch("./data/photographers.json")
-//     .then(function(response) {
-//         if (response.ok) {
-//             response.json().then(function(json) {
-//                 photographData = json;
-//                 photographers = json.photographers;
-//                 photographMedia = json.medias;
-//                 showPhotographers(json)
-//             })
-//         } else {
-//             console.log("Network request for product.json failed with response")
-//         }
-//     })
-
-
-
-async function getPhotographers() {
-    // Penser à remplacer par les données récupérées dans le json
-    const photographers = [{
-        "name": "Mimi Keel",
-        "id": 243,
-        "city": "London",
-        "country": "UK",
-        "tagline": "Voir le beau dans le quotidien",
-        "price": 400,
-        "portrait": "MimiKeel.jpg",
-    }, ]
-    return ({
-        photographers: [...photographers]
-    });
+async function getPhotographer() {
+    const photographer =
+        fetch("/data/photographers.json")
+        .then((data) => {
+            return data.json();
+        })
+        .then((photographer) => {
+            displayData(photographer.photographers);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    return photographer
 }
 
-async function displayData(photographers) {
+// async function getPhotographer() {
+//     const photographer = [{
+//         "name": "Mimi Keel",
+//         "id": 243,
+//         "city": "London",
+//         "country": "UK",
+//         "tagline": "Voir le beau dans le quotidien",
+//         "price": 400,
+//         "portrait": "MimiKeel.jpg",
+//     }, ]
+//     return ({
+//         photographer: [...photographer]
+//     });
+// }
+
+async function displayData(photographer) {
     const header = document.querySelector('.photograph-header');
-    photographers.forEach((photographer) => {
+    photographer.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer);
-        const photographInfoDOM = photographerModel.getPhotographInfoDOM();
-        header.appendChild(photographInfoDOM);
+        const photographerInfoDOM = photographerModel.getPhotographerInfoDOM();
+        header.appendChild(photographerInfoDOM);
     });
 };
 
 async function init() {
-    // Récupère les datas des photographes
-    const { photographers } = await getPhotographers();
-    displayData(photographers);
+    const { photographer } = await getPhotographer();
+    displayData(photographer);
 };
 
 
@@ -119,19 +116,33 @@ function mediaFactory(data) {
 }
 
 async function getMedia() {
-    // Penser à remplacer par les données récupérées dans le json
-    const media = [{
-        "id": 95234343,
-        "photographerId": 243,
-        "title": "Rainbow Bird",
-        "image": "Animals_Rainbow.jpg",
-        "likes": 59,
-        "date": "2019-07-02"
-    }, ]
-    return ({
-        media: [...media]
-    });
+    const media =
+        fetch("/data/photographers.json")
+        .then((data) => {
+            return data.json();
+        })
+        .then((media) => {
+            displayPhotographerWork(media.media);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    return media;
 }
+
+// async function getMedia() {
+//     const media = [{
+//         "id": 95234343,
+//         "photographerId": 243,
+//         "title": "Rainbow Bird",
+//         "image": "Animals_Rainbow.jpg",
+//         "likes": 59,
+//         "date": "2019-07-02"
+//     }, ]
+//     return ({
+//         media: [...media]
+//     });
+// }
 
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
@@ -142,7 +153,6 @@ async function displayPhotographerWork(media) {
 };
 
 async function WorkInit() {
-    // Récupère les datas des medias
     const { media } = await getMedia();
     displayPhotographerWork(media);
 };
