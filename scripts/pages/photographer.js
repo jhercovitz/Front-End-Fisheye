@@ -115,6 +115,20 @@ function mediaFactory(data) {
     return { title, image, likes, getMediaInfoDOM };
 }
 
+// async function getMedia() {
+//     const media = [{
+//         "id": 95234343,
+//         "photographerId": 243,
+//         "title": "Rainbow Bird",
+//         "image": "Animals_Rainbow.jpg",
+//         "likes": 59,
+//         "date": "2019-07-02"
+//     }, ]
+//     return ({
+//         media: [...media]
+//     });
+// }
+
 async function getMedia() {
     const media =
         fetch("/data/photographers.json")
@@ -130,19 +144,9 @@ async function getMedia() {
     return media;
 }
 
-// async function getMedia() {
-//     const media = [{
-//         "id": 95234343,
-//         "photographerId": 243,
-//         "title": "Rainbow Bird",
-//         "image": "Animals_Rainbow.jpg",
-//         "likes": 59,
-//         "date": "2019-07-02"
-//     }, ]
-//     return ({
-//         media: [...media]
-//     });
-// }
+// const mediaWrapper = new ImageMedia("image", "title", "likes")
+
+// mediaWrapper.createHTML();
 
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
@@ -156,7 +160,6 @@ async function WorkInit() {
     const { media } = await getMedia();
     displayPhotographerWork(media);
 };
-
 
 
 // OUVERTURE DU DROPDOWN
@@ -199,10 +202,6 @@ heart.addEventListener("click", function() {
     likesTotalCount++;
     document.querySelector(".like").innerHTML = likesTotalCount;
 })
-
-
-// OUVERTURE DE LA LIGHTBOX
-
 
 
 

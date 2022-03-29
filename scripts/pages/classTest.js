@@ -3,15 +3,15 @@ export class ImageMedia {
      * @param {string} name
      * @param {number} id
      * @param {number} photographerId
-     * @param {} image
+     * @param {image} image
      * @param {string} tagline
      * @param {number} likes
      * @param {date} date
      * @param {number} price
      */
 
-    constructor(name, id, photographerId, image, tags, likes, date, price) {
-        this.name = name
+    constructor(title, id, photographerId, image, tags, likes, date, price) {
+        this.title = title
         this.id = id
         this.photographerId = photographerId
         this.image = image
@@ -23,19 +23,12 @@ export class ImageMedia {
     }
 
     createHTML() {
-        document.getElementById('picture-photographer').innerHTML = `
-      <div class="picture-photographer_presentation">
-        <div class="wrapper">
+        document.getElementById('photograph_work').innerHTML = `
+      <div class="work">
         <img class="img-page" src="/img/${this.image}" alt="">
-        </div>
-        <div class="text-presentation">
-          <p>${this.name}</p>
-          <div class="price-and-count">
-              <p>${this.price}€</p>
+          <p class="p1">${this.title}</p>
               <p class="paddeur">${this.likes} ❤</p>
-          </div>
       </div>
-  </div>
         `
     }
 }
