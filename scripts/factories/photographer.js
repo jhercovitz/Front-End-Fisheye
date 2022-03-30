@@ -19,6 +19,7 @@ export function photographerFactory(data) {
         p3.classList.add("p3")
         const a = document.createElement('a');
         a.href = "photographer.html";
+        // a.href = "photographer.html?id=${photographer.id}"
         p1.textContent = String(city) + "," + " " + String(country);
         p2.textContent = tagline;
         p3.textContent = String(price) + "€/jour";

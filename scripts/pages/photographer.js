@@ -85,6 +85,7 @@ async function displayData(photographer) {
 
 async function init() {
     const { photographer } = await getPhotographer();
+    // probleme avec {photographer}
     displayData(photographer);
 };
 
@@ -92,13 +93,13 @@ async function init() {
 // AFFICHAGE DU TRAVAIL DU PHOTOGRAPHE
 function mediaFactory(data) {
     const { id, title, image, likes, date } = data;
-    const picture = `assets/FishEye_Photos/Sample Photos/Mimi/${image}`
+    // const picture = `assets/FishEye_Photos/Sample Photos/Mimi/${image}`
 
     function getMediaInfoDOM() {
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
         const img = document.createElement('img');
-        img.setAttribute("src", picture);
+        img.setAttribute("src", /*picture*/ image);
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = title;
@@ -145,7 +146,6 @@ async function getMedia() {
 }
 
 // const mediaWrapper = new ImageMedia("image", "title", "likes")
-
 // mediaWrapper.createHTML();
 
 async function displayPhotographerWork(media) {
@@ -158,6 +158,7 @@ async function displayPhotographerWork(media) {
 
 async function WorkInit() {
     const { media } = await getMedia();
+    // probleme avec {media}
     displayPhotographerWork(media);
 };
 
