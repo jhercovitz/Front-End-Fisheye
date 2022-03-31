@@ -15,10 +15,15 @@ const main = document.querySelector('main');
 const heart = document.createElement('i');
 heart.classList.add("far", "fa-heart", "increment");
 
+// Recuperation de l'id du photographe 
+const url = new URL(window.location);
+const params = new URLSearchParams(url.search);
+const photographerId = Number(params.get("id"));
+
 
 // AFFICHAGE DES INFOS PHOTOGRAPHE
 function photographerFactory(data) {
-    const { name, portrait, city, country, tagline, id } = data;
+    const { name, portrait, city, country, tagline } = data;
     const picture = `assets/photographers/${portrait}`;
 
     function getPhotographerInfoDOM() {
@@ -55,27 +60,18 @@ async function getPhotographer() {
     return photographer
 }
 
-// Recuperation de l'id du photographe 
-const url = new URL(window.location);
-const params = new URLSearchParams(url.search);
-const photographerId = Number(params.get("id"));
-
 
 async function displayData(photographer) {
     const header = document.querySelector('.photograph-header');
-    photographer.forEach((photographer) => {
-        const photographerModel = photographerFactory(photographer);
-        const photographerInfoDOM = photographerModel.getPhotographerInfoDOM();
-        header.appendChild(photographerInfoDOM);
-    });
+    const photographerModel = photographerFactory(photographer);
+    const photographerInfoDOM = photographerModel.getPhotographerInfoDOM();
+    header.appendChild(photographerInfoDOM);
 };
 
 async function init() {
     const { photographers } = await getPhotographer();
     const currentPhotographer = photographers.find((photographer) => photographer.id === photographerId);
-    console.log(currentPhotographer);
-
-    displayData(photographers);
+    displayData(currentPhotographer);
 };
 
 
@@ -118,8 +114,6 @@ async function getMedia() {
     return media;
 }
 
-// const mediaWrapper = new ImageMedia("image", "title", "likes")
-// mediaWrapper.createHTML();
 
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
@@ -131,7 +125,9 @@ async function displayPhotographerWork(media) {
 
 async function WorkInit() {
     const { media } = await getMedia();
-    displayPhotographerWork(media);
+    const currentMedias = media.filter((medias) => medias.media === photographerId);
+    console.log(currentMedias)
+    displayPhotographerWork(currentMedias);
 };
 
 
