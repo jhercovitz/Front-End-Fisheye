@@ -2,8 +2,6 @@ export function photographerFactory(data) {
     const { name, portrait, city, country, tagline, price, id } = data;
 
     const picture = `/assets/photographers/${portrait}`;
-    // const myUrl = new URL("photographer.html");
-    // myUrl.searchParams.append (id = "243")
 
     function getUserCardDOM() {
         const article = document.createElement('article');
@@ -18,8 +16,7 @@ export function photographerFactory(data) {
         const p3 = document.createElement('p');
         p3.classList.add("p3")
         const a = document.createElement('a');
-        a.href = "photographer.html";
-        // a.href = "photographer.html?id=${photographer.id}"
+        a.href = `photographer.html?id=${id}`;
         p1.textContent = String(city) + "," + " " + String(country);
         p2.textContent = tagline;
         p3.textContent = String(price) + "€/jour";

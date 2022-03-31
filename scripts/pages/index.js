@@ -6,9 +6,6 @@
             .then((data) => {
                 return data.json();
             })
-            .then((photographers) => {
-                displayData(photographers.photographers);
-            })
             .catch((err) => {
                 console.log(err);
             });
