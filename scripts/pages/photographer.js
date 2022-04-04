@@ -76,9 +76,10 @@ async function init() {
 
 
 
-// AFFICHAGE DU TRAVAIL DU PHOTOGRAPHE
+// AFFICHAGE DES MEDIAS
 function mediaFactory(data) {
     const { title, image, likes } = data;
+    // const picture = `assets/photographers/FishEye_Photos/Sample Photos/${image}`;
 
     function getMediaInfoDOM() {
         const workDiv1 = document.createElement('div');
@@ -116,15 +117,23 @@ function mediaFactory(data) {
 
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
-        const workModel = mediaFactory(media);
-        const mediaInfoDOM = workModel.getMediaInfoDOM();
+        const mediaModel = mediaFactory(media);
+        const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
     });
     console.log("display", await displayPhotographerWork(media))
 };
 
+// async function displayData(photographer) {
+//     const header = document.querySelector('.photograph-header');
+//     const photographerModel = photographerFactory(photographer);
+//     const photographerInfoDOM = photographerModel.getPhotographerInfoDOM();
+//     header.appendChild(photographerInfoDOM);
+// };
+
 async function mediaInit() {
     const { media } = await getData();
+    console.log("media", media)
     const currentMedias = media.filter((medias) => medias.media === photographerId);
     console.log("current media", currentMedias)
     displayPhotographerWork(currentMedias);
