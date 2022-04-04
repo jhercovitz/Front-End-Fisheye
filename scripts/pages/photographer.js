@@ -48,16 +48,16 @@ function photographerFactory(data) {
 }
 
 // RECUPERATION DES DONNEES DU FICHIER JSON
-async function getPhotographer() {
-    const photographer =
+async function getData() {
+    const data =
         fetch("/data/photographers.json")
-        .then((data) => {
-            return data.json();
+        .then((response) => {
+            return response.json();
         })
         .catch((err) => {
             console.log(err);
         });
-    return photographer
+    return data
 }
 
 
@@ -69,7 +69,7 @@ async function displayData(photographer) {
 };
 
 async function init() {
-    const { photographers } = await getPhotographer();
+    const { photographers } = await getData();
     const currentPhotographer = photographers.find((photographer) => photographer.id === photographerId);
     displayData(currentPhotographer);
 };
@@ -78,8 +78,7 @@ async function init() {
 
 // AFFICHAGE DU TRAVAIL DU PHOTOGRAPHE
 function mediaFactory(data) {
-    const { id, title, image, likes, date } = data;
-    // const picture = `assets/FishEye_Photos/Sample Photos/Mimi/${image}`
+    const { title, image, likes } = data;
 
     function getMediaInfoDOM() {
         const workDiv1 = document.createElement('div');
@@ -102,18 +101,18 @@ function mediaFactory(data) {
     return { title, image, likes, getMediaInfoDOM };
 }
 
-async function getMedia() {
-    const media =
-        fetch("/data/photographers.json")
-        .then((data) => {
-            return data.json();
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    return media;
-}
-
+// async function getMedia() {
+//     const media =
+//         fetch("/data/photographers.json")
+//         .then((data) => {
+//             return data.json();
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+//     return media;
+// }
+// console.log("medias", await getMedia())
 
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
@@ -121,14 +120,17 @@ async function displayPhotographerWork(media) {
         const mediaInfoDOM = workModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
     });
+    console.log("display", await displayPhotographerWork(media))
 };
 
-async function WorkInit() {
-    const { media } = await getMedia();
+async function mediaInit() {
+    const { media } = await getData();
     const currentMedias = media.filter((medias) => medias.media === photographerId);
-    console.log(currentMedias)
+    console.log("current media", currentMedias)
     displayPhotographerWork(currentMedias);
 };
+
+
 
 
 // OUVERTURE DU DROPDOWN
@@ -222,5 +224,5 @@ function displayNameModal() {
 
 
 init();
-WorkInit();
+mediaInit
 displayNameModal();
