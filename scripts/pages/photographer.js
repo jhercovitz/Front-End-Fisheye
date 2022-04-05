@@ -78,7 +78,9 @@ async function init() {
 
 // AFFICHAGE DES MEDIAS
 function mediaFactory(data) {
-    const { title, image, likes } = data;
+    const { title, image, likes, video } = data;
+    console.log("DATA:", title, image, likes)
+
     // const picture = `assets/photographers/FishEye_Photos/Sample Photos/${image}`;
 
     function getMediaInfoDOM() {
@@ -99,6 +101,8 @@ function mediaFactory(data) {
         workDiv1.appendChild(p4);
         return (photographWorkDiv);
     }
+    console.log("GET", getMediaInfoDOM)
+
     return { title, image, likes, getMediaInfoDOM };
 }
 
@@ -118,18 +122,12 @@ function mediaFactory(data) {
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
         const mediaModel = mediaFactory(media);
+        console.log(mediaModel)
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
     });
-    console.log("display", await displayPhotographerWork(media))
 };
 
-// async function displayData(photographer) {
-//     const header = document.querySelector('.photograph-header');
-//     const photographerModel = photographerFactory(photographer);
-//     const photographerInfoDOM = photographerModel.getPhotographerInfoDOM();
-//     header.appendChild(photographerInfoDOM);
-// };
 
 async function mediaInit() {
     const { media } = await getData();
