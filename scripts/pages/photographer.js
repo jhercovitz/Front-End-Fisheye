@@ -12,19 +12,30 @@ const whiteLine1 = document.getElementById("whiteLine1");
 const whiteLine2 = document.getElementById("whiteLine2");
 const photographWorkDiv = document.querySelector(".photograph_work");
 const main = document.querySelector('main');
-const heart = document.createElement('i');
-heart.classList.add("far", "fa-heart", "increment");
 
-// Recuperation de l'id du photographe 
+// RECUPERATION DE L'ID DU PHOTOGRAPHE 
 const url = new URL(window.location);
 const params = new URLSearchParams(url.search);
 const photographerId = Number(params.get("id"));
+
+// RECUPERATION DES DONNEES DU FICHIER JSON
+async function getData() {
+    const data =
+        fetch("/data/photographers.json")
+        .then((response) => {
+            return response.json();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    return data
+}
 
 
 // AFFICHAGE DES INFOS PHOTOGRAPHE
 function photographerFactory(data) {
     const { name, portrait, city, country, tagline } = data;
-    const picture = `assets/photographers/${portrait}`;
+    const picture = `assets/FishEye_Photos/Sample Photos/Photographers ID Photos/${portrait}`;
 
     function getPhotographerInfoDOM() {
         const article = document.createElement('article');
@@ -47,19 +58,6 @@ function photographerFactory(data) {
     return { name, picture, getPhotographerInfoDOM };
 }
 
-// RECUPERATION DES DONNEES DU FICHIER JSON
-async function getData() {
-    const data =
-        fetch("/data/photographers.json")
-        .then((response) => {
-            return response.json();
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    return data
-}
-
 
 async function displayData(photographer) {
     const header = document.querySelector('.photograph-header');
@@ -69,25 +67,38 @@ async function displayData(photographer) {
 };
 
 async function init() {
-    const { photographers } = await getData();
+    const { photographers, media } = await getData();
     const currentPhotographer = photographers.find((photographer) => photographer.id === photographerId);
     displayData(currentPhotographer);
-};
 
+    // RECUPERER QUE LE PRENOM DU PHOTOGRAPHE
+    const splitName = currentPhotographer.name.split(' ');
+    const firstName = splitName[0];
+
+    // media
+    const currentMedias = media.filter(
+        (media) => media.photographerId === photographerId).map(function(media) {
+        return {...media, firstName: firstName }
+    });
+    displayPhotographerWork(currentMedias);
+};
 
 
 // AFFICHAGE DES MEDIAS
 function mediaFactory(data) {
-    const { title, image, likes, video } = data;
-    console.log("DATA:", title, image, likes)
-
-    // const picture = `assets/photographers/FishEye_Photos/Sample Photos/${image}`;
+    const { title, image, likes, video, firstName } = data;
+    const picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
+    const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
 
     function getMediaInfoDOM() {
+        const heart = document.createElement('i');
+        heart.classList.add("far", "fa-heart", "increment");
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
         const img = document.createElement('img');
-        img.setAttribute("src", /*picture*/ image);
+        img.setAttribute("src", picture);
+        const video = document.createElement('video');
+        video.setAttribute("src", mp4)
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = title;
@@ -97,47 +108,28 @@ function mediaFactory(data) {
         p4.appendChild(heart);
         photographWorkDiv.appendChild(workDiv1);
         workDiv1.appendChild(img);
+        workDiv1.appendChild(video);
         workDiv1.appendChild(p1);
         workDiv1.appendChild(p4);
+
+        //INCREMENTATION DES LIKES
+        heart.addEventListener("click", function() {
+            heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
+            likesTotalCount++;
+            document.querySelector(".like").innerHTML = likesTotalCount;
+        })
         return (photographWorkDiv);
     }
-    console.log("GET", getMediaInfoDOM)
-
-    return { title, image, likes, getMediaInfoDOM };
+    return { title, image, video, likes, getMediaInfoDOM };
 }
-
-// async function getMedia() {
-//     const media =
-//         fetch("/data/photographers.json")
-//         .then((data) => {
-//             return data.json();
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-//     return media;
-// }
-// console.log("medias", await getMedia())
 
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
         const mediaModel = mediaFactory(media);
-        console.log(mediaModel)
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
     });
 };
-
-
-async function mediaInit() {
-    const { media } = await getData();
-    console.log("media", media)
-    const currentMedias = media.filter((medias) => medias.media === photographerId);
-    console.log("current media", currentMedias)
-    displayPhotographerWork(currentMedias);
-};
-
-
 
 
 // OUVERTURE DU DROPDOWN
@@ -174,12 +166,6 @@ const tagContain =
     <p class="p5">300€ / jour</p>`;
 document.querySelector('.tag').innerHTML += tagContain;
 
-//INCREMENTATION DES LIKES
-heart.addEventListener("click", function() {
-    heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
-    likesTotalCount++;
-    document.querySelector(".like").innerHTML = likesTotalCount;
-})
 
 
 
@@ -231,5 +217,4 @@ function displayNameModal() {
 
 
 init();
-mediaInit
 displayNameModal();

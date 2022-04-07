@@ -55,6 +55,7 @@ a {
     border-radius: 50%;
     object-fit: cover;
     transition: transform .1s;
+    filter: drop-shadow(1px 4px 3px rgb(70, 69, 69))
 }
 
 .photographer_section article img:hover {
