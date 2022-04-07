@@ -98,7 +98,7 @@ function mediaFactory(data) {
         const img = document.createElement('img');
         img.setAttribute("src", picture);
         const video = document.createElement('video');
-        video.setAttribute("src", mp4)
+        video.setAttribute("src", mp4, );
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = title;
@@ -107,8 +107,13 @@ function mediaFactory(data) {
         p4.textContent = likes;
         p4.appendChild(heart);
         photographWorkDiv.appendChild(workDiv1);
+
+        // if (video === video) {
+        // workDiv1.appendChild(video);
+        // } else if (image === image) {
         workDiv1.appendChild(img);
-        workDiv1.appendChild(video);
+        // }
+
         workDiv1.appendChild(p1);
         workDiv1.appendChild(p4);
 
