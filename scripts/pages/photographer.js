@@ -1,5 +1,5 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
-// import ImageMedia from "./classTest.js";
+// import Media from "./classTest.js";
 
 const input = document.querySelector("form");
 const chevronDown = document.getElementById("chevronDown");
@@ -67,6 +67,7 @@ async function displayData(photographer) {
 };
 
 async function init() {
+    // photographer
     const { photographers, media } = await getData();
     const currentPhotographer = photographers.find((photographer) => photographer.id === photographerId);
     displayData(currentPhotographer);
@@ -88,17 +89,19 @@ async function init() {
 function mediaFactory(data) {
     const { title, image, likes, video, firstName } = data;
     const picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
-    const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
+    // const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
+
 
     function getMediaInfoDOM() {
         const heart = document.createElement('i');
         heart.classList.add("far", "fa-heart", "increment");
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
+
         const img = document.createElement('img');
         img.setAttribute("src", picture);
-        const video = document.createElement('video');
-        video.setAttribute("src", mp4, );
+        // const videoMedia = document.createElement('video');
+        // videoMedia.setAttribute("src", mp4);
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = title;
@@ -107,13 +110,8 @@ function mediaFactory(data) {
         p4.textContent = likes;
         p4.appendChild(heart);
         photographWorkDiv.appendChild(workDiv1);
-
-        // if (video === video) {
-        // workDiv1.appendChild(video);
-        // } else if (image === image) {
+        // workDiv1.appendChild(videoMedia);
         workDiv1.appendChild(img);
-        // }
-
         workDiv1.appendChild(p1);
         workDiv1.appendChild(p4);
 
@@ -167,8 +165,8 @@ chevronUp.addEventListener("click", function() {
 let likesTotalCount = 297081; //le nombre de likes du json  doivent s'additionner
 const tagContain =
     `<p class="like">${likesTotalCount}</p>
-    <i class="fa fa-solid fa-heart"></i>
-    <p class="p5">300€ / jour</p>`;
+        <i class="fa fa-solid fa-heart"></i>
+        <p class="p5">300€ / jour</p>`;
 document.querySelector('.tag').innerHTML += tagContain;
 
 
