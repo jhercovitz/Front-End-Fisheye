@@ -256,12 +256,14 @@ video {
     height: 89px;
     border-radius: 5px;
     background-color: #DB8876;
-    float: right;
-    margin-right: 40px;
+    margin-left: 67%;
+    margin-top: 100px;
     color: black;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: fixed;
+    z-index: 1;
 }
 
 .tag i {

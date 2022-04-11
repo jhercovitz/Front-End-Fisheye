@@ -82,6 +82,19 @@ async function init() {
         return {...media, firstName: firstName }
     });
     displayPhotographerWork(currentMedias);
+
+
+    //INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
+    function displayNameModal(data) {
+        const { name } = data;
+
+        let photographerName = "";
+        photographerName =
+            photographerName +
+            `<h2 id="name">${name}<h2>`;
+        document.getElementById("modalHeader").innerHTML += photographerName;
+    }
+    displayNameModal(currentPhotographer);
 };
 
 
@@ -97,11 +110,11 @@ function mediaFactory(data) {
         heart.classList.add("far", "fa-heart", "increment");
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
-
         const img = document.createElement('img');
         img.setAttribute("src", picture);
         // const videoMedia = document.createElement('video');
         // videoMedia.setAttribute("src", mp4);
+        // videoMedia.setAttribute("controls", "true")
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = title;
@@ -123,6 +136,7 @@ function mediaFactory(data) {
         })
         return (photographWorkDiv);
     }
+
     return { title, image, video, likes, getMediaInfoDOM };
 }
 
@@ -133,6 +147,7 @@ async function displayPhotographerWork(media) {
         main.appendChild(mediaInfoDOM);
     });
 };
+
 
 
 // OUVERTURE DU DROPDOWN
@@ -207,17 +222,7 @@ input.addEventListener("input", function(e) {
     console.log(userInput);
 });
 
-//INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
-// ne pas oublier de remplacer le nom
-function displayNameModal() {
-    let photographerName = "";
-    photographerName =
-        photographerName +
-        `<h2 id="name">Mimi Keel<h2>`;
-    document.getElementById("modalHeader").innerHTML += photographerName;
-}
 
 
 
 init();
-displayNameModal();

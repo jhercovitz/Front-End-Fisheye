@@ -31,8 +31,6 @@ export class Media {
         `
     }
 
-
-
     createVideoHTML() {
         document.getElementById('photograph_work').innerHTML = `
   <div class="work">
