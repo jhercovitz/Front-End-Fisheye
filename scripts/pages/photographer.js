@@ -99,7 +99,7 @@ async function init() {
 
 // AFFICHAGE DES MEDIAS
 function mediaFactory(data) {
-    const { title, image, likes, video, firstName } = data;
+    let { title, image, likes, video, firstName } = data;
     const picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
     const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
 
@@ -113,7 +113,7 @@ function mediaFactory(data) {
 
         const splitImage = picture.split("/");
         const splitVideo = mp4.split("/")
-        if (splitImage[4] != undefined) {
+        if (splitImage[4] !== undefined) {
             const img = document.createElement('img');
             img.setAttribute("src", picture);
             workDiv1.appendChild(img);
@@ -142,8 +142,14 @@ function mediaFactory(data) {
         //INCREMENTATION DES LIKES
         heart.addEventListener("click", function() {
             heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
+            likes++;
+            p4.innerHTML = likes
+            p4.appendChild(heart);
             likesTotalCount++;
             document.querySelector(".like").innerHTML = likesTotalCount;
+
+            console.log(likesTotalCount)
+            console.log(likes)
         })
         return (photographWorkDiv);
     }
@@ -187,13 +193,23 @@ chevronUp.addEventListener("click", function() {
 })
 
 
-// CONTENU DU TAG
-let likesTotalCount = 10; //le nombre de likes du json  doivent s'additionner
+// // CONTENU DU TAG
+// function tag(data) {
+//     const { likes } = data
+//le nombre de likes du json  doivent s'additionner
+let likesTotalCount = 0;
+// for (let i = 0; i < likes.length; i++) {
+//     likesTotalCount += likes[i]
+//     console.log(likesTotalCount)
+// }
+
 const tagContain =
     `<p class="like">${likesTotalCount}</p>
 <i class="fa fa-solid fa-heart"></i>
 <p class="p5">300€ / jour</p>`;
 document.querySelector('.tag').innerHTML += tagContain;
+// }
+
 
 
 // OUVERTURE ET FERMETURE DE LA MODALE
