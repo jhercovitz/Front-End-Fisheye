@@ -83,7 +83,6 @@ async function init() {
     });
     displayPhotographerWork(currentMedias);
 
-
     //INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
     function displayNameModal(data) {
         const { name } = data;
@@ -102,19 +101,33 @@ async function init() {
 function mediaFactory(data) {
     const { title, image, likes, video, firstName } = data;
     const picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
-    // const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
+    const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
 
+    const videoMedia = document.createElement('video');
 
     function getMediaInfoDOM() {
         const heart = document.createElement('i');
         heart.classList.add("far", "fa-heart", "increment");
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
-        const img = document.createElement('img');
-        img.setAttribute("src", picture);
-        // const videoMedia = document.createElement('video');
-        // videoMedia.setAttribute("src", mp4);
-        // videoMedia.setAttribute("controls", "true")
+
+        const splitImage = picture.split("/");
+        const splitVideo = mp4.split("/")
+        if (splitImage[4] != undefined) {
+            const img = document.createElement('img');
+            img.setAttribute("src", picture);
+            workDiv1.appendChild(img);
+        } else {
+            photographWorkDiv.removeChild(workDiv1);
+        }
+        // if (splitVideo[4] != undefined) {
+        //     videoMedia.setAttribute("src", mp4);
+        //     videoMedia.setAttribute("controls", "true")
+        //     workDiv1.appendChild(videoMedia);
+        // } else {
+        //     workDiv1.removeChild(videoMedia)
+        // }
+
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = title;
@@ -123,8 +136,6 @@ function mediaFactory(data) {
         p4.textContent = likes;
         p4.appendChild(heart);
         photographWorkDiv.appendChild(workDiv1);
-        // workDiv1.appendChild(videoMedia);
-        workDiv1.appendChild(img);
         workDiv1.appendChild(p1);
         workDiv1.appendChild(p4);
 
@@ -177,14 +188,12 @@ chevronUp.addEventListener("click", function() {
 
 
 // CONTENU DU TAG
-let likesTotalCount = 297081; //le nombre de likes du json  doivent s'additionner
+let likesTotalCount = 10; //le nombre de likes du json  doivent s'additionner
 const tagContain =
     `<p class="like">${likesTotalCount}</p>
-        <i class="fa fa-solid fa-heart"></i>
-        <p class="p5">300€ / jour</p>`;
+<i class="fa fa-solid fa-heart"></i>
+<p class="p5">300€ / jour</p>`;
 document.querySelector('.tag').innerHTML += tagContain;
-
-
 
 
 // OUVERTURE ET FERMETURE DE LA MODALE
