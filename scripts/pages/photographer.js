@@ -58,7 +58,6 @@ function photographerFactory(data) {
     return { name, picture, getPhotographerInfoDOM };
 }
 
-
 async function displayData(photographer) {
     const header = document.querySelector('.photograph-header');
     const photographerModel = photographerFactory(photographer);
@@ -113,7 +112,7 @@ function mediaFactory(data) {
 
         const splitImage = picture.split("/");
         const splitVideo = mp4.split("/")
-        if (splitImage[4] !== undefined) {
+        if (splitImage[4] != undefined) {
             const img = document.createElement('img');
             img.setAttribute("src", picture);
             workDiv1.appendChild(img);
@@ -140,17 +139,27 @@ function mediaFactory(data) {
         workDiv1.appendChild(p4);
 
         //INCREMENTATION DES LIKES
-        heart.addEventListener("click", function() {
+        heart.addEventListener("click", (e) => {
+            e.stopPropagation();
             heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
             likes++;
-            p4.innerHTML = likes
+            p4.textContent = likes
             p4.appendChild(heart);
             likesTotalCount++;
-            document.querySelector(".like").innerHTML = likesTotalCount;
-
+            document.querySelector(".like").textContent = likesTotalCount;
             console.log(likesTotalCount)
-            console.log(likes)
-        })
+        });
+        //DECREMENTATION DES LIKES
+        // heart.addEventListener("click", () => {
+        //     heart.classList.add("far", "fa-heart", "decrement");
+        //     likes--;
+        //     p4.innerHTML = likes
+        //     p4.appendChild(heart);
+        //     likesTotalCount--;
+        //     document.querySelector(".like").innerHTML = likesTotalCount;
+
+        //     console.log(likesTotalCount)
+        // });
         return (photographWorkDiv);
     }
 
@@ -165,6 +174,21 @@ async function displayPhotographerWork(media) {
     });
 };
 
+
+// // CONTENU DU TAG
+// function tag(data) {
+const likes = []
+let likesTotalCount = 0;
+for (let i = 0; i < likes.length; i++) {
+    likesTotalCount += likes[i]
+    console.log(likesTotalCount)
+}
+const tagContain =
+    `<p class="like">${likesTotalCount}</p>
+<i class="fa fa-solid fa-heart"></i>
+<p class="p5">300€ / jour</p>`;
+document.querySelector('.tag').innerHTML = tagContain;
+// }
 
 
 // OUVERTURE DU DROPDOWN
@@ -191,25 +215,6 @@ chevronUp.addEventListener("click", function() {
     chevronDown.style.display = "inline";
     chevronUp.style.display = "none";
 })
-
-
-// // CONTENU DU TAG
-// function tag(data) {
-//     const { likes } = data
-//le nombre de likes du json  doivent s'additionner
-let likesTotalCount = 0;
-// for (let i = 0; i < likes.length; i++) {
-//     likesTotalCount += likes[i]
-//     console.log(likesTotalCount)
-// }
-
-const tagContain =
-    `<p class="like">${likesTotalCount}</p>
-<i class="fa fa-solid fa-heart"></i>
-<p class="p5">300€ / jour</p>`;
-document.querySelector('.tag').innerHTML += tagContain;
-// }
-
 
 
 // OUVERTURE ET FERMETURE DE LA MODALE
