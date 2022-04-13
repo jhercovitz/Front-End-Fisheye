@@ -100,9 +100,8 @@ async function init() {
 function mediaFactory(data) {
     let { title, image, likes, video, firstName } = data;
     const picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
-    const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
+    // const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
 
-    const videoMedia = document.createElement('video');
 
     function getMediaInfoDOM() {
         const heart = document.createElement('i');
@@ -110,21 +109,17 @@ function mediaFactory(data) {
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
 
-        const splitImage = picture.split("/");
-        const splitVideo = mp4.split("/")
-        if (splitImage[4] != undefined) {
-            const img = document.createElement('img');
-            img.setAttribute("src", picture);
-            workDiv1.appendChild(img);
-        } else {
-            photographWorkDiv.removeChild(workDiv1);
-        }
-        // if (splitVideo[4] != undefined) {
-        //     videoMedia.setAttribute("src", mp4);
-        //     videoMedia.setAttribute("controls", "true")
-        //     workDiv1.appendChild(videoMedia);
+        // const splitImage = image.split(".");
+        // const splitVideo = mp4.split("/")
+        // if (splitImage[1] === jpg) {
+        const img = document.createElement('img');
+        img.setAttribute("src", picture);
+        workDiv1.appendChild(img);
         // } else {
-        //     workDiv1.removeChild(videoMedia)
+        // const videoMedia = document.createElement('video');
+        // videoMedia.setAttribute("src", mp4);
+        // videoMedia.setAttribute("controls", "true")
+        // workDiv1.appendChild(videoMedia);
         // }
 
         const p1 = document.createElement('p');
@@ -162,7 +157,6 @@ function mediaFactory(data) {
         // });
         return (photographWorkDiv);
     }
-
     return { title, image, video, likes, getMediaInfoDOM };
 }
 
@@ -171,24 +165,32 @@ async function displayPhotographerWork(media) {
         const mediaModel = mediaFactory(media);
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
+        // tag(media)
     });
 };
 
 
 // // CONTENU DU TAG
-// function tag(data) {
-const likes = []
+// async function tag() {
+//     const { media } = await getData()
 let likesTotalCount = 0;
-for (let i = 0; i < likes.length; i++) {
-    likesTotalCount += likes[i]
-    console.log(likesTotalCount)
-}
+// const likes = media.filter((media) => media.photographerId === media.likes)
+
+// for (let i = 0; i < likes.length; i++) {
+//     likesTotalCount += likes[i]
+//     console.log(likesTotalCount)
+// }
+
 const tagContain =
     `<p class="like">${likesTotalCount}</p>
-<i class="fa fa-solid fa-heart"></i>
+<i class="fa fa-solid fa-heart"></i> 
 <p class="p5">300€ / jour</p>`;
 document.querySelector('.tag').innerHTML = tagContain;
-// }
+// return { likesTotalCount }
+
+// };
+
+
 
 
 // OUVERTURE DU DROPDOWN
