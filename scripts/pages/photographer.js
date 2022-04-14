@@ -1,5 +1,5 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
-// import Media from "./classTest.js";
+import { TestMedia } from "./classTest.js";
 
 const input = document.querySelector("form");
 const chevronDown = document.getElementById("chevronDown");
@@ -12,6 +12,7 @@ const whiteLine1 = document.getElementById("whiteLine1");
 const whiteLine2 = document.getElementById("whiteLine2");
 const photographWorkDiv = document.querySelector(".photograph_work");
 const main = document.querySelector('main');
+let likesTotalCount = 0;
 
 // RECUPERATION DE L'ID DU PHOTOGRAPHE 
 const url = new URL(window.location);
@@ -31,6 +32,14 @@ async function getData() {
     return data
 }
 
+
+function displayTotalLike(total) {
+    const tagContain =
+        `<p class="like">${total}</p>
+<i class="fa fa-solid fa-heart"></i> 
+<p class="p5">300€ / jour</p>`;
+    document.querySelector('.tag').innerHTML = tagContain;
+}
 
 // AFFICHAGE DES INFOS PHOTOGRAPHE
 function photographerFactory(data) {
@@ -82,16 +91,14 @@ async function init() {
     });
     displayPhotographerWork(currentMedias);
 
-    //INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
-    function displayNameModal(data) {
-        const { name } = data;
-
-        let photographerName = "";
-        photographerName =
-            photographerName +
-            `<h2 id="name">${name}<h2>`;
-        document.getElementById("modalHeader").innerHTML += photographerName;
+    // CONTENU DU TAG
+    for (let i = 0; i < currentMedias.length; i++) {
+        likesTotalCount += currentMedias[i].likes;
     }
+    displayTotalLike(likesTotalCount)
+
+
+
     displayNameModal(currentPhotographer);
 };
 
@@ -100,7 +107,7 @@ async function init() {
 function mediaFactory(data) {
     let { title, image, likes, video, firstName } = data;
     const picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
-    // const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
+    const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
 
 
     function getMediaInfoDOM() {
@@ -109,18 +116,16 @@ function mediaFactory(data) {
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
 
-        // const splitImage = image.split(".");
-        // const splitVideo = mp4.split("/")
-        // if (splitImage[1] === jpg) {
-        const img = document.createElement('img');
-        img.setAttribute("src", picture);
-        workDiv1.appendChild(img);
-        // } else {
-        // const videoMedia = document.createElement('video');
-        // videoMedia.setAttribute("src", mp4);
-        // videoMedia.setAttribute("controls", "true")
-        // workDiv1.appendChild(videoMedia);
-        // }
+        if (image) {
+            const img = document.createElement('img');
+            img.setAttribute("src", picture);
+            workDiv1.appendChild(img);
+        } else {
+            const videoMedia = document.createElement('video');
+            videoMedia.setAttribute("src", mp4);
+            videoMedia.setAttribute("controls", "true")
+            workDiv1.appendChild(videoMedia);
+        }
 
         const p1 = document.createElement('p');
         p1.classList.add("p1");
@@ -163,17 +168,27 @@ function mediaFactory(data) {
 async function displayPhotographerWork(media) {
     media.forEach((media) => {
         const mediaModel = mediaFactory(media);
+        // const mediaModel = new TestMedia(media)
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
         // tag(media)
     });
 };
 
+//INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
+function displayNameModal(data) {
+    const { name } = data;
 
-// // CONTENU DU TAG
+    let photographerName = "";
+    photographerName =
+        photographerName +
+        `<h2 id="name">${name}<h2>`;
+    document.getElementById("modalHeader").innerHTML += photographerName;
+}
+
 // async function tag() {
 //     const { media } = await getData()
-let likesTotalCount = 0;
+// let likesTotalCount = 0;
 // const likes = media.filter((media) => media.photographerId === media.likes)
 
 // for (let i = 0; i < likes.length; i++) {
@@ -181,11 +196,11 @@ let likesTotalCount = 0;
 //     console.log(likesTotalCount)
 // }
 
-const tagContain =
-    `<p class="like">${likesTotalCount}</p>
-<i class="fa fa-solid fa-heart"></i> 
-<p class="p5">300€ / jour</p>`;
-document.querySelector('.tag').innerHTML = tagContain;
+// const tagContain =
+//     `<p class="like">${likesTotalCount}</p>
+// <i class="fa fa-solid fa-heart"></i> 
+// <p class="p5">300€ / jour</p>`;
+// document.querySelector('.tag').innerHTML = tagContain;
 // return { likesTotalCount }
 
 // };
