@@ -77,6 +77,7 @@ async function displayData(photographer) {
 async function init() {
     // photographer
     const { photographers, media } = await getData();
+
     const currentPhotographer = photographers.find((photographer) => photographer.id === photographerId);
     displayData(currentPhotographer);
 
@@ -90,6 +91,8 @@ async function init() {
         return {...media, firstName: firstName }
     });
     displayPhotographerWork(currentMedias);
+    sortMedia(currentMedias)
+
 
     // CONTENU DU TAG
     for (let i = 0; i < currentMedias.length; i++) {
@@ -97,15 +100,14 @@ async function init() {
     }
     displayTotalLike(likesTotalCount)
 
-
-
     displayNameModal(currentPhotographer);
 };
 
 
+
 // AFFICHAGE DES MEDIAS
 function mediaFactory(data) {
-    let { title, image, likes, video, firstName } = data;
+    const { title, image, likes, video, firstName } = data;
     const picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
     const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
 
@@ -139,15 +141,13 @@ function mediaFactory(data) {
         workDiv1.appendChild(p4);
 
         //INCREMENTATION DES LIKES
-        heart.addEventListener("click", (e) => {
-            e.stopPropagation();
+        heart.addEventListener("click", () => {
             heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
             likes++;
             p4.textContent = likes
             p4.appendChild(heart);
             likesTotalCount++;
             document.querySelector(".like").textContent = likesTotalCount;
-            console.log(likesTotalCount)
         });
         //DECREMENTATION DES LIKES
         // heart.addEventListener("click", () => {
@@ -171,46 +171,13 @@ async function displayPhotographerWork(media) {
         // const mediaModel = new TestMedia(media)
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
-        // tag(media)
     });
 };
-
-//INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
-function displayNameModal(data) {
-    const { name } = data;
-
-    let photographerName = "";
-    photographerName =
-        photographerName +
-        `<h2 id="name">${name}<h2>`;
-    document.getElementById("modalHeader").innerHTML += photographerName;
-}
-
-// async function tag() {
-//     const { media } = await getData()
-// let likesTotalCount = 0;
-// const likes = media.filter((media) => media.photographerId === media.likes)
-
-// for (let i = 0; i < likes.length; i++) {
-//     likesTotalCount += likes[i]
-//     console.log(likesTotalCount)
-// }
-
-// const tagContain =
-//     `<p class="like">${likesTotalCount}</p>
-// <i class="fa fa-solid fa-heart"></i> 
-// <p class="p5">300€ / jour</p>`;
-// document.querySelector('.tag').innerHTML = tagContain;
-// return { likesTotalCount }
-
-// };
-
-
 
 
 // OUVERTURE DU DROPDOWN
 // voir mettre des buttons
-chevronDown.addEventListener("click", function() {
+chevronDown.addEventListener("click", () => {
     selectFiltre.style.height = "170px";
     idP1.style.display = "block";
     idP2.style.display = "block";
@@ -222,7 +189,7 @@ chevronDown.addEventListener("click", function() {
 })
 
 // FERMETURE DROPDOWN
-chevronUp.addEventListener("click", function() {
+chevronUp.addEventListener("click", () => {
     selectFiltre.style.height = "69px";
     idP1.style.display = "none";
     idP2.style.display = "none";
@@ -234,10 +201,49 @@ chevronUp.addEventListener("click", function() {
 })
 
 
+// TRI DES MEDIAS
+function sortMedia(data) {
+    const sortByLikes = data;
+    const sortByDate = data;
+    const sortByTitle = data;
+
+    for (let i = 0; i < sortByLikes.length; i++) {
+        const likes = sortByLikes[i].likes
+        sortByLikes.sort((a, b) => a.likes - b.likes);
+        console.log("likes", likes)
+    }
+
+    document.getElementById('p3').addEventListener("click", () => {
+        for (let i = 0; i < sortByLikes.length; i++) {
+            const likes = sortByLikes[i].likes;
+            sortByLikes.sort((a, b) => a.likes - b.likes);
+            console.log("likes event", likes)
+        }
+    })
+
+    document.getElementById('p1').addEventListener("click", () => {
+        for (let i = 0; i < sortByDate.length; i++) {
+            const date = sortByDate[i].date;
+            sortByDate.sort((a, b) => a.date - b.date);
+            console.log("date", date)
+        }
+    })
+
+    document.getElementById('p2').addEventListener("click", () => {
+        for (let i = 0; i < sortByTitle.length; i++) {
+            const title = sortByTitle[i].title;
+            sortByTitle.sort((a, b) => a.title - b.title);
+            console.log("title", title)
+        }
+    })
+}
+
+
+
 // OUVERTURE ET FERMETURE DE LA MODALE
 // voir s'il faut changer de fichier 
 const button = document.getElementById("button");
-button.addEventListener("click", function() {
+button.addEventListener("click", () => {
     document.querySelector('header').style.opacity = "0.6";
     main.style.opacity = "0.6";
     document.querySelector('.select_filtre').style.marginLeft = "0"
@@ -245,12 +251,22 @@ button.addEventListener("click", function() {
 });
 
 const close = document.getElementById("close");
-close.addEventListener("click", function() {
+close.addEventListener("click", () => {
     document.querySelector('header').style.opacity = "1";
     main.style.opacity = "1";
     document.querySelector('.select_filtre').style.marginLeft = "90px";
     closeModal();
 });
+
+//INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM
+function displayNameModal(data) {
+    const { name } = data;
+    let photographerName = "";
+    photographerName =
+        photographerName +
+        `<h2 id="name">${name}<h2>`;
+    document.getElementById("modalHeader").innerHTML += photographerName;
+}
 
 // FERMETURE DU MESSAGE D'ENVOI
 const closeConfirm = document.getElementById('close_confirm');

@@ -39,7 +39,6 @@
 }
 
 .modal header {
-    /* justify-content: space-between; */
     width: 100%;
     display: flex;
     align-items: baseline
@@ -47,6 +46,7 @@
 
 .modal header img {
     cursor: pointer;
+    margin-right: -15px;
 }
 
 .modal header h2 {
@@ -168,6 +168,11 @@ article h1 {
     margin-top: -50px;
 }
 
+.p_with_chevron {
+    display: flex;
+    align-items: center;
+}
+
 #p1 {
     display: none;
     margin-left: -53%;
@@ -208,6 +213,7 @@ article h1 {
     display: none;
     margin-left: 25px;
     cursor: pointer;
+    margin-top: 11px;
 }
 
 #chevronDown {
