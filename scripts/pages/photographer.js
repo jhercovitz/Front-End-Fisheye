@@ -81,7 +81,18 @@ async function init() {
 
 // AFFICHAGE DES MEDIAS
 async function displayPhotographerWork(media) {
-    sortMedia(media)
+    // sortMedia(media)
+    // document.getElementById('p3').addEventListener("click", () => {
+    //     sortMediaByLikes(media)
+    // })
+    document.getElementById('p1').addEventListener("click", () => {
+            sortMediaByDate(media)
+            console.log("media", media)
+        })
+        // document.getElementById('p2').addEventListener("click", () => {
+        //     sortMediaByTitle(media)
+        // })
+
     media.forEach((media) => {
         const mediaModel = new Media(media)
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
@@ -117,41 +128,40 @@ chevronUp.addEventListener("click", () => {
 
 
 // TRI DES MEDIAS
-function sortMedia(data) {
-    const sortByLikes = data;
-    const sortByDate = data;
-    const sortByTitle = data;
+// function sortMediaByLikes(data) {
+//     const sortByLikes = data;
+//     for (let i = 0; i < sortByLikes.length; i++) {
+//         const likes = sortByLikes[i].likes;
+//         sortByLikes.sort((a, b) => a.likes - b.likes);
+//         console.log("likes event", likes)
+//     }
+// }
 
-    for (let i = 0; i < sortByLikes.length; i++) {
-        const likes = sortByLikes[i].likes
-        sortByLikes.sort((a, b) => a.likes - b.likes);
+function sortMediaByDate(data) {
+    const sortByDate = data
+    for (let i = 0; i < sortByDate.length; i++) {
+        const date = sortByDate[i].date;
+        sortByDate.sort((a, b) => a.date.localeCompare(b.date));
+        console.log("date", date)
     }
-
-
-    document.getElementById('p3').addEventListener("click", () => {
-        for (let i = 0; i < sortByLikes.length; i++) {
-            const likes = sortByLikes[i].likes;
-            sortByLikes.sort((a, b) => a.likes - b.likes);
-            console.log("likes event", likes)
-        }
-    })
-
-    document.getElementById('p1').addEventListener("click", () => {
-        for (let i = 0; i < sortByDate.length; i++) {
-            const date = sortByDate[i].date;
-            sortByDate.sort((a, b) => a.date.localeCompare(b.date));
-            console.log("date", date)
-        }
-    })
-
-    document.getElementById('p2').addEventListener("click", () => {
-        for (let i = 0; i < sortByTitle.length; i++) {
-            const title = sortByTitle[i].title;
-            sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
-            console.log("title", title)
-        }
-    })
 }
+
+// function sortMediaByTitle(data) {
+//     const sortByTitle = data;
+//     for (let i = 0; i < sortByTitle.length; i++) {
+//         const title = sortByTitle[i].title;
+//         sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
+//         console.log("title", title)
+//     }
+// }
+
+// function sortMedia(data) {
+//     const sortByLikes = data;
+//     for (let i = 0; i < sortByLikes.length; i++) {
+//         const likes = sortByLikes[i].likes
+//         sortByLikes.sort((a, b) => a.likes - b.likes);
+//     }
+// }
 
 
 function displayTotalLike(total) {
@@ -215,5 +225,4 @@ input.addEventListener("input", function(e) {
 
 
 
-sortMedia(photographerId);
 init();
