@@ -214,17 +214,17 @@ function sortMedia(data) {
     }
 
     document.getElementById('p3').addEventListener("click", () => {
-        for (let i = 0; i < sortByLikes.length; i++) {
-            const likes = sortByLikes[i].likes;
-            sortByLikes.sort((a, b) => a.likes - b.likes);
-            console.log("likes event", likes)
-        }
-    })
-
+            for (let i = 0; i < sortByLikes.length; i++) {
+                const likes = sortByLikes[i].likes;
+                sortByLikes.sort((a, b) => a.likes - b.likes);
+                console.log("likes event", likes)
+            }
+        })
+        // au premier clic mal trié
     document.getElementById('p1').addEventListener("click", () => {
         for (let i = 0; i < sortByDate.length; i++) {
             const date = sortByDate[i].date;
-            sortByDate.sort((a, b) => a.date - b.date);
+            sortByDate.sort((a, b) => a.date.localeCompare(b.date));
             console.log("date", date)
         }
     })
@@ -232,7 +232,7 @@ function sortMedia(data) {
     document.getElementById('p2').addEventListener("click", () => {
         for (let i = 0; i < sortByTitle.length; i++) {
             const title = sortByTitle[i].title;
-            sortByTitle.sort((a, b) => a.title - b.title);
+            sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
             console.log("title", title)
         }
     })
@@ -287,5 +287,5 @@ input.addEventListener("input", function(e) {
 
 
 
-
+sortMedia(photographerId);
 init();
