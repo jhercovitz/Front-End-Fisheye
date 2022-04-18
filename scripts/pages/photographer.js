@@ -1,5 +1,5 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
-import { TestMedia } from "./classTest.js";
+import { Photographer, Media } from "./class.js";
 
 const input = document.querySelector("form");
 const chevronDown = document.getElementById("chevronDown");
@@ -10,9 +10,10 @@ const idP2 = document.getElementById("p2");
 const idP3 = document.getElementById("p3");
 const whiteLine1 = document.getElementById("whiteLine1");
 const whiteLine2 = document.getElementById("whiteLine2");
-const photographWorkDiv = document.querySelector(".photograph_work");
 const main = document.querySelector('main');
 let likesTotalCount = 0;
+let photographerPrice = 0;
+
 
 // RECUPERATION DE L'ID DU PHOTOGRAPHE 
 const url = new URL(window.location);
@@ -33,43 +34,10 @@ async function getData() {
 }
 
 
-function displayTotalLike(total) {
-    const tagContain =
-        `<p class="like">${total}</p>
-<i class="fa fa-solid fa-heart"></i> 
-<p class="p5">300€ / jour</p>`;
-    document.querySelector('.tag').innerHTML = tagContain;
-}
-
 // AFFICHAGE DES INFOS PHOTOGRAPHE
-function photographerFactory(data) {
-    const { name, portrait, city, country, tagline } = data;
-    const picture = `assets/FishEye_Photos/Sample Photos/Photographers ID Photos/${portrait}`;
-
-    function getPhotographerInfoDOM() {
-        const article = document.createElement('article');
-        const img = document.createElement('img');
-        img.setAttribute("src", picture);
-        const h1 = document.createElement('h1');
-        h1.textContent = name;
-        const p1 = document.createElement('p');
-        p1.classList.add("p1");
-        const p2 = document.createElement('p');
-        p2.classList.add("p2");
-        p1.textContent = String(city) + "," + " " + String(country);
-        p2.textContent = tagline;
-        article.appendChild(h1);
-        article.appendChild(p1);
-        article.appendChild(p2);
-        document.querySelector('.contact').appendChild(img);
-        return (article);
-    }
-    return { name, picture, getPhotographerInfoDOM };
-}
-
 async function displayData(photographer) {
     const header = document.querySelector('.photograph-header');
-    const photographerModel = photographerFactory(photographer);
+    const photographerModel = new Photographer(photographer)
     const photographerInfoDOM = photographerModel.getPhotographerInfoDOM();
     header.appendChild(photographerInfoDOM);
 };
@@ -81,6 +49,7 @@ async function init() {
     const currentPhotographer = photographers.find((photographer) => photographer.id === photographerId);
     displayData(currentPhotographer);
 
+
     // RECUPERER QUE LE PRENOM DU PHOTOGRAPHE
     const splitName = currentPhotographer.name.split(' ');
     const firstName = splitName[0];
@@ -91,7 +60,7 @@ async function init() {
         return {...media, firstName: firstName }
     });
     displayPhotographerWork(currentMedias);
-    sortMedia(currentMedias)
+
 
 
     // CONTENU DU TAG
@@ -100,75 +69,21 @@ async function init() {
     }
     displayTotalLike(likesTotalCount)
 
+    for (let i = 0; i < currentPhotographer.length; i++) {
+        console.log('current', currentPhotographer)
+        photographerPrice += currentPhotographer[i].this.price;
+    }
+    displayPrice(photographerPrice)
+
     displayNameModal(currentPhotographer);
 };
 
 
-
 // AFFICHAGE DES MEDIAS
-function mediaFactory(data) {
-    const { title, image, likes, video, firstName } = data;
-    const picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
-    const mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
-
-
-    function getMediaInfoDOM() {
-        const heart = document.createElement('i');
-        heart.classList.add("far", "fa-heart", "increment");
-        const workDiv1 = document.createElement('div');
-        workDiv1.classList.add("work");
-
-        if (image) {
-            const img = document.createElement('img');
-            img.setAttribute("src", picture);
-            workDiv1.appendChild(img);
-        } else {
-            const videoMedia = document.createElement('video');
-            videoMedia.setAttribute("src", mp4);
-            videoMedia.setAttribute("controls", "true")
-            workDiv1.appendChild(videoMedia);
-        }
-
-        const p1 = document.createElement('p');
-        p1.classList.add("p1");
-        p1.textContent = title;
-        const p4 = document.createElement('p');
-        p4.classList.add('p4');
-        p4.textContent = likes;
-        p4.appendChild(heart);
-        photographWorkDiv.appendChild(workDiv1);
-        workDiv1.appendChild(p1);
-        workDiv1.appendChild(p4);
-
-        //INCREMENTATION DES LIKES
-        heart.addEventListener("click", () => {
-            heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
-            likes++;
-            p4.textContent = likes
-            p4.appendChild(heart);
-            likesTotalCount++;
-            document.querySelector(".like").textContent = likesTotalCount;
-        });
-        //DECREMENTATION DES LIKES
-        // heart.addEventListener("click", () => {
-        //     heart.classList.add("far", "fa-heart", "decrement");
-        //     likes--;
-        //     p4.innerHTML = likes
-        //     p4.appendChild(heart);
-        //     likesTotalCount--;
-        //     document.querySelector(".like").innerHTML = likesTotalCount;
-
-        //     console.log(likesTotalCount)
-        // });
-        return (photographWorkDiv);
-    }
-    return { title, image, video, likes, getMediaInfoDOM };
-}
-
 async function displayPhotographerWork(media) {
+    sortMedia(media)
     media.forEach((media) => {
-        const mediaModel = mediaFactory(media);
-        // const mediaModel = new TestMedia(media)
+        const mediaModel = new Media(media)
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
     });
@@ -210,17 +125,17 @@ function sortMedia(data) {
     for (let i = 0; i < sortByLikes.length; i++) {
         const likes = sortByLikes[i].likes
         sortByLikes.sort((a, b) => a.likes - b.likes);
-        console.log("likes", likes)
     }
 
+
     document.getElementById('p3').addEventListener("click", () => {
-            for (let i = 0; i < sortByLikes.length; i++) {
-                const likes = sortByLikes[i].likes;
-                sortByLikes.sort((a, b) => a.likes - b.likes);
-                console.log("likes event", likes)
-            }
-        })
-        // au premier clic mal trié
+        for (let i = 0; i < sortByLikes.length; i++) {
+            const likes = sortByLikes[i].likes;
+            sortByLikes.sort((a, b) => a.likes - b.likes);
+            console.log("likes event", likes)
+        }
+    })
+
     document.getElementById('p1').addEventListener("click", () => {
         for (let i = 0; i < sortByDate.length; i++) {
             const date = sortByDate[i].date;
@@ -238,6 +153,19 @@ function sortMedia(data) {
     })
 }
 
+
+function displayTotalLike(total) {
+    const tagContain =
+        `<p class="like">${total}</p>
+<i class="fa fa-solid fa-heart"></i> `
+    document.querySelector('.tag').innerHTML = tagContain;
+}
+
+function displayPrice(price) {
+    const tagContain =
+        `<p class="p5">${price}€ / jour</p>`;
+    document.querySelector('.tag').innerHTML += tagContain;
+}
 
 
 // OUVERTURE ET FERMETURE DE LA MODALE

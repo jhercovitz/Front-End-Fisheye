@@ -1,49 +1,38 @@
-export class Media {
-    /**
-     * @param {string} name
-     * @param {number} id
-     * @param {number} photographerId
-     * @param {image} image
-     * @param {video} video
-     * @param {number} likes
-     * @param {date} date
-     * @param {number} price
-     */
-
-    constructor({ title, id, photographerId, image, likes, date, price }) {
-        this.title = title
-        this.id = id
-        this.photographerId = photographerId
-        this.image = image
-        this.video = video
-        this.likes = likes
-        this.date = date
-        this.price = price
+export class Photographer {
+    constructor({ name, portrait, city, country, tagline }) {
+        this.name = name;
+        this.portrait = portrait;
+        this.city = city;
+        this.country = country;
+        this.tagline = tagline;
+        this.picture = `assets/FishEye_Photos/Sample Photos/Photographers ID Photos/${portrait}`;
     }
 
-    createImageHTML() {
-        document.getElementById('photograph_work').innerHTML = `
-      <div class="work">
-        <img class="img-page" src="/img/${this.image}" alt="">
-          <p class="p1">${this.title}</p>
-              <p class="paddeur">${this.likes} ❤</p>
-      </div>
-        `
-    }
-
-    createVideoHTML() {
-        document.getElementById('photograph_work').innerHTML = `
-  <div class="work">
-    <img class="img-page" src="/video/${this.video}" alt="">
-      <p class="p1">${this.title}</p>
-          <p class="paddeur">${this.likes} ❤</p>
-  </div>
-    `
+    getPhotographerInfoDOM() {
+        const article = document.createElement('article');
+        const img = document.createElement('img');
+        img.setAttribute("src", this.picture);
+        const h1 = document.createElement('h1');
+        h1.textContent = this.name;
+        const p1 = document.createElement('p');
+        p1.classList.add("p1");
+        const p2 = document.createElement('p');
+        p2.classList.add("p2");
+        p1.textContent = String(this.city) + "," + " " + String(this.country);
+        p2.textContent = this.tagline;
+        article.appendChild(h1);
+        article.appendChild(p1);
+        article.appendChild(p2);
+        document.querySelector('.contact').appendChild(img);
+        return (article);
     }
 }
 
-export class TestMedia {
-    constructor(title, id, photographerId, image, likes, date, price, firstName, video) {
+
+
+
+export class Media {
+    constructor({ title, id, photographerId, image, likes, date, price, firstName, video, likesTotalCount }) {
         this.title = title
         this.id = id
         this.photographerId = photographerId
@@ -53,21 +42,18 @@ export class TestMedia {
         this.date = date
         this.price = price
         this.firstName = firstName;
+        this.likesTotalCount = likesTotalCount;
         this.picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
         this.mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
     }
 
-
-
-
     getMediaInfoDOM() {
+        const photographWorkDiv = document.querySelector(".photograph_work");
         const heart = document.createElement('i');
         heart.classList.add("far", "fa-heart", "increment");
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
 
-        // const splitImage = image.split(".");
-        // const splitVideo = mp4.split("/")
         if (this.image) {
             const img = document.createElement('img');
             img.setAttribute("src", this.picture);
@@ -90,16 +76,16 @@ export class TestMedia {
         workDiv1.appendChild(p1);
         workDiv1.appendChild(p4);
 
-        //INCREMENTATION DES LIKES
-        heart.addEventListener("click", (e) => {
-            e.stopPropagation();
+        // //INCREMENTATION DES LIKES
+        heart.addEventListener("click", () => {
             heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
             this.likes++;
             p4.textContent = this.likes
             p4.appendChild(heart);
-            // likesTotalCount++;
-            // document.querySelector(".like").textContent = likesTotalCount;
-            // console.log(likesTotalCount)
+            this.likesTotalCount++;
+            document.querySelector(".like").textContent = this.likesTotalCount;
+            // probleme avec likesTotalCount(NaN)
+            console.log(this.likesTotalCount)
         });
         //DECREMENTATION DES LIKES
         // heart.addEventListener("click", () => {
