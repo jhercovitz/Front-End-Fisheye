@@ -2,7 +2,7 @@ import { enableBodyScroll, disableBodyScroll } from "./lightbox/body-scroll-lock
 
 /**
  * @property {HTMLElement} element
- * @property {string[]} images Chemin des images de la lightbox
+ * @property {string[]} images Chemin des images de la lightbox        `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
  * @property {string} url Image actuellement affichée
  */
 
@@ -20,7 +20,7 @@ class Lightbox {
 
     /**
      * @param {string} url URL de l'image
-     * @param {string[]} images Chemins des images de la lightbox 
+     * @param {string[]} images Chemins des images de la lightbox
      */
     constructor(url, images) {
         this.element = this.buildDOM(url)
@@ -70,7 +70,6 @@ class Lightbox {
      * Ferme la lightbox
      * @param {MouseEvent/keyboardEvent} e 
      */
-
     close(e) {
         e.preventDefault()
         this.element.classList.add('fadeOut')
@@ -119,9 +118,7 @@ class Lightbox {
         <div class="lightbox_container">
         </div>`;
         dom.querySelector('lightbox_close').addEventListener('click', this.close.bind(this))
-        return dom;
         dom.querySelector('lightbox_next').addEventListener('click', this.next.bind(this))
-        return dom;
         dom.querySelector('lightbox_prev').addEventListener('click', this.prev.bind(this))
         return dom;
     }

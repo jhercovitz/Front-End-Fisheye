@@ -87,6 +87,8 @@ export class Media {
             // probleme avec likesTotalCount(NaN)
             console.log(this.likesTotalCount)
         });
+        // voir removeListener
+
         //DECREMENTATION DES LIKES
         // heart.addEventListener("click", () => {
         //     heart.classList.add("far", "fa-heart", "decrement");
