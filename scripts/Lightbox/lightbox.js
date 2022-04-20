@@ -1,16 +1,18 @@
-import { enableBodyScroll, disableBodyScroll } from "./lightbox/body-scroll-lock.js"
+import { enableBodyScroll, disableBodyScroll } from "./body-scroll-lock.js"
 
 /**
  * @property {HTMLElement} element
- * @property {string[]} images Chemin des images de la lightbox        `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
+ * @property {string[]} images Chemin des images de la lightbox
  * @property {string} url Image actuellement affichée
  */
 
 class Lightbox {
 
     static init() {
-        const links = Array.from(document.querySelectorAll('img'))
+        const links = Array.from(document.querySelectorAll('img[src$=".jpg"], video[src$=".mp4"]'));
+        console.log('links', links)
         const gallery = links.map(link => link.getAttribute('src'))
+        console.log("gallery", gallery)
 
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
@@ -18,10 +20,6 @@ class Lightbox {
         }))
     }
 
-    /**
-     * @param {string} url URL de l'image
-     * @param {string[]} images Chemins des images de la lightbox
-     */
     constructor(url, images) {
         this.element = this.buildDOM(url)
         this.images = images
@@ -32,13 +30,11 @@ class Lightbox {
         document.addEventListener('keyup', this.onKeyUp)
     }
 
-    /**
-     * @param {string} URL de l'image 
-     */
+
     loadImage(url) {
         this.url = null
         const image = new Image();
-        const container = this.element.querySelector('lightbox_container')
+        const container = this.element.querySelector('.lightbox_container')
         const loader = document.createElement('div')
         loader.classList.add("lightbox_loader")
         container.innerHTML = ''
@@ -67,7 +63,6 @@ class Lightbox {
     }
 
     /**
-     * Ferme la lightbox
      * @param {MouseEvent/keyboardEvent} e 
      */
     close(e) {
@@ -107,7 +102,7 @@ class Lightbox {
 
     /**
      * @param {string} URL de l'image 
-     * @param {HTMLElement}
+     * @return {HTMLElement}
      */
     buildDOM(url) {
         const dom = document.createElement('div')
@@ -117,9 +112,9 @@ class Lightbox {
         <button class="lightbox_prev">Précédent</button>
         <div class="lightbox_container">
         </div>`;
-        dom.querySelector('lightbox_close').addEventListener('click', this.close.bind(this))
-        dom.querySelector('lightbox_next').addEventListener('click', this.next.bind(this))
-        dom.querySelector('lightbox_prev').addEventListener('click', this.prev.bind(this))
+        dom.querySelector('.lightbox_close').addEventListener('click', this.close.bind(this))
+        dom.querySelector('.lightbox_next').addEventListener('click', this.next.bind(this))
+        dom.querySelector('.lightbox_prev').addEventListener('click', this.prev.bind(this))
         return dom;
     }
 }

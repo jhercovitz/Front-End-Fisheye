@@ -248,6 +248,7 @@ video {
     object-fit: cover;
     border-radius: 5px;
     filter: drop-shadow(1px 4px 3px rgb(70, 69, 69));
+    cursor: grab;
 }
 
 .photograph_work i {
