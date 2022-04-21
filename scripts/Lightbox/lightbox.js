@@ -6,13 +6,11 @@ import { enableBodyScroll, disableBodyScroll } from "./body-scroll-lock.js"
  * @property {string} url Image actuellement affichée
  */
 
-class Lightbox {
+export class Lightbox {
 
     static init() {
         const links = Array.from(document.querySelectorAll('img[src$=".jpg"], video[src$=".mp4"]'));
-        console.log('links', links)
         const gallery = links.map(link => link.getAttribute('src'))
-        console.log("gallery", gallery)
 
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
@@ -81,11 +79,11 @@ class Lightbox {
      */
     next(e) {
         e.preventDefault()
-        let pos = this.images.findIndex(i => i === this.url)
-        if (pos === this.images.length - 1) {
-            pos = -1
+        let i = this.images.findIndex(image => image === this.url)
+        if (i === this.images.length - 1) {
+            i = -1
         }
-        this.loadImage(this.images[pos + 1])
+        this.loadImage(this.images[i + 1])
     }
 
     /**
@@ -93,11 +91,11 @@ class Lightbox {
      */
     prev(e) {
         e.preventDefault()
-        let pos = this.images.findIndex(i => i === this.url)
-        if (pos === 0) {
-            pos = this.images.length
+        let i = this.images.findIndex(image => image === this.url)
+        if (i === 0) {
+            i = this.images.length
         }
-        this.loadImage(this.images[pos - 1])
+        this.loadImage(this.images[i - 1])
     }
 
     /**
@@ -119,4 +117,4 @@ class Lightbox {
     }
 }
 
-Lightbox.init();
+// Lightbox.init();
