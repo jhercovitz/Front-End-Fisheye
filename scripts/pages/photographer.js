@@ -66,6 +66,9 @@ async function init() {
     sortMediaByDate(currentMedias);
     sortMediaByTitle(currentMedias);
     sortMediaByLikes(currentMedias);
+    Lightbox.init();
+
+
 
 
     // AFFICHAGE DU CONTENU TAG

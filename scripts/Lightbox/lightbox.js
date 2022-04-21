@@ -9,7 +9,9 @@ import { enableBodyScroll, disableBodyScroll } from "./body-scroll-lock.js"
 export class Lightbox {
 
     static init() {
-        const links = Array.from(document.querySelectorAll('img[src$=".jpg"], video[src$=".mp4"]'));
+        // const links = Array.from(document.querySelectorAll('img[src$=".jpg"], video[src$=".mp4"]'));
+        const links = Array.from(document.querySelectorAll('.work'));
+        console.log("links", links)
         const gallery = links.map(link => link.getAttribute('src'))
 
         links.forEach(link => link.addEventListener('click', e => {
@@ -116,5 +118,3 @@ export class Lightbox {
         return dom;
     }
 }
-
-// Lightbox.init();
