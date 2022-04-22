@@ -57,6 +57,7 @@ export class Media {
         if (this.image) {
             const img = document.createElement('img');
             img.setAttribute("src", this.picture);
+            img.classList.add("img_and_video")
             workDiv1.appendChild(img);
         } else {
             const videoMedia = document.createElement('video');

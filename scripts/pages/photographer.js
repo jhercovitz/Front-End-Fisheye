@@ -1,16 +1,11 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
-import { Photographer, Media } from "./class.js";
+import { Photographer, Media } from "/scripts/utils/class.js";
 import { Lightbox } from "../Lightbox/lightbox.js";
 
 const input = document.querySelector("form");
-const chevronDown = document.getElementById("chevronDown");
-const chevronUp = document.getElementById("chevronUp");
-const selectFiltre = document.querySelector('.select_filtre');
 const idP1 = document.getElementById("p1");
 const idP2 = document.getElementById("p2");
 const idP3 = document.getElementById("p3");
-const whiteLine1 = document.getElementById("whiteLine1");
-const whiteLine2 = document.getElementById("whiteLine2");
 const main = document.querySelector('main');
 let likesTotalCount = 0;
 
@@ -93,32 +88,6 @@ async function displayPhotographerWork(media) {
 };
 
 
-// OUVERTURE DU DROPDOWN
-// voir mettre des buttons
-chevronDown.addEventListener("click", () => {
-    selectFiltre.style.height = "170px";
-    idP1.style.display = "block";
-    idP2.style.display = "block";
-    idP3.style.marginTop = "30px";
-    whiteLine1.style.display = "block";
-    whiteLine2.style.display = "block";
-    chevronDown.style.display = "none";
-    chevronUp.style.display = "inline";
-})
-
-// FERMETURE DROPDOWN
-chevronUp.addEventListener("click", () => {
-    selectFiltre.style.height = "69px";
-    idP1.style.display = "none";
-    idP2.style.display = "none";
-    idP3.style.marginTop = "18px";
-    whiteLine1.style.display = "none";
-    whiteLine2.style.display = "none";
-    chevronDown.style.display = "inline";
-    chevronUp.style.display = "none";
-})
-
-
 // TRI DES MEDIAS
 function sortMedia(data) {
     const sortByLikes = data;
@@ -130,7 +99,7 @@ function sortMedia(data) {
 
 function sortMediaByLikes(data) {
     const sortByLikes = data;
-    document.getElementById('p3').addEventListener("click", () => {
+    document.getElementById('p3').addEventListener("change", () => {
         for (let i = 0; i < sortByLikes.length; i++) {
             const likes = sortByLikes[i].likes;
             sortByLikes.sort((a, b) => a.likes - b.likes);
@@ -141,7 +110,7 @@ function sortMediaByLikes(data) {
 
 function sortMediaByTitle(data) {
     const sortByTitle = data;
-    document.getElementById('p2').addEventListener("click", () => {
+    document.getElementById('p2').addEventListener("change", () => {
         for (let i = 0; i < sortByTitle.length; i++) {
             const title = sortByTitle[i].title;
             sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
@@ -153,7 +122,7 @@ function sortMediaByTitle(data) {
 
 function sortMediaByDate(data) {
     const sortByDate = data
-    document.getElementById('p1').addEventListener("click", () => {
+    document.getElementById('p1').addEventListener("change", () => {
         for (let i = 0; i < sortByDate.length; i++) {
             const date = sortByDate[i].date;
             sortByDate.sort((a, b) => a.date.localeCompare(b.date));
@@ -221,6 +190,91 @@ input.addEventListener("input", function(e) {
     const userInput = e.target.value;
     console.log(userInput);
 });
+
+
+// OUVERTURE DU DROPDOWN
+var x, i, j, l, ll, selElmnt, a, b, c;
+/* Look for any elements with the class "custom-select": */
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+    selElmnt = x[i].getElementsByTagName("select")[0];
+    ll = selElmnt.length;
+    /* For each element, create a new DIV that will act as the selected item: */
+    a = document.createElement("DIV");
+    a.setAttribute("class", "select-selected");
+    a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+    x[i].appendChild(a);
+    /* For each element, create a new DIV that will contain the option list: */
+    b = document.createElement("DIV");
+    b.setAttribute("class", "select-items select-hide");
+    for (j = 1; j < ll; j++) {
+        /* For each option in the original select element,
+        create a new DIV that will act as an option item: */
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function(e) {
+            /* When an item is clicked, update the original select box,
+            and the selected item: */
+            var y, i, k, s, h, sl, yl;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            sl = s.length;
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < sl; i++) {
+                if (s.options[i].innerHTML == this.innerHTML) {
+                    s.selectedIndex = i;
+                    h.innerHTML = this.innerHTML;
+                    y = this.parentNode.getElementsByClassName("same-as-selected");
+                    yl = y.length;
+                    for (k = 0; k < yl; k++) {
+                        y[k].removeAttribute("class");
+                    }
+                    this.setAttribute("class", "same-as-selected");
+                    break;
+                }
+            }
+            h.click();
+        });
+        b.appendChild(c);
+    }
+    x[i].appendChild(b);
+    a.addEventListener("click", function(e) {
+        /* When the select box is clicked, close any other select boxes,
+        and open/close the current select box: */
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.nextSibling.classList.toggle("select-hide");
+        this.classList.toggle("select-arrow-active");
+        document.querySelector(".select-selected").style.borderRadius = "5px 5px 0 0";
+    });
+}
+
+function closeAllSelect(elmnt) {
+    /* A function that will close all select boxes in the document,
+    except the current select box: */
+    var x, y, i, xl, yl, arrNo = [];
+    x = document.getElementsByClassName("select-items");
+    y = document.getElementsByClassName("select-selected");
+    xl = x.length;
+    yl = y.length;
+    for (i = 0; i < yl; i++) {
+        if (elmnt == y[i]) {
+            arrNo.push(i)
+        } else {
+            y[i].classList.remove("select-arrow-active");
+        }
+    }
+    for (i = 0; i < xl; i++) {
+        if (arrNo.indexOf(i)) {
+            x[i].classList.add("select-hide");
+            document.querySelector(".select-selected").style.borderRadius = "5px";
+        }
+    }
+}
+
+/* If the user clicks anywhere outside the select box,
+then close all select boxes: */
+document.addEventListener("click", closeAllSelect);
 
 
 init();

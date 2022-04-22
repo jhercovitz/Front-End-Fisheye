@@ -24,16 +24,13 @@
         </div>
         <div class="filter">
             <p>Trier par</p>
-            <div class="select_filtre">
-                <div class="p_with_chevron">
-                    <p class="filtre" id="p3">Popularité</p>
-                    <i id="chevronDown" class="fas fa-chevron-down"></i>
-                    <i id="chevronUp" class="fas fa-chevron-up"></i>
-                </div>
-                <div class="whiteLine" id="whiteLine1"></div>
-                <p class="filtre" id="p1">Date</p>
-                <div class="whiteLine" id="whiteLine2"></div>
-                <p class="filtre" id="p2">Titre</p>
+            <div class="custom-select">
+                <select name="filtres">
+                    <option value="popularité" selected>Choisissez</option>
+                <option value="popularité" id="p3">Popularité</option>
+                <option value="date" id="p1">Date</option>
+                <option value="titre" id="p2">Titre</option>
+            </select>
             </div>
         </div>
         <div class="photograph_work"></div>

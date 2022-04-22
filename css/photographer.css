@@ -168,65 +168,72 @@ article h1 {
     margin-top: -50px;
 }
 
-.p_with_chevron {
-    display: flex;
-    align-items: center;
-}
-
-#p1 {
-    display: none;
-    margin-left: -53%;
-    cursor: pointer;
-}
-
-#p2 {
-    display: none;
-    margin-left: -53%;
-    cursor: pointer;
-}
-
-#p3 {
-    cursor: pointer;
-}
-
 .filter {
     display: flex;
     margin-top: 10px;
 }
 
-.select_filtre {
-    background-color: #901C1C;
+.custom-select {
+    position: relative;
     width: 170px;
-    height: 69px;
+}
+
+.custom-select select {
+    display: none;
+}
+
+.select-selected {
+    background-color: #901C1C;
+    width: 80%;
+    height: 30px;
     border-radius: 5px;
-    margin-left: 90px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    margin-left: 30px;
+}
+
+.select-selected:after {
     position: absolute;
-    z-index: 1;
+    content: "";
+    top: 29px;
+    right: -10px;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-color: #fff transparent transparent transparent;
 }
 
-#chevronUp {
-    display: none;
-    margin-left: 25px;
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 19px;
+}
+
+.select-items div,
+.select-selected {
+    font-weight: 700;
+    color: #ffffff;
+    padding: 20px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     cursor: pointer;
-    margin-top: 11px;
 }
 
-#chevronDown {
-    margin-left: 25px;
-    cursor: pointer;
+.select-items {
+    position: absolute;
+    background-color: #901C1C;
+    top: 100%;
+    left: 30px;
+    right: 0;
+    z-index: 99;
+    width: 100%;
+    border-radius: 0 0 5px 5px;
 }
 
-.whiteLine {
-    width: 150px;
-    color: white;
-    border: solid 1px;
+.select-hide {
     display: none;
-    margin-top: -5px;
+}
+
+.select-items div:hover,
+.same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .photograph_work {
