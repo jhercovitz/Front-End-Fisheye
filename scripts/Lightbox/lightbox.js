@@ -48,9 +48,9 @@ export class Lightbox {
 
 
     /**
-     * 
      * @param {keybordEvent} e 
      */
+    // ne fonctionne pas
     onKeyUp(e) {
         if (e === "Escape") {
             this.close(e)

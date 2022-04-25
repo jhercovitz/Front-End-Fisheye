@@ -62,6 +62,7 @@ export class Media {
         } else {
             const videoMedia = document.createElement('video');
             videoMedia.setAttribute("src", this.mp4);
+            videoMedia.classList.add("img_and_video")
             videoMedia.setAttribute("controls", "true")
             workDiv1.appendChild(videoMedia);
         }
