@@ -56,28 +56,13 @@ async function init() {
         (media) => media.photographerId === photographerId).map(function(media) {
         return {...media, firstName: firstName }
     });
-    sortMedia(currentMedias);
+    // sortMediaByDefault(currentMedias);
 
     displayPhotographerWork(currentMedias);
-
-    function sortMediaByItem() {
-        document.querySelector(".select-selected").addEventListener("change", (e) => {
-            if (e.target.value === "popularité") {
-                sortMediaByLikes(currentMedias)
-                console.log("pop", currentMedias)
-            }
-            if (e.target.value === "date") {
-                sortMediaByDate(currentMedias)
-            }
-            if (e.target.value === "titre") {
-                sortMediaByTitle(currentMedias)
-            }
-        })
-    }
-    // sortMediaByDate(currentMedias);
-    // sortMediaByTitle(currentMedias);
-    // sortMediaByLikes(currentMedias);
-    sortMediaByItem()
+    // launchSortMedias(currentMedias)
+    sortMediaByLikes(currentMedias);
+    sortMediaByDate(currentMedias);
+    sortMediaByTitle(currentMedias);
     Lightbox.init();
 
 
@@ -106,47 +91,72 @@ async function displayPhotographerWork(media) {
 
 
 // TRI DES MEDIAS
-function sortMedia(data) {
-    const sortByLikes = data;
-    for (let i = 0; i < sortByLikes.length; i++) {
-        const likes = sortByLikes[i].likes
-        sortByLikes.sort((a, b) => a.likes - b.likes);
-    }
-}
+// function sortMediaByDefault(data) {
+//     const sortByLikes = data;
+//     for (let i = 0; i < sortByLikes.length; i++) {
+//         const likes = sortByLikes[i].likes
+//         sortByLikes.sort((a, b) => a.likes - b.likes);
+//     }
+// }
 
 function sortMediaByLikes(data) {
     const sortByLikes = data;
-    document.getElementById('p3').addEventListener("change", () => {
-        for (let i = 0; i < sortByLikes.length; i++) {
-            const likes = sortByLikes[i].likes;
-            sortByLikes.sort((a, b) => a.likes - b.likes);
+    document.querySelector(".select-selected").addEventListener("change", (e) => {
+        if (e.target.value === "popularité") {
+            for (let i = 0; i < sortByLikes.length; i++) {
+                const likes = sortByLikes[i].likes;
+                sortByLikes.sort((a, b) => a.likes - b.likes);
+                console.log("likes", likes)
+            }
         }
-        displayPhotographerWork(data);
     })
+    displayPhotographerWork(data);
 }
 
 function sortMediaByTitle(data) {
     const sortByTitle = data;
-    document.getElementById('p2').addEventListener("change", () => {
-        for (let i = 0; i < sortByTitle.length; i++) {
-            const title = sortByTitle[i].title;
-            sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
+    document.querySelector(".select-selected").addEventListener("change", (e) => {
+        if (e.target.value === "titre") {
+            for (let i = 0; i < sortByTitle.length; i++) {
+                const title = sortByTitle[i].title;
+                sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
+                console.log("title", title)
+            }
         }
-        displayPhotographerWork(data);
     })
+    displayPhotographerWork(data);
 }
 
 
 function sortMediaByDate(data) {
     const sortByDate = data
-    document.getElementById('p1').addEventListener("change", () => {
-        for (let i = 0; i < sortByDate.length; i++) {
-            const date = sortByDate[i].date;
-            sortByDate.sort((a, b) => a.date.localeCompare(b.date));
+    document.querySelector(".select-selected").addEventListener("change", (e) => {
+        if (e.target.value === "date") {
+            for (let i = 0; i < sortByDate.length; i++) {
+                const date = sortByDate[i].date;
+                sortByDate.sort((a, b) => a.date.localeCompare(b.date));
+                console.log("date", date)
+            }
         }
-        displayPhotographerWork(data);
     })
+    displayPhotographerWork(data);
 }
+
+/// Ne fonctionne pas
+// function launchSortMedias() {
+//     document.querySelector(".select-selected").addEventListener("change", (e) => {
+//         if (e.target.value === "Popularité") {
+//             sortMediaByLikes(data)
+//         }
+//         if (e.target.value === "Date") {
+//             sortMediaByDate(data)
+//         }
+//         if (e.target.value === "Titre") {
+//             sortMediaByTitle(data)
+//         }
+//         console.log("target", e.target.value)
+//     })
+// }
 
 
 
