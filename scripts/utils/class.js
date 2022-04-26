@@ -29,8 +29,6 @@ export class Photographer {
 }
 
 
-
-
 export class Media {
     constructor({ title, id, photographerId, image, likes, date, price, firstName, video, likesTotalCount }) {
         this.title = title
@@ -87,9 +85,9 @@ export class Media {
             this.likesTotalCount++;
             document.querySelector(".like").textContent = this.likesTotalCount;
             // probleme avec likesTotalCount(NaN)
-            console.log(this.likesTotalCount)
+            console.log("likes", this.likesTotalCount)
         });
-        // voir removeListener
+        // voir removeEventListener
 
         //DECREMENTATION DES LIKES
         // heart.addEventListener("click", () => {

@@ -3,11 +3,11 @@ import { enableBodyScroll, disableBodyScroll } from "./body-scroll-lock.js"
 /**
  * @property {HTMLElement} element
  * @property {string[]} images Chemin des images de la lightbox
- * @property {string} url Image actuellement affichée
+ * @property {string[]} videos Chemin des video de la lightbox
+ * @property {string} url Media actuellement affichée
  */
 
 export class Lightbox {
-
     static init() {
         const links = Array.from(document.querySelectorAll('.img_and_video'));
         console.log("links", links)
@@ -19,33 +19,39 @@ export class Lightbox {
         }))
     }
 
-    constructor(url, images) {
+    constructor(url, images, videos) {
         this.element = this.buildDOM(url)
         this.images = images
-        this.loadImage(url)
+        this.videos = videos
+        this.loadMedia(url)
         this.onKeyUp = this.onKeyUp.bind(this)
         document.body.appendChild(this.element)
         disableBodyScroll(this.element)
         document.addEventListener('keyup', this.onKeyUp)
     }
 
-
-    loadImage(url) {
+    loadMedia(url) {
         this.url = null
         const image = new Image();
+        // const video = new Video()
         const container = this.element.querySelector('.lightbox_container')
         const loader = document.createElement('div')
         loader.classList.add("lightbox_loader")
         container.innerHTML = ''
         container.appendChild(loader)
         image.onload = () => {
-            container.removeChild(loader)
-            container.appendChild(image)
-            this.url = url
-        }
+                container.removeChild(loader)
+                container.appendChild(image)
+                this.url = url
+            }
+            // video.onload = () => {
+            //     container.removeChild(loader)
+            //     container.appendChild(video)
+            //     this.url = url
+            // }
         image.src = url
+            // video.src = url
     }
-
 
     /**
      * @param {keybordEvent} e 
@@ -84,7 +90,7 @@ export class Lightbox {
         if (i === this.images.length - 1) {
             i = -1
         }
-        this.loadImage(this.images[i + 1])
+        this.loadMedia(this.images[i + 1])
     }
 
     /**
@@ -96,13 +102,9 @@ export class Lightbox {
         if (i === 0) {
             i = this.images.length
         }
-        this.loadImage(this.images[i - 1])
+        this.loadMedia(this.images[i - 1])
     }
 
-    /**
-     * @param {string} URL de l'image 
-     * @return {HTMLElement}
-     */
     buildDOM(url) {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')

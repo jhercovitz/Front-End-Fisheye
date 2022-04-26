@@ -73,6 +73,10 @@ async function init() {
         likesTotalCount += currentMedias[i].likes;
     }
     displayTotalLike(likesTotalCount)
+        // currentPhotographer.map(function(photographers) {
+        //     return {...photographers, likesTotalCount: likesTotalCount }
+        // })
+
     displayPrice(currentPhotographer.price)
 
     displayNameModal(currentPhotographer);
@@ -101,7 +105,7 @@ async function displayPhotographerWork(media) {
 
 function sortMediaByLikes(data) {
     const sortByLikes = data;
-    document.querySelector(".select-selected").addEventListener("change", (e) => {
+    document.getElementById("filtres").addEventListener("change", (e) => {
         if (e.target.value === "popularité") {
             for (let i = 0; i < sortByLikes.length; i++) {
                 const likes = sortByLikes[i].likes;
@@ -115,7 +119,7 @@ function sortMediaByLikes(data) {
 
 function sortMediaByTitle(data) {
     const sortByTitle = data;
-    document.querySelector(".select-selected").addEventListener("change", (e) => {
+    document.getElementById("filtres").addEventListener("change", (e) => {
         if (e.target.value === "titre") {
             for (let i = 0; i < sortByTitle.length; i++) {
                 const title = sortByTitle[i].title;
@@ -130,7 +134,7 @@ function sortMediaByTitle(data) {
 
 function sortMediaByDate(data) {
     const sortByDate = data
-    document.querySelector(".select-selected").addEventListener("change", (e) => {
+    document.querySelector("select").addEventListener("change", (e) => {
         if (e.target.value === "date") {
             for (let i = 0; i < sortByDate.length; i++) {
                 const date = sortByDate[i].date;
