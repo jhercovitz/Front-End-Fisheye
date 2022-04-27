@@ -1,7 +1,7 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import { Photographer, Media } from "/scripts/utils/class.js";
 import { Lightbox } from "../Lightbox/lightbox.js";
-import { dropdownEvents } from "../utils/dropdown.js";
+// import { dropdownEvents } from "../utils/dropdown.js";
 
 const input = document.querySelector("form");
 const idP1 = document.getElementById("p1");
@@ -113,8 +113,9 @@ function sortMediaByLikes(data) {
                 console.log("likes", likes)
             }
         }
+        displayPhotographerWork(data);
     })
-    displayPhotographerWork(data);
+
 }
 
 function sortMediaByTitle(data) {
@@ -127,8 +128,9 @@ function sortMediaByTitle(data) {
                 console.log("title", title)
             }
         }
+        displayPhotographerWork(data);
     })
-    displayPhotographerWork(data);
+
 }
 
 
@@ -142,8 +144,9 @@ function sortMediaByDate(data) {
                 console.log("date", date)
             }
         }
+        displayPhotographerWork(data);
     })
-    displayPhotographerWork(data);
+
 }
 
 /// Ne fonctionne pas
@@ -225,5 +228,5 @@ input.addEventListener("input", function(e) {
 
 
 
-dropdownEvents();
+// dropdownEvents();
 init();
