@@ -102,23 +102,7 @@ function sortMediaByLikes(data) {
         }
         displayPhotographerWork(data);
     })
-
 }
-
-function sortMediaByTitle(data) {
-    const sortByTitle = data;
-    document.getElementById("filtres").addEventListener("change", (e) => {
-        if (e.target.value === "titre") {
-            for (let i = 0; i < sortByTitle.length; i++) {
-                const title = sortByTitle[i].title;
-                sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
-            }
-        }
-        displayPhotographerWork(data);
-    })
-
-}
-
 
 function sortMediaByDate(data) {
     const sortByDate = data
@@ -131,7 +115,20 @@ function sortMediaByDate(data) {
         }
         displayPhotographerWork(data);
     })
+}
 
+function sortMediaByTitle(data) {
+    const sortByTitle = data;
+    document.getElementById("filtres").addEventListener("change", (e) => {
+        if (e.target.value === "titre") {
+            for (let i = 0; i < sortByTitle.length; i++) {
+                const title = sortByTitle[i].title;
+                sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
+            }
+        }
+        displayPhotographerWork(data);
+        Lightbox.init();
+    })
 }
 
 
@@ -155,7 +152,6 @@ const button = document.getElementById("button");
 button.addEventListener("click", () => {
     document.querySelector('header').style.opacity = "0.6";
     main.style.opacity = "0.6";
-    document.querySelector('.select_filtre').style.marginLeft = "0"
     displayModal();
 });
 
@@ -163,7 +159,6 @@ const close = document.getElementById("close");
 close.addEventListener("click", () => {
     document.querySelector('header').style.opacity = "1";
     main.style.opacity = "1";
-    document.querySelector('.select_filtre').style.marginLeft = "90px";
     closeModal();
 });
 

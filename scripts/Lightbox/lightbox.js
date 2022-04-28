@@ -31,35 +31,43 @@ export class Lightbox {
     }
 
     loadMedia(url) {
-        // savoir si image ou video
-
-        // ecrire le code qui affiche la video
         this.url = null
-        const image = new Image();
-        // const video = new Video()
-        const container = this.element.querySelector('.lightbox_container')
-        const loader = document.createElement('div')
-        loader.classList.add("lightbox_loader")
-        container.innerHTML = ''
-        container.appendChild(loader)
-        image.onload = () => {
+        let image = new Image();
+        if (this.images) {
+            const container = this.element.querySelector('.lightbox_container')
+            const loader = document.createElement('div')
+            loader.classList.add("lightbox_loader")
+            container.innerHTML = ''
+            container.appendChild(loader)
+            image.onload = () => {
                 container.removeChild(loader)
                 container.appendChild(image)
                 this.url = url
             }
-            // video.onload = () => {
-            //     container.removeChild(loader)
-            //     container.appendChild(video)
-            //     this.url = url
-            // }
-        image.src = url
-            // video.src = url
+            image.src = url
+            console.log("image....", url)
+
+        } else if (this.videos) {
+            const video = document.createElement("video")
+            const container = this.element.querySelector('.lightbox_container')
+            const loader = document.createElement('div')
+            loader.classList.add("lightbox_loader")
+            container.innerHTML = ''
+            container.appendChild(loader)
+            video.onload = () => {
+                container.removeChild(loader)
+                container.appendChild(image)
+                this.url = url
+            }
+            video.src = url
+            console.log("video.....", url)
+
+        }
     }
 
     /**
      * @param {keybordEvent} e 
      */
-    // ne fonctionne pas
     onKeyUp(e) {
         if (e.key === "Escape") {
             this.close(e)
@@ -81,7 +89,6 @@ export class Lightbox {
             this.element.parentElement.removeChild(this.element)
         }, 500)
         document.removeEventListener('keyup', this.onKeyUp)
-
     }
 
     /**
