@@ -1,12 +1,8 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import { Photographer, Media } from "/scripts/utils/class.js";
 import { Lightbox } from "../Lightbox/lightbox.js";
-// import { dropdownEvents } from "../utils/dropdown.js";
 
 const input = document.querySelector("form");
-const idP1 = document.getElementById("p1");
-const idP2 = document.getElementById("p2");
-const idP3 = document.getElementById("p3");
 const main = document.querySelector('main');
 let likesTotalCount = 0;
 
@@ -56,16 +52,12 @@ async function init() {
         (media) => media.photographerId === photographerId).map(function(media) {
         return {...media, firstName: firstName }
     });
-    // sortMediaByDefault(currentMedias);
-
+    sortMediaByDefault(currentMedias);
     displayPhotographerWork(currentMedias);
-    // launchSortMedias(currentMedias)
     sortMediaByLikes(currentMedias);
     sortMediaByDate(currentMedias);
     sortMediaByTitle(currentMedias);
     Lightbox.init();
-
-
 
 
     // AFFICHAGE DU CONTENU TAG
@@ -73,10 +65,6 @@ async function init() {
         likesTotalCount += currentMedias[i].likes;
     }
     displayTotalLike(likesTotalCount)
-        // currentPhotographer.map(function(photographers) {
-        //     return {...photographers, likesTotalCount: likesTotalCount }
-        // })
-
     displayPrice(currentPhotographer.price)
 
     displayNameModal(currentPhotographer);
@@ -95,13 +83,13 @@ async function displayPhotographerWork(media) {
 
 
 // TRI DES MEDIAS
-// function sortMediaByDefault(data) {
-//     const sortByLikes = data;
-//     for (let i = 0; i < sortByLikes.length; i++) {
-//         const likes = sortByLikes[i].likes
-//         sortByLikes.sort((a, b) => a.likes - b.likes);
-//     }
-// }
+function sortMediaByDefault(data) {
+    const sortByLikes = data;
+    for (let i = 0; i < sortByLikes.length; i++) {
+        const likes = sortByLikes[i].likes
+        sortByLikes.sort((a, b) => a.likes - b.likes);
+    }
+}
 
 function sortMediaByLikes(data) {
     const sortByLikes = data;
@@ -110,7 +98,6 @@ function sortMediaByLikes(data) {
             for (let i = 0; i < sortByLikes.length; i++) {
                 const likes = sortByLikes[i].likes;
                 sortByLikes.sort((a, b) => a.likes - b.likes);
-                console.log("likes", likes)
             }
         }
         displayPhotographerWork(data);
@@ -125,7 +112,6 @@ function sortMediaByTitle(data) {
             for (let i = 0; i < sortByTitle.length; i++) {
                 const title = sortByTitle[i].title;
                 sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
-                console.log("title", title)
             }
         }
         displayPhotographerWork(data);
@@ -141,30 +127,12 @@ function sortMediaByDate(data) {
             for (let i = 0; i < sortByDate.length; i++) {
                 const date = sortByDate[i].date;
                 sortByDate.sort((a, b) => a.date.localeCompare(b.date));
-                console.log("date", date)
             }
         }
         displayPhotographerWork(data);
     })
 
 }
-
-/// Ne fonctionne pas
-// function launchSortMedias() {
-//     document.querySelector(".select-selected").addEventListener("change", (e) => {
-//         if (e.target.value === "Popularité") {
-//             sortMediaByLikes(data)
-//         }
-//         if (e.target.value === "Date") {
-//             sortMediaByDate(data)
-//         }
-//         if (e.target.value === "Titre") {
-//             sortMediaByTitle(data)
-//         }
-//         console.log("target", e.target.value)
-//     })
-// }
-
 
 
 // CONTENU DU TAG
@@ -228,5 +196,4 @@ input.addEventListener("input", function(e) {
 
 
 
-// dropdownEvents();
 init();

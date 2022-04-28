@@ -31,6 +31,9 @@ export class Lightbox {
     }
 
     loadMedia(url) {
+        // savoir si image ou video
+
+        // ecrire le code qui affiche la video
         this.url = null
         const image = new Image();
         // const video = new Video()
@@ -58,11 +61,11 @@ export class Lightbox {
      */
     // ne fonctionne pas
     onKeyUp(e) {
-        if (e === "Escape") {
+        if (e.key === "Escape") {
             this.close(e)
-        } else if (e === "ArrowLeft") {
+        } else if (e.key === "ArrowLeft") {
             this.prev(e)
-        } else if (e === "ArrowRight") {
+        } else if (e.key === "ArrowRight") {
             this.next(e)
         }
     }

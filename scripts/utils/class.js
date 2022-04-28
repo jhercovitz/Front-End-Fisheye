@@ -30,7 +30,7 @@ export class Photographer {
 
 
 export class Media {
-    constructor({ title, id, photographerId, image, likes, date, price, firstName, video, likesTotalCount }) {
+    constructor({ title, id, photographerId, image, likes, date, price, firstName, video }) {
         this.title = title
         this.id = id
         this.photographerId = photographerId
@@ -40,7 +40,6 @@ export class Media {
         this.date = date
         this.price = price
         this.firstName = firstName;
-        this.likesTotalCount = likesTotalCount;
         this.picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
         this.mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
     }
@@ -82,10 +81,12 @@ export class Media {
             this.likes++;
             p4.textContent = this.likes
             p4.appendChild(heart);
-            this.likesTotalCount++;
-            document.querySelector(".like").textContent = this.likesTotalCount;
-            // probleme avec likesTotalCount(NaN)
-            console.log("likes", this.likesTotalCount)
+            const likeDomList = [...document.querySelectorAll("p.p4")];
+            let sum = 0;
+            likeDomList.forEach((likeDom) => {
+                sum = sum + Number(likeDom.textContent);
+            })
+            document.querySelector(".like").textContent = sum;
         });
         // voir removeEventListener
 
