@@ -32,8 +32,8 @@ export class Lightbox {
 
     loadMedia(url) {
         this.url = null
-        let image = new Image();
         if (this.images) {
+            let image = new Image();
             const container = this.element.querySelector('.lightbox_container')
             const loader = document.createElement('div')
             loader.classList.add("lightbox_loader")
@@ -47,8 +47,9 @@ export class Lightbox {
             image.src = url
             console.log("image....", url)
 
-        } else if (this.videos) {
+        } else if (this.image === this.videos) {
             const video = document.createElement("video")
+            console.log('const video', video)
             const container = this.element.querySelector('.lightbox_container')
             const loader = document.createElement('div')
             loader.classList.add("lightbox_loader")

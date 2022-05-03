@@ -54,11 +54,14 @@ export class Media {
         if (this.image) {
             const img = document.createElement('img');
             img.setAttribute("src", this.picture);
+            img.setAttribute("alt", 'image')
             img.classList.add("img_and_video")
+            img.setAttribute("tabindex", "0")
             workDiv1.appendChild(img);
         } else {
             const videoMedia = document.createElement('video');
             videoMedia.setAttribute("src", this.mp4);
+            videoMedia.setAttribute("alt", 'video')
             videoMedia.classList.add("img_and_video")
             videoMedia.setAttribute("controls", "true")
             workDiv1.appendChild(videoMedia);
@@ -70,12 +73,22 @@ export class Media {
         const p4 = document.createElement('p');
         p4.classList.add('p4');
         p4.textContent = this.likes;
+        heart.setAttribute("tabindex", "0")
         p4.appendChild(heart);
         photographWorkDiv.appendChild(workDiv1);
         workDiv1.appendChild(p1);
         workDiv1.appendChild(p4);
 
         // //INCREMENTATION DES LIKES
+
+        //  onKeyup(e) {
+        //     if (e.key === "enter") {
+        //         increment(e)
+        //     }
+        // }
+
+        //  increment(e) {
+        e.preventDefault()
         heart.addEventListener("click", () => {
             heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
             this.likes++;
@@ -84,10 +97,15 @@ export class Media {
             const likeDomList = [...document.querySelectorAll("p.p4")];
             let sum = 0;
             likeDomList.forEach((likeDom) => {
-                sum = sum + Number(likeDom.textContent);
-            })
+                    sum = sum + Number(likeDom.textContent);
+                })
+                // document.removeEventListener('keyup', this.onKeyUp)
             document.querySelector(".like").textContent = sum;
         });
+        // }
+
+
+
         // voir removeEventListener
 
         //DECREMENTATION DES LIKES
