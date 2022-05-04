@@ -80,16 +80,8 @@ export class Media {
         workDiv1.appendChild(p4);
 
         // //INCREMENTATION DES LIKES
-
-        //  onKeyup(e) {
-        //     if (e.key === "enter") {
-        //         increment(e)
-        //     }
-        // }
-
-        //  increment(e) {
-        e.preventDefault()
         heart.addEventListener("click", () => {
+            // function incrementLikes() {
             heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
             this.likes++;
             p4.textContent = this.likes
@@ -97,15 +89,29 @@ export class Media {
             const likeDomList = [...document.querySelectorAll("p.p4")];
             let sum = 0;
             likeDomList.forEach((likeDom) => {
+                sum = sum + Number(likeDom.textContent);
+            })
+            document.querySelector(".like").textContent = sum;
+            // }
+            // incrementLikes()
+        });
+
+        heart.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                // incrementLikes()
+                heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
+                this.likes++;
+                p4.textContent = this.likes
+                p4.appendChild(heart);
+                const likeDomList = [...document.querySelectorAll("p.p4")];
+                let sum = 0;
+                likeDomList.forEach((likeDom) => {
                     sum = sum + Number(likeDom.textContent);
                 })
-                // document.removeEventListener('keyup', this.onKeyUp)
-            document.querySelector(".like").textContent = sum;
+                document.querySelector(".like").textContent = sum;
+            }
+
         });
-        // }
-
-
-
         // voir removeEventListener
 
         //DECREMENTATION DES LIKES
