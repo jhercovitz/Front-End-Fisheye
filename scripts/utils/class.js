@@ -42,12 +42,26 @@ export class Media {
         this.firstName = firstName;
         this.picture = `assets/FishEye_Photos/Sample Photos/${firstName}/${image}`;
         this.mp4 = `assets/FishEye_Photos/Sample Photos/${firstName}/${video}`;
+        this.incrementLikes = this.incrementLikes.bind(this);
+    }
+
+    incrementLikes(e) {
+        this.heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
+        this.likes++;
+        this.p4.textContent = this.likes
+        this.p4.appendChild(this.heart);
+        const likeDomList = [...document.querySelectorAll("p.p4")];
+        let sum = 0;
+        likeDomList.forEach((likeDom) => {
+            sum = sum + Number(likeDom.textContent);
+        })
+        document.querySelector(".like").textContent = sum;
     }
 
     getMediaInfoDOM() {
         const photographWorkDiv = document.querySelector(".photograph_work");
-        const heart = document.createElement('i');
-        heart.classList.add("far", "fa-heart", "increment");
+        this.heart = document.createElement('i');
+        this.heart.classList.add("far", "fa-heart", "increment");
         const workDiv1 = document.createElement('div');
         workDiv1.classList.add("work");
 
@@ -70,50 +84,24 @@ export class Media {
         const p1 = document.createElement('p');
         p1.classList.add("p1");
         p1.textContent = this.title;
-        const p4 = document.createElement('p');
-        p4.classList.add('p4');
-        p4.textContent = this.likes;
-        heart.setAttribute("tabindex", "0")
-        p4.appendChild(heart);
+        this.p4 = document.createElement('p');
+        this.p4.classList.add('p4');
+        this.p4.textContent = this.likes;
+        this.heart.setAttribute("tabindex", "0")
+        this.p4.appendChild(this.heart);
         photographWorkDiv.appendChild(workDiv1);
         workDiv1.appendChild(p1);
-        workDiv1.appendChild(p4);
+        workDiv1.appendChild(this.p4);
 
         // //INCREMENTATION DES LIKES
-        heart.addEventListener("click", () => {
-            // function incrementLikes() {
-            heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
-            this.likes++;
-            p4.textContent = this.likes
-            p4.appendChild(heart);
-            const likeDomList = [...document.querySelectorAll("p.p4")];
-            let sum = 0;
-            likeDomList.forEach((likeDom) => {
-                sum = sum + Number(likeDom.textContent);
-            })
-            document.querySelector(".like").textContent = sum;
-            // }
-            // incrementLikes()
-        });
+        this.heart.addEventListener("click", this.incrementLikes)
 
-        heart.addEventListener("keydown", (e) => {
+        this.heart.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
-                // incrementLikes()
-                heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
-                this.likes++;
-                p4.textContent = this.likes
-                p4.appendChild(heart);
-                const likeDomList = [...document.querySelectorAll("p.p4")];
-                let sum = 0;
-                likeDomList.forEach((likeDom) => {
-                    sum = sum + Number(likeDom.textContent);
-                })
-                document.querySelector(".like").textContent = sum;
+                this.incrementLikes()
             }
-
         });
         // voir removeEventListener
-
         //DECREMENTATION DES LIKES
         // heart.addEventListener("click", () => {
         //     heart.classList.add("far", "fa-heart", "decrement");

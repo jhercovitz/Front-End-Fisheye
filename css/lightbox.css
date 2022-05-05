@@ -92,6 +92,16 @@
     animation: lightboxIn .5s;
 }
 
+.lightbox_container video {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    animation: lightboxIn .5s;
+}
+
 .lightbox_loader {
     width: 38px;
     height: 38px;

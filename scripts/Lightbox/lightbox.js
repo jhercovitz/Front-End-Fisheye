@@ -10,7 +10,6 @@ import { enableBodyScroll, disableBodyScroll } from "./body-scroll-lock.js"
 export class Lightbox {
     static init() {
         const links = Array.from(document.querySelectorAll('.img_and_video'));
-        console.log("links", links)
         const gallery = links.map(link => link.getAttribute('src'))
 
         links.forEach(link => link.addEventListener('click', e => {
@@ -26,13 +25,14 @@ export class Lightbox {
         this.loadMedia(url)
         this.onKeyUp = this.onKeyUp.bind(this)
         document.body.appendChild(this.element)
+        document.querySelector(".lightbox_close").focus();
         disableBodyScroll(this.element)
         document.addEventListener('keyup', this.onKeyUp)
     }
 
     loadMedia(url) {
         this.url = null
-        if (this.images) {
+        if (url.endsWith(".jpg")) {
             let image = new Image();
             const container = this.element.querySelector('.lightbox_container')
             const loader = document.createElement('div')
@@ -47,20 +47,13 @@ export class Lightbox {
             image.src = url
             console.log("image....", url)
 
-        } else if (this.image === this.videos) {
+        } else {
             const video = document.createElement("video")
-            console.log('const video', video)
             const container = this.element.querySelector('.lightbox_container')
-            const loader = document.createElement('div')
-            loader.classList.add("lightbox_loader")
             container.innerHTML = ''
-            container.appendChild(loader)
-            video.onload = () => {
-                container.removeChild(loader)
-                container.appendChild(image)
-                this.url = url
-            }
             video.src = url
+            video.setAttribute("controls", "true")
+            container.appendChild(video)
             console.log("video.....", url)
 
         }

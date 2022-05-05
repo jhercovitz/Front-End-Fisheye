@@ -6,6 +6,8 @@ const input = document.querySelector("form");
 const main = document.querySelector('main');
 let likesTotalCount = 0;
 
+let mediaList = [];
+
 
 
 // RECUPERATION DE L'ID DU PHOTOGRAPHE 
@@ -52,11 +54,11 @@ async function init() {
         (media) => media.photographerId === photographerId).map(function(media) {
         return {...media, firstName: firstName }
     });
-    sortMediaByDefault(currentMedias);
+    // sortMediaByDefault(currentMedias);
     displayPhotographerWork(currentMedias);
-    sortMediaByLikes(currentMedias);
-    sortMediaByDate(currentMedias);
-    sortMediaByTitle(currentMedias);
+    sortMediaByLikes(mediaList);
+    sortMediaByDate(mediaList);
+    sortMediaByTitle(mediaList);
     Lightbox.init();
 
 
@@ -76,6 +78,7 @@ async function displayPhotographerWork(media) {
     document.querySelector(".photograph_work").innerHTML = "";
     media.forEach((media) => {
         const mediaModel = new Media(media)
+        mediaList.push(mediaModel);
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
     });
