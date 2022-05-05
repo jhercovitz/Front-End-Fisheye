@@ -45,7 +45,7 @@ export class Media {
         this.incrementLikes = this.incrementLikes.bind(this);
     }
 
-    incrementLikes(e) {
+    incrementLikes() {
         this.heart.classList.add("fa", "fa-solid", "fa-heart", "increment");
         this.likes++;
         this.p4.textContent = this.likes

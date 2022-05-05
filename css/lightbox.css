@@ -1,4 +1,4 @@
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 7px;
 }
 
@@ -18,19 +18,20 @@
 
 .lightbox::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, .3);
-}
+} */
 
 .lightbox {
     position: fixed;
-    top: 9%;
+    top: 3%;
     left: 13%;
     width: 74%;
-    height: 590px;
-    background-color: rgba(0, 0, 0, .9);
+    height: 90%;
+    background-color: white;
     z-index: 10;
     overflow: auto;
     animation: lightboxIn .5s;
     transition: opacity .3s;
+    padding-bottom: 2%
 }
 
 .lightbox.fadeOut {
@@ -46,7 +47,6 @@
     position: fixed;
     top: 0;
     right: 13%;
-    margin-top: 10px;
     z-index: 11;
 }
 
@@ -60,16 +60,15 @@
     width: 30px;
     height: 30px;
     background: url(/assets/img_svg/cross.svg) center center / 100% 100% no-repeat transparent;
-    position: fixed;
-    top: 75px;
+    position: inherit;
+    top: 6%;
     right: 14%;
     z-index: 12;
+    border: none;
 }
 
 .lightbox button {
-    opacity: .5;
     cursor: pointer;
-    transition: opacity .3s;
     text-indent: -3000px;
 }
 
@@ -80,16 +79,19 @@
 .lightbox_container {
     margin-left: 50px;
     margin-right: 50px;
+    height: 95%;
 }
 
 .lightbox_container img {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 100%;
-    height: auto;
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    min-height: 80vh;
     animation: lightboxIn .5s;
+    border-radius: 5px;
+    margin-top: 2%;
 }
 
 .lightbox_container video {
@@ -97,9 +99,10 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: auto;
-    min-height: 100vh;
+    height: 100%;
+    min-height: 76vh;
     animation: lightboxIn .5s;
+    border-radius: 5px;
 }
 
 .lightbox_loader {
