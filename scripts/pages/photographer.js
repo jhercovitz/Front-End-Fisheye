@@ -151,6 +151,9 @@ function displayPrice(price) {
 
 
 // OUVERTURE ET FERMETURE DE LA MODALE
+let focusables = [];
+const modal = document.getElementById("contact_modal");
+
 const button = document.getElementById("button");
 button.addEventListener("click", () => {
     document.querySelector('header').style.opacity = "0.6";
@@ -163,6 +166,35 @@ close.addEventListener("click", () => {
     document.querySelector('header').style.opacity = "1";
     main.style.opacity = "1";
     closeModal();
+});
+
+// const focusInModal = function(e) {
+//     e.preventDefault()
+//     let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
+//     if (e.ShiftKey === true) {
+//         index--
+//     } else {
+//         index++
+//     }
+//     if (index >= focusables.length) {
+//         index = 0
+//     }
+//     if (index < 0) {
+//         index = focusables.length - 1
+//     }
+//     focusables[index].focus()
+// }
+
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === 'Escape') {
+        document.querySelector('header').style.opacity = "1";
+        main.style.opacity = "1";
+        closeModal();
+    }
+    // if (e.key === 'Tab') {
+    //     focusInModal(e)
+    // }
 });
 
 //INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM

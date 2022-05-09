@@ -1,18 +1,24 @@
 const form = document.getElementById("myForm");
 const confirmMessage = document.getElementById('confirm_submit');
 const formData = document.querySelectorAll(".formData");
+const modal = document.getElementById("contact_modal");
+const focusableSelector = 'img, input, button';
+let focusables = [];
+let previouslyFocusedElement = null;
 
 
 export function displayModal() {
-    const modal = document.getElementById("contact_modal");
+    focusables = Array.from(modal.querySelectorAll(focusableSelector));
+    document.querySelector = document.querySelector(':focus')
+    focusables[0].focus();
     modal.style.display = "flex";
+
 }
 
 export function closeModal() {
-    const modal = document.getElementById("contact_modal");
+    if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
     modal.style.display = "none";
 }
-
 
 document.forms[0].addEventListener("submit", function(e) {
     e.preventDefault();

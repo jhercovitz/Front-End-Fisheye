@@ -14,6 +14,14 @@ export class Lightbox {
 
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
+            document.querySelector('main').style.opacity = "0";
+            document.querySelector('header').style.opacity = "0";
+            new Lightbox(e.currentTarget.getAttribute('src'), gallery)
+        }))
+        links.forEach(link => link.addEventListener('keydown', e => {
+            e.preventDefault()
+            document.querySelector('main').style.opacity = "0";
+            document.querySelector('header').style.opacity = "0";
             new Lightbox(e.currentTarget.getAttribute('src'), gallery)
         }))
     }
@@ -80,6 +88,8 @@ export class Lightbox {
         this.element.classList.add('fadeOut')
         enableBodyScroll(this.element)
         window.setTimeout(() => {
+            document.querySelector('main').style.opacity = "1";
+            document.querySelector('header').style.opacity = "1"
             this.element.parentElement.removeChild(this.element)
         }, 500)
         document.removeEventListener('keyup', this.onKeyUp)

@@ -87,7 +87,7 @@ export class Media {
         this.p4 = document.createElement('p');
         this.p4.classList.add('p4');
         this.p4.textContent = this.likes;
-        this.heart.setAttribute("tabindex", "0")
+        this.heart.setAttribute("tabindex", "0");
         this.p4.appendChild(this.heart);
         photographWorkDiv.appendChild(workDiv1);
         workDiv1.appendChild(p1);

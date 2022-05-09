@@ -1,6 +1,6 @@
 #contact_modal {
     display: none;
-    margin-top: -1200px;
+    justify-content: center;
 }
 
 .photograph-header {
@@ -35,8 +35,8 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
-    margin-top: -1260px;
-    position: relative;
+    position: absolute;
+    z-index: 20;
 }
 
 .modal header {

@@ -1,22 +1,26 @@
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 7px;
 }
 
-::-webkit-scrollbar-track {
+
+/* ::-webkit-scrollbar-track {
     background: #FFF;
     padding-left: 1px;
-}
+} */
 
-::-webkit-scrollbar-thumb {
+
+/* ::-webkit-scrollbar-thumb {
     background: #9ca2b0;
     border-radius: 4px;
-}
+} */
 
-.lightbox::-webkit-scrollbar-track {
+
+/* .lightbox::-webkit-scrollbar-track {
     background: black;
-}
+} */
 
-.lightbox::-webkit-scrollbar-thumb {
+
+/* .lightbox::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, .3);
 } */
 
@@ -48,6 +52,7 @@
     top: 0;
     right: 13%;
     z-index: 11;
+    margin-top: -3%;
 }
 
 .lightbox_prev {
