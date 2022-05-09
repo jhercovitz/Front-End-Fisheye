@@ -9,7 +9,7 @@ let previouslyFocusedElement = null;
 
 export function displayModal() {
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
-    document.querySelector = document.querySelector(':focus')
+    // document.querySelector = document.querySelector(':focus')
     focusables[0].focus();
     modal.style.display = "flex";
 
@@ -19,6 +19,24 @@ export function closeModal() {
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
     modal.style.display = "none";
 }
+
+export const focusInModal = function(e) {
+    e.preventDefault()
+    let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
+    if (e.ShiftKey === true) {
+        index--
+    } else {
+        index++
+    }
+    if (index >= focusables.length) {
+        index = 0
+    }
+    if (index < 0) {
+        index = focusables.length - 1
+    }
+    focusables[index].focus()
+}
+
 
 document.forms[0].addEventListener("submit", function(e) {
     e.preventDefault();
