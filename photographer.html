@@ -16,13 +16,13 @@
     <header>
         <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" /></a>
     </header>
-    <div id="contact_modal">
+    <div id="contact_modal" role="dialog" aria-hidden="true" aria-labelledby="titlemodal">
         <div class="modal">
             <header>
                 <div id="modalHeader">
-                    <h2>Contactez-moi</h2>
+                    <h2 id="titlemodal">Contactez-moi</h2>
                 </div>
-                <img src="assets/icons/close.svg" id="close" alt="Close Contact form" />
+                <img src="assets/icons/close.svg" id="close" alt="Close Contact form" tabindex="0" />
             </header>
             <form id="myForm" novalidate method="get">
                 <div>

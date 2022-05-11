@@ -5,8 +5,10 @@ import { Lightbox } from "../Lightbox/lightbox.js";
 const input = document.querySelector("form");
 const main = document.querySelector('main');
 let likesTotalCount = 0;
-
 let mediaList = [];
+const modal = document.getElementById("contact_modal");
+const close = document.getElementById("close");
+const button = document.getElementById("button");
 
 
 
@@ -151,30 +153,23 @@ function displayPrice(price) {
 
 
 // OUVERTURE ET FERMETURE DE LA MODALE
-const modal = document.getElementById("contact_modal");
-
-const button = document.getElementById("button");
-button.addEventListener("click", () => {
-    document.querySelector('header').style.opacity = "0.6";
-    main.style.opacity = "0.6";
-    displayModal();
+button.addEventListener("click", (e) => {
+    displayModal(e);
 });
 
-const close = document.getElementById("close");
-close.addEventListener("click", () => {
-    document.querySelector('header').style.opacity = "1";
-    main.style.opacity = "1";
-    closeModal();
+close.addEventListener("click", (e) => {
+    closeModal(e);
 });
+close.addEventListener("keydown", (e) => {
+    closeModal(e);
+})
 
 window.addEventListener("keydown", (e) => {
-    if (e.key === 'Escape') {
-        document.querySelector('header').style.opacity = "1";
-        main.style.opacity = "1";
-        closeModal();
-    }
     if (e.key === 'Tab' && modal !== null) {
         focusInModal(e)
+    }
+    if (e.key === 'Escape') {
+        closeModal(e);
     }
 });
 

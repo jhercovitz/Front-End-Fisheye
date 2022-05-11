@@ -7,17 +7,26 @@ let focusables = [];
 let previouslyFocusedElement = null;
 
 
-export function displayModal() {
+export function displayModal(e) {
+    e.preventDefault()
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
-    // document.querySelector = document.querySelector(':focus')
+    document.querySelector = document.querySelector(':focus')
     focusables[0].focus();
     modal.style.display = "flex";
-
+    modal.removeAttribute('aria-hidden')
+    modal.setAttribute('aria-modal', 'true')
+    document.querySelector('header').style.opacity = "0.6";
+    main.style.opacity = "0.6";
 }
 
-export function closeModal() {
+export function closeModal(e) {
+    e.preventDefault()
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
     modal.style.display = "none";
+    modal.setAttribute('aria-hidden', 'true')
+    modal.removeAttribute('aria-modal')
+    document.querySelector('header').style.opacity = "1";
+    main.style.opacity = "1";
 }
 
 export const focusInModal = function(e) {
