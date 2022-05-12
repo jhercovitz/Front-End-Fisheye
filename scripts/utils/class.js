@@ -69,12 +69,14 @@ export class Media {
             const img = document.createElement('img');
             img.setAttribute("src", this.picture);
             img.setAttribute("alt", 'image')
+            img.setAttribute("data-title", this.title)
             img.classList.add("img_and_video")
             img.setAttribute("tabindex", "0")
             workDiv1.appendChild(img);
         } else {
             const videoMedia = document.createElement('video');
             videoMedia.setAttribute("src", this.mp4);
+            videoMedia.setAttribute("data-title", this.title)
             videoMedia.setAttribute("alt", 'video')
             videoMedia.classList.add("img_and_video")
             videoMedia.setAttribute("controls", "true")

@@ -1,4 +1,4 @@
-import { displayModal, closeModal, focusInModal } from "../utils/contactForm.js";
+import { displayModal, closeModal, /*focusInModal*/ } from "../utils/contactForm.js";
 import { Photographer, Media } from "/scripts/utils/class.js";
 import { Lightbox } from "../Lightbox/lightbox.js";
 
@@ -6,7 +6,7 @@ const input = document.querySelector("form");
 const main = document.querySelector('main');
 let likesTotalCount = 0;
 let mediaList = [];
-const modal = document.getElementById("contact_modal");
+// const modal = document.getElementById("contact_modal");
 const close = document.getElementById("close");
 const button = document.getElementById("button");
 
@@ -37,7 +37,7 @@ async function displayData(photographer) {
     const photographerModel = new Photographer(photographer)
     const photographerInfoDOM = photographerModel.getPhotographerInfoDOM();
     header.appendChild(photographerInfoDOM);
-};
+}
 
 async function init() {
     // photographer
@@ -72,7 +72,7 @@ async function init() {
     displayPrice(currentPhotographer.price)
 
     displayNameModal(currentPhotographer);
-};
+}
 
 
 // AFFICHAGE DES MEDIAS
@@ -84,24 +84,24 @@ async function displayPhotographerWork(media) {
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
     });
-};
+}
 
 
 // TRI DES MEDIAS
-function sortMediaByDefault(data) {
-    const sortByLikes = data;
-    for (let i = 0; i < sortByLikes.length; i++) {
-        const likes = sortByLikes[i].likes
-        sortByLikes.sort((a, b) => a.likes - b.likes);
-    }
-}
+// function sortMediaByDefault(data) {
+//     const sortByLikes = data;
+//     for (let i = 0; i < sortByLikes.length; i++) {
+//         const likes = sortByLikes[i].likes
+//         sortByLikes.sort((a, b) => a.likes - b.likes);
+//     }
+// }
 
 function sortMediaByLikes(data) {
     const sortByLikes = data;
     document.getElementById("filtres").addEventListener("change", (e) => {
         if (e.target.value === "popularité") {
             for (let i = 0; i < sortByLikes.length; i++) {
-                const likes = sortByLikes[i].likes;
+                sortByLikes[i].likes;
                 sortByLikes.sort((a, b) => a.likes - b.likes);
             }
         }
@@ -114,7 +114,7 @@ function sortMediaByDate(data) {
     document.querySelector("select").addEventListener("change", (e) => {
         if (e.target.value === "date") {
             for (let i = 0; i < sortByDate.length; i++) {
-                const date = sortByDate[i].date;
+                sortByDate[i].date;
                 sortByDate.sort((a, b) => a.date.localeCompare(b.date));
             }
         }
@@ -127,7 +127,7 @@ function sortMediaByTitle(data) {
     document.getElementById("filtres").addEventListener("change", (e) => {
         if (e.target.value === "titre") {
             for (let i = 0; i < sortByTitle.length; i++) {
-                const title = sortByTitle[i].title;
+                sortByTitle[i].title;
                 sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
             }
         }
@@ -165,22 +165,24 @@ close.addEventListener("click", (e) => {
     closeModal(e);
 });
 
-close.addEventListener("keydown", (e) => {
-    document.querySelector('header').style.opacity = "1";
-    main.style.opacity = "1";
-    closeModal(e);
-})
+// close.addEventListener("keydown", (e) => {
+//     if (e.key === 'Enter') {
+//         document.querySelector('header').style.opacity = "1";
+//         main.style.opacity = "1";
+//         closeModal(e);
+//     }
+// })
 
-window.addEventListener("keydown", (e) => {
-    if (e.key === 'Tab' && modal !== null) {
-        focusInModal(e)
-    }
-    if (e.key === 'Escape') {
-        document.querySelector('header').style.opacity = "1";
-        main.style.opacity = "1";
-        closeModal(e);
-    }
-});
+// window.addEventListener("keydown", (e) => {
+//     // if (e.key === 'Tab' && modal !== null) {
+//     //     focusInModal(e)
+//     // }
+//     if (e.key === 'Escape') {
+//         document.querySelector('header').style.opacity = "1";
+//         main.style.opacity = "1";
+//         closeModal(e);
+//     }
+// });
 
 
 //INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM

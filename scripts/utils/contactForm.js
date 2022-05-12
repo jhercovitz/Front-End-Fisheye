@@ -5,6 +5,8 @@ const modal = document.getElementById("contact_modal");
 const focusableSelector = 'img, input, button';
 let focusables = [];
 let previouslyFocusedElement = null;
+const main = document.querySelector('main');
+
 
 
 export function displayModal(e) {
@@ -12,6 +14,7 @@ export function displayModal(e) {
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
     // document.querySelector = document.querySelector(':focus')
     focusables[0].focus();
+    console.log(focusables[0])
     modal.style.display = "flex";
     modal.removeAttribute('aria-hidden')
     modal.setAttribute('aria-modal', 'true')
@@ -97,7 +100,7 @@ function checkLastName(input) { // l'utilisateur doit remplir ce champ
 
 function checkEmail(input) { // l'utilisateur doit entrer une adresse mail valide
     const emailError = formData[2];
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,64})+$/.test(input)) {
+    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,64})+$/.test(input)) {
         emailError.setAttribute('data-error', 'l\'email n\'est pas valide');
         emailError.setAttribute('data-error-visible', 'true');
         return false

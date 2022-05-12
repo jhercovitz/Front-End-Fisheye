@@ -20,19 +20,24 @@ export class Lightbox {
         }))
         links.forEach(link => link.addEventListener('keydown', e => {
             e.preventDefault()
-            document.querySelector('main').style.opacity = "0";
-            document.querySelector('header').style.opacity = "0";
-            new Lightbox(e.currentTarget.getAttribute('src'), gallery)
+            if (e.key === "Enter") {
+                document.querySelector('main').style.opacity = "0";
+                document.querySelector('header').style.opacity = "0";
+                new Lightbox(e.currentTarget.getAttribute('src'), gallery)
+            }
+
         }))
     }
 
-    constructor(url, images, videos) {
+    constructor(url, images) {
         this.element = this.buildDOM(url)
         this.images = images
-        this.videos = videos
-        this.loadMedia(url)
+            // this.videos = videos
+            // this.title = title
+
         this.onKeyUp = this.onKeyUp.bind(this)
         document.body.appendChild(this.element)
+        this.loadMedia(url)
         document.querySelector(".lightbox_close").focus();
         disableBodyScroll(this.element)
         document.addEventListener('keyup', this.onKeyUp)
@@ -53,8 +58,6 @@ export class Lightbox {
                 this.url = url
             }
             image.src = url
-            console.log("image....", url)
-
         } else {
             const video = document.createElement("video")
             const container = this.element.querySelector('.lightbox_container')
@@ -62,9 +65,11 @@ export class Lightbox {
             video.src = url
             video.setAttribute("controls", "true")
             container.appendChild(video)
-            console.log("video.....", url)
+            this.url = url;
 
         }
+        const title = document.querySelector(`.img_and_video[src="${url}"]`).getAttribute('data-title');
+        document.querySelector('.title').textContent = title;
     }
 
     /**
@@ -119,14 +124,15 @@ export class Lightbox {
         this.loadMedia(this.images[i - 1])
     }
 
-    buildDOM(url) {
+    buildDOM() {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')
         dom.innerHTML = `<button class="lightbox_close">Fermer</button>
         <button class="lightbox_next">Suivant</button>
         <button class="lightbox_prev">Précédent</button>
         <div class="lightbox_container">
-        </div>`;
+        </div>
+        <div class="title"></div>`;
         dom.querySelector('.lightbox_close').addEventListener('click', this.close.bind(this))
         dom.querySelector('.lightbox_next').addEventListener('click', this.next.bind(this))
         dom.querySelector('.lightbox_prev').addEventListener('click', this.prev.bind(this))

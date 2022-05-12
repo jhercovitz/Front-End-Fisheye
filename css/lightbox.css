@@ -119,6 +119,13 @@
     background: url(/assets/img_svg/loader.svg) center center no-repeat;
 }
 
+.title {
+    color: #901C1C;
+    font-size: 24px;
+    margin-left: 6%;
+    margin-top: 1%;
+}
+
 @keyframes lightboxIn {
     from {
         opacity: 0;
