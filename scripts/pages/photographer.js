@@ -154,13 +154,20 @@ function displayPrice(price) {
 
 // OUVERTURE ET FERMETURE DE LA MODALE
 button.addEventListener("click", (e) => {
+    document.querySelector('header').style.opacity = "0.6";
+    main.style.opacity = "0.6";
     displayModal(e);
 });
 
 close.addEventListener("click", (e) => {
+    document.querySelector('header').style.opacity = "1";
+    main.style.opacity = "1";
     closeModal(e);
 });
+
 close.addEventListener("keydown", (e) => {
+    document.querySelector('header').style.opacity = "1";
+    main.style.opacity = "1";
     closeModal(e);
 })
 
@@ -169,6 +176,8 @@ window.addEventListener("keydown", (e) => {
         focusInModal(e)
     }
     if (e.key === 'Escape') {
+        document.querySelector('header').style.opacity = "1";
+        main.style.opacity = "1";
         closeModal(e);
     }
 });
