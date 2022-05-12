@@ -157,6 +157,7 @@ button.addEventListener("click", (e) => {
     document.querySelector('header').style.opacity = "0.6";
     main.style.opacity = "0.6";
     displayModal(e);
+    close.focus()
 });
 
 close.addEventListener("click", (e) => {
@@ -165,24 +166,24 @@ close.addEventListener("click", (e) => {
     closeModal(e);
 });
 
-// close.addEventListener("keydown", (e) => {
-//     if (e.key === 'Enter') {
-//         document.querySelector('header').style.opacity = "1";
-//         main.style.opacity = "1";
-//         closeModal(e);
-//     }
-// })
+close.addEventListener("keydown", (e) => {
+    if (e.key === 'Enter') {
+        document.querySelector('header').style.opacity = "1";
+        main.style.opacity = "1";
+        closeModal(e);
+    }
+})
 
-// window.addEventListener("keydown", (e) => {
-//     // if (e.key === 'Tab' && modal !== null) {
-//     //     focusInModal(e)
-//     // }
-//     if (e.key === 'Escape') {
-//         document.querySelector('header').style.opacity = "1";
-//         main.style.opacity = "1";
-//         closeModal(e);
-//     }
-// });
+window.addEventListener("keydown", (e) => {
+    // if (e.key === 'Tab' && modal !== null) {
+    //     focusInModal(e)
+    // }
+    if (e.key === 'Escape') {
+        document.querySelector('header').style.opacity = "1";
+        main.style.opacity = "1";
+        closeModal(e);
+    }
+});
 
 
 //INCLURE LE NOM DU PHOTOGRAPHE DANS LE FORM

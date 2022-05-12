@@ -2,8 +2,8 @@ const form = document.getElementById("myForm");
 const confirmMessage = document.getElementById('confirm_submit');
 const formData = document.querySelectorAll(".formData");
 const modal = document.getElementById("contact_modal");
-const focusableSelector = 'img, input, button';
-let focusables = [];
+// const focusableSelector = 'img, input, button';
+// let focusables = [];
 let previouslyFocusedElement = null;
 const main = document.querySelector('main');
 
@@ -11,39 +11,41 @@ const main = document.querySelector('main');
 
 export function displayModal(e) {
     e.preventDefault()
-    focusables = Array.from(modal.querySelectorAll(focusableSelector));
-    // document.querySelector = document.querySelector(':focus')
-    focusables[0].focus();
-    console.log(focusables[0])
+        // focusables = Array.from(modal.querySelectorAll(focusableSelector));
+        // document.querySelector = document.querySelector(':focus')
+        // focusables[0].focus();
+        // console.log(focusables[0])
     modal.style.display = "flex";
     modal.removeAttribute('aria-hidden')
     modal.setAttribute('aria-modal', 'true')
+
 }
 
 export function closeModal(e) {
     e.preventDefault()
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
+    console.log(previouslyFocusedElement) ///// est toujours null
     modal.style.display = "none";
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute('aria-modal')
 }
 
-export const focusInModal = function(e) {
-    e.preventDefault()
-    let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
-    if (e.ShiftKey === true) {
-        index--
-    } else {
-        index++
-    }
-    if (index >= focusables.length) {
-        index = 0
-    }
-    if (index < 0) {
-        index = focusables.length - 1
-    }
-    focusables[index].focus()
-}
+// export const focusInModal = function(e) {
+//     e.preventDefault()
+//     let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
+//     if (e.ShiftKey === true) {
+//         index--
+//     } else {
+//         index++
+//     }
+//     if (index >= focusables.length) {
+//         index = 0
+//     }
+//     if (index < 0) {
+//         index = focusables.length - 1
+//     }
+//     focusables[index].focus()
+// }
 
 
 document.forms[0].addEventListener("submit", function(e) {
