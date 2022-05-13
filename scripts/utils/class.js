@@ -67,18 +67,18 @@ export class Media {
 
         if (this.image) {
             const img = document.createElement('img');
+            img.classList.add("img_and_video")
             img.setAttribute("src", this.picture);
             img.setAttribute("data-title", this.title)
             img.setAttribute("alt", this.title)
-            img.classList.add("img_and_video")
             img.setAttribute("tabindex", "0")
             workDiv1.appendChild(img);
         } else {
             const videoMedia = document.createElement('video');
+            videoMedia.classList.add("img_and_video")
             videoMedia.setAttribute("src", this.mp4);
             videoMedia.setAttribute("data-title", this.title)
             videoMedia.setAttribute("alt", this.title)
-            videoMedia.classList.add("img_and_video")
             videoMedia.setAttribute("controls", "true")
             workDiv1.appendChild(videoMedia);
         }

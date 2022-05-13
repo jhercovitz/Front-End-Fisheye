@@ -4,30 +4,38 @@ const formData = document.querySelectorAll(".formData");
 const modal = document.getElementById("contact_modal");
 // const focusableSelector = 'img, input, button';
 // let focusables = [];
-let previouslyFocusedElement = null;
+// let previouslyFocusedElement = null;
 const main = document.querySelector('main');
+const close = document.getElementById("close");
+const button = document.getElementById("button");
+
 
 
 
 export function displayModal(e) {
-    e.preventDefault()
-        // focusables = Array.from(modal.querySelectorAll(focusableSelector));
-        // document.querySelector = document.querySelector(':focus')
-        // focusables[0].focus();
-        // console.log(focusables[0])
+    e.preventDefault();
+    // focusables = Array.from(modal.querySelectorAll(focusableSelector));
+    // document.querySelector = document.querySelector(':focus')
+    // focusables[0].focus();
+    // console.log(focusables[0])
     modal.style.display = "flex";
-    modal.removeAttribute('aria-hidden')
-    modal.setAttribute('aria-modal', 'true')
-
+    modal.removeAttribute('aria-hidden');
+    modal.setAttribute('aria-modal', 'true');
+    document.querySelector('header').style.opacity = "0.6";
+    main.style.opacity = "0.6";
+    close.focus();
 }
 
 export function closeModal(e) {
-    e.preventDefault()
-    if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
-    console.log(previouslyFocusedElement) ///// est toujours null
+    e.preventDefault();
+    // if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
+    // console.log(previouslyFocusedElement) ///// est toujours null
     modal.style.display = "none";
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute('aria-modal')
+    modal.setAttribute('aria-hidden', 'true');
+    modal.removeAttribute('aria-modal');
+    document.querySelector('header').style.opacity = "1";
+    main.style.opacity = "1";
+    button.focus();
 }
 
 // export const focusInModal = function(e) {
@@ -44,7 +52,7 @@ export function closeModal(e) {
 //     if (index < 0) {
 //         index = focusables.length - 1
 //     }
-//     focusables[index].focus()
+//     close.focus()
 // }
 
 

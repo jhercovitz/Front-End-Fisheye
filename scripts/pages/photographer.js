@@ -6,7 +6,7 @@ const input = document.querySelector("form");
 const main = document.querySelector('main');
 let likesTotalCount = 0;
 let mediaList = [];
-// const modal = document.getElementById("contact_modal");
+const modal = document.getElementById("contact_modal");
 const close = document.getElementById("close");
 const button = document.getElementById("button");
 
@@ -154,33 +154,24 @@ function displayPrice(price) {
 
 // OUVERTURE ET FERMETURE DE LA MODALE
 button.addEventListener("click", (e) => {
-    document.querySelector('header').style.opacity = "0.6";
-    main.style.opacity = "0.6";
     displayModal(e);
-    close.focus()
 });
 
 close.addEventListener("click", (e) => {
-    document.querySelector('header').style.opacity = "1";
-    main.style.opacity = "1";
     closeModal(e);
 });
 
 close.addEventListener("keydown", (e) => {
     if (e.key === 'Enter') {
-        document.querySelector('header').style.opacity = "1";
-        main.style.opacity = "1";
         closeModal(e);
     }
 })
 
-window.addEventListener("keydown", (e) => {
+modal.addEventListener("keydown", (e) => {
     // if (e.key === 'Tab' && modal !== null) {
     //     focusInModal(e)
     // }
     if (e.key === 'Escape') {
-        document.querySelector('header').style.opacity = "1";
-        main.style.opacity = "1";
         closeModal(e);
     }
 });
