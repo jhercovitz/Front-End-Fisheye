@@ -13,27 +13,22 @@ export class Lightbox {
         const gallery = links.map(link => link.getAttribute('src'))
 
         links.forEach(link => link.addEventListener('click', e => {
-            e.preventDefault()
             document.querySelector('main').style.opacity = "0";
             document.querySelector('header').style.opacity = "0";
             new Lightbox(e.currentTarget.getAttribute('src'), gallery)
         }))
         links.forEach(link => link.addEventListener('keydown', e => {
-            e.preventDefault()
             if (e.key === "Enter") {
                 document.querySelector('main').style.opacity = "0";
                 document.querySelector('header').style.opacity = "0";
                 new Lightbox(e.currentTarget.getAttribute('src'), gallery)
             }
-
         }))
     }
 
     constructor(url, images) {
         this.element = this.buildDOM(url)
         this.images = images
-            // this.videos = videos
-            // this.title = title
 
         this.onKeyUp = this.onKeyUp.bind(this)
         document.body.appendChild(this.element)

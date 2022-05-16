@@ -124,10 +124,13 @@ function sortMediaByDate(data) {
 
 function sortMediaByTitle(data) {
     const sortByTitle = data;
+    console.log("data", sortByTitle)
     document.getElementById("filtres").addEventListener("change", (e) => {
+        console.log("data 2", sortByTitle)
         if (e.target.value === "titre") {
             for (let i = 0; i < sortByTitle.length; i++) {
                 sortByTitle[i].title;
+                console.log(sortByTitle[i].title)
                 sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
             }
         }
