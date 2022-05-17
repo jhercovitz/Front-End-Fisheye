@@ -1,4 +1,4 @@
-import { displayModal, closeModal, /*focusInModal*/ } from "../utils/contactForm.js";
+import { displayModal, closeModal, focusInModal } from "../utils/contactForm.js";
 import { Photographer, Media } from "/scripts/utils/class.js";
 import { Lightbox } from "../Lightbox/lightbox.js";
 
@@ -80,7 +80,6 @@ async function displayPhotographerWork(media) {
     document.querySelector(".photograph_work").innerHTML = "";
     media.forEach((media) => {
         const mediaModel = new Media(media)
-            // mediaList.splice(0, 10);
         mediaList.push(mediaModel);
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
@@ -172,9 +171,9 @@ close.addEventListener("keydown", (e) => {
 })
 
 modal.addEventListener("keydown", (e) => {
-    // if (e.key === 'Tab' && modal !== null) {
-    //     focusInModal(e)
-    // }
+    if (e.key === 'Tab') {
+        focusInModal(e)
+    }
     if (e.key === 'Escape') {
         closeModal(e);
     }

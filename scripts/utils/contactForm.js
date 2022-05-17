@@ -15,7 +15,7 @@ const button = document.getElementById("button");
 export function displayModal(e) {
     e.preventDefault();
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
-    // document.querySelector = document.querySelector(':focus')
+    // previouslyFocusedElement = document.querySelector(':focus')
     focusables[0].focus();
     modal.style.display = "flex";
     modal.removeAttribute('aria-hidden');
@@ -23,13 +23,12 @@ export function displayModal(e) {
     document.querySelector('header').style.opacity = "0.6";
     main.style.opacity = "0.6";
     close.focus();
-    // document.querySelector("body").blur()
 }
 
 export function closeModal(e) {
     e.preventDefault();
     // if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
-    // console.log(previouslyFocusedElement) ///// est toujours null
+    // console.log(previouslyFocusedElement) 
     modal.style.display = "none";
     modal.setAttribute('aria-hidden', 'true');
     modal.removeAttribute('aria-modal');
@@ -38,23 +37,24 @@ export function closeModal(e) {
     button.focus();
 }
 
-// export function focusInModal(e) {
-//     e.preventDefault()
-//     let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
-//     console.log(index)
-//     if (e.ShiftKey === true) {
-//         index--
-//     } else {
-//         index++
-//     }
-//     if (index >= focusables.length) {
-//         index = 0
-//     }
-//     if (index < 0) {
-//         index = focusables.length - 1
-//     }
-//     close.focus()
-// }
+export function focusInModal(e) {
+    e.preventDefault()
+    let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
+    console.log(index)
+    if (e.shiftKey === true) {
+        index--
+    } else {
+        index++
+    }
+    if (index >= focusables.length) {
+        index = 0
+    }
+    if (index < 0) {
+        index = focusables.length - 1
+    }
+    focusables[index].focus()
+    console.log(focusables[index])
+}
 
 
 document.forms[0].addEventListener("submit", function(e) {
