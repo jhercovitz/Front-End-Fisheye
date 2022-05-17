@@ -58,9 +58,9 @@ async function init() {
     });
     // sortMediaByDefault(currentMedias);
     displayPhotographerWork(currentMedias);
-    sortMediaByLikes(mediaList);
-    sortMediaByDate(mediaList);
-    sortMediaByTitle(mediaList);
+    sortMediaByLikes(currentMedias);
+    sortMediaByDate(currentMedias);
+    sortMediaByTitle(currentMedias);
     Lightbox.init();
 
 
@@ -80,6 +80,7 @@ async function displayPhotographerWork(media) {
     document.querySelector(".photograph_work").innerHTML = "";
     media.forEach((media) => {
         const mediaModel = new Media(media)
+            // mediaList.splice(0, 10);
         mediaList.push(mediaModel);
         const mediaInfoDOM = mediaModel.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
@@ -126,11 +127,11 @@ function sortMediaByTitle(data) {
     const sortByTitle = data;
     console.log("data", sortByTitle)
     document.getElementById("filtres").addEventListener("change", (e) => {
-        console.log("data 2", sortByTitle)
         if (e.target.value === "titre") {
+            console.log("data 2", sortByTitle)
             for (let i = 0; i < sortByTitle.length; i++) {
                 sortByTitle[i].title;
-                console.log(sortByTitle[i].title)
+                console.log("sort", sortByTitle[i].title)
                 sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
             }
         }

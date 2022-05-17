@@ -1,5 +1,3 @@
-import { enableBodyScroll, disableBodyScroll } from "./body-scroll-lock.js"
-
 /**
  * @property {HTMLElement} element
  * @property {string[]} images Chemin des images de la lightbox
@@ -19,6 +17,7 @@ export class Lightbox {
         }))
         links.forEach(link => link.addEventListener('keydown', e => {
             if (e.key === "Enter") {
+                e.preventDefault()
                 document.querySelector('main').style.opacity = "0";
                 document.querySelector('header').style.opacity = "0";
                 new Lightbox(e.currentTarget.getAttribute('src'), gallery)
@@ -29,12 +28,10 @@ export class Lightbox {
     constructor(url, images) {
         this.element = this.buildDOM(url)
         this.images = images
-
         this.onKeyUp = this.onKeyUp.bind(this)
         document.body.appendChild(this.element)
         this.loadMedia(url)
         document.querySelector(".lightbox_close").focus();
-        disableBodyScroll(this.element)
         document.addEventListener('keyup', this.onKeyUp)
     }
 
@@ -73,7 +70,8 @@ export class Lightbox {
     onKeyUp(e) {
         if (e.key === "Escape") {
             this.close(e)
-        } else if (e.key === "ArrowLeft") {
+        } else
+        if (e.key === "ArrowLeft") {
             this.prev(e)
         } else if (e.key === "ArrowRight") {
             this.next(e)
@@ -86,7 +84,6 @@ export class Lightbox {
     close(e) {
         e.preventDefault()
         this.element.classList.add('fadeOut')
-        enableBodyScroll(this.element)
         window.setTimeout(() => {
             document.querySelector('main').style.opacity = "1";
             document.querySelector('header').style.opacity = "1"

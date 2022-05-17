@@ -2,8 +2,8 @@ const form = document.getElementById("myForm");
 const confirmMessage = document.getElementById('confirm_submit');
 const formData = document.querySelectorAll(".formData");
 const modal = document.getElementById("contact_modal");
-// const focusableSelector = 'img, input, button';
-// let focusables = [];
+const focusableSelector = 'img, input, button';
+let focusables = [];
 // let previouslyFocusedElement = null;
 const main = document.querySelector('main');
 const close = document.getElementById("close");
@@ -14,16 +14,16 @@ const button = document.getElementById("button");
 
 export function displayModal(e) {
     e.preventDefault();
-    // focusables = Array.from(modal.querySelectorAll(focusableSelector));
+    focusables = Array.from(modal.querySelectorAll(focusableSelector));
     // document.querySelector = document.querySelector(':focus')
-    // focusables[0].focus();
-    // console.log(focusables[0])
+    focusables[0].focus();
     modal.style.display = "flex";
     modal.removeAttribute('aria-hidden');
     modal.setAttribute('aria-modal', 'true');
     document.querySelector('header').style.opacity = "0.6";
     main.style.opacity = "0.6";
     close.focus();
+    // document.querySelector("body").blur()
 }
 
 export function closeModal(e) {
@@ -38,9 +38,10 @@ export function closeModal(e) {
     button.focus();
 }
 
-// export const focusInModal = function(e) {
+// export function focusInModal(e) {
 //     e.preventDefault()
 //     let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
+//     console.log(index)
 //     if (e.ShiftKey === true) {
 //         index--
 //     } else {
