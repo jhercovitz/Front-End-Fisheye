@@ -183,6 +183,7 @@ select {
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     color: white;
     font-size: 18px;
+    padding-left: 5px;
 }
 
 .photograph_work {

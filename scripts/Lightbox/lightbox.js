@@ -4,9 +4,6 @@
  * @property {string[]} videos Chemin des video de la lightbox
  * @property {string} url Media actuellement affichée
  */
-let focusables = [];
-const focusableSelector = 'button';
-const lightbox = document.querySelector(".lightbox")
 export class Lightbox {
     static init() {
         const links = Array.from(document.querySelectorAll('.img_and_video'));
@@ -43,12 +40,10 @@ export class Lightbox {
         if (url.endsWith(".jpg")) {
             let image = new Image();
             const container = this.element.querySelector('.lightbox_container')
-            const loader = document.createElement('div')
-            loader.classList.add("lightbox_loader")
             container.innerHTML = ''
             container.appendChild(image)
             this.url = url
-
+            container.focus()
             image.src = url
         } else {
             const video = document.createElement("video")
@@ -62,9 +57,6 @@ export class Lightbox {
         }
         const title = document.querySelector(`.img_and_video[src="${url}"]`).getAttribute('data-title');
         document.querySelector('.title').textContent = title;
-        // focusables = Array.from(lightbox.querySelectorAll(focusableSelector));
-        // focusables[0].focus();
-        focusInLightbox(url)
     }
 
     /**
@@ -122,7 +114,7 @@ export class Lightbox {
     buildDOM() {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')
-        dom.innerHTML = `<button class="lightbox_close">Fermer</button>
+        dom.innerHTML = `<button class="lightbox_close" tabindex="0">Fermer</button>
         <button class="lightbox_next">Suivant</button>
         <button class="lightbox_prev">Précédent</button>
         <div class="lightbox_container">
@@ -133,22 +125,4 @@ export class Lightbox {
         dom.querySelector('.lightbox_prev').addEventListener('click', this.prev.bind(this))
         return dom;
     }
-}
-
-// permet de garder le focus dans la lightbox
-function focusInLightbox(e) {
-    // e.preventDefault()
-    let index = focusables.findIndex(f => f === Lightbox.querySelector(':focus'));
-    if (e.shiftKey === true) {
-        index--
-    } else {
-        index++
-    }
-    if (index >= focusables.length) {
-        index = 0
-    }
-    if (index < 0) {
-        index = focusables.length - 1
-    }
-    focusables[index].focus()
 }
