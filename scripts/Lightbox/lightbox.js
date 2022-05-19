@@ -4,7 +4,9 @@
  * @property {string[]} videos Chemin des video de la lightbox
  * @property {string} url Media actuellement affichée
  */
-
+let focusables = [];
+const focusableSelector = 'button';
+const lightbox = document.querySelector(".lightbox")
 export class Lightbox {
     static init() {
         const links = Array.from(document.querySelectorAll('.img_and_video'));
@@ -23,6 +25,7 @@ export class Lightbox {
                 new Lightbox(e.currentTarget.getAttribute('src'), gallery)
             }
         }))
+        document.querySelector("main").setAttribute("tabindex", "-1")
     }
 
     constructor(url, images) {
@@ -43,12 +46,9 @@ export class Lightbox {
             const loader = document.createElement('div')
             loader.classList.add("lightbox_loader")
             container.innerHTML = ''
-            container.appendChild(loader)
-            image.onload = () => {
-                container.removeChild(loader)
-                container.appendChild(image)
-                this.url = url
-            }
+            container.appendChild(image)
+            this.url = url
+
             image.src = url
         } else {
             const video = document.createElement("video")
@@ -62,6 +62,9 @@ export class Lightbox {
         }
         const title = document.querySelector(`.img_and_video[src="${url}"]`).getAttribute('data-title');
         document.querySelector('.title').textContent = title;
+        // focusables = Array.from(lightbox.querySelectorAll(focusableSelector));
+        // focusables[0].focus();
+        focusInLightbox(url)
     }
 
     /**
@@ -130,4 +133,22 @@ export class Lightbox {
         dom.querySelector('.lightbox_prev').addEventListener('click', this.prev.bind(this))
         return dom;
     }
+}
+
+// permet de garder le focus dans la lightbox
+function focusInLightbox(e) {
+    // e.preventDefault()
+    let index = focusables.findIndex(f => f === Lightbox.querySelector(':focus'));
+    if (e.shiftKey === true) {
+        index--
+    } else {
+        index++
+    }
+    if (index >= focusables.length) {
+        index = 0
+    }
+    if (index < 0) {
+        index = focusables.length - 1
+    }
+    focusables[index].focus()
 }

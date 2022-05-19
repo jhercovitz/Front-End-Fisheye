@@ -2,7 +2,6 @@ import { displayModal, closeModal, focusInModal } from "../utils/contactForm.js"
 import { Photographer, Media } from "/scripts/utils/class.js";
 import { Lightbox } from "../Lightbox/lightbox.js";
 
-const input = document.querySelector("form");
 const main = document.querySelector('main');
 let likesTotalCount = 0;
 let mediaList = [];
@@ -56,11 +55,11 @@ async function init() {
         (media) => media.photographerId === photographerId).map(function(media) {
         return {...media, firstName: firstName }
     });
-    // sortMediaByDefault(currentMedias);
-    displayPhotographerWork(currentMedias);
-    sortMediaByLikes(currentMedias);
-    sortMediaByDate(currentMedias);
-    sortMediaByTitle(currentMedias);
+    mediaList = createMediaObjArray(currentMedias);
+    displayPhotographerWork2(mediaList);
+    sortMediaByLikes(mediaList);
+    sortMediaByDate(mediaList);
+    sortMediaByTitle(mediaList);
     Lightbox.init();
 
 
@@ -76,26 +75,26 @@ async function init() {
 
 
 // AFFICHAGE DES MEDIAS
-async function displayPhotographerWork(media) {
+function createMediaObjArray(mediaDataArray) {
+    let temp = [];
+    mediaDataArray.forEach((mediaData) => {
+        const mediaModel = new Media(mediaData)
+        temp.push(mediaModel);
+    });
+
+    return temp
+}
+
+function displayPhotographerWork2(mediaArray) {
     document.querySelector(".photograph_work").innerHTML = "";
-    media.forEach((media) => {
-        const mediaModel = new Media(media)
-        mediaList.push(mediaModel);
-        const mediaInfoDOM = mediaModel.getMediaInfoDOM();
+    mediaArray.forEach((media) => {
+        const mediaInfoDOM = media.getMediaInfoDOM();
         main.appendChild(mediaInfoDOM);
     });
 }
 
 
 // TRI DES MEDIAS
-// function sortMediaByDefault(data) {
-//     const sortByLikes = data;
-//     for (let i = 0; i < sortByLikes.length; i++) {
-//         const likes = sortByLikes[i].likes
-//         sortByLikes.sort((a, b) => a.likes - b.likes);
-//     }
-// }
-
 function sortMediaByLikes(data) {
     const sortByLikes = data;
     document.getElementById("filtres").addEventListener("change", (e) => {
@@ -105,7 +104,7 @@ function sortMediaByLikes(data) {
                 sortByLikes.sort((a, b) => a.likes - b.likes);
             }
         }
-        displayPhotographerWork(data);
+        displayPhotographerWork2(data);
     })
 }
 
@@ -118,23 +117,20 @@ function sortMediaByDate(data) {
                 sortByDate.sort((a, b) => a.date.localeCompare(b.date));
             }
         }
-        displayPhotographerWork(data);
+        displayPhotographerWork2(data);
     })
 }
 
 function sortMediaByTitle(data) {
     const sortByTitle = data;
-    console.log("data", sortByTitle)
     document.getElementById("filtres").addEventListener("change", (e) => {
         if (e.target.value === "titre") {
-            console.log("data 2", sortByTitle)
             for (let i = 0; i < sortByTitle.length; i++) {
                 sortByTitle[i].title;
-                console.log("sort", sortByTitle[i].title)
                 sortByTitle.sort((a, b) => a.title.localeCompare(b.title));
             }
         }
-        displayPhotographerWork(data);
+        displayPhotographerWork2(data);
         Lightbox.init();
     })
 }
@@ -192,20 +188,14 @@ function displayNameModal(data) {
 
 // FERMETURE DU MESSAGE D'ENVOI
 const closeConfirm = document.getElementById('close_confirm');
-closeConfirm.addEventListener("click", () => {
-    closeModal();
+closeConfirm.addEventListener("click", (e) => {
+    closeModal(e);
     document.querySelector('header').style.opacity = "1";
     main.style.opacity = "1";
     document.getElementById('myForm').style.display = "block"; // ré-ouvre le formulaire au clic
     document.getElementById('modalHeader').style.display = "flex";
     document.getElementById('confirm_submit').style.display = "none"; // empeche la ré-ouverture automatique du message de confirmation
 })
-
-// CONSOLE.LOG DES INPUTS
-input.addEventListener("input", function(e) {
-    const userInput = e.target.value;
-    console.log(userInput);
-});
 
 
 

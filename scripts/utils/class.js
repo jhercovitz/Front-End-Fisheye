@@ -103,18 +103,6 @@ export class Media {
                 this.incrementLikes()
             }
         });
-        // voir removeEventListener
-        //DECREMENTATION DES LIKES
-        // heart.addEventListener("click", () => {
-        //     heart.classList.add("far", "fa-heart", "decrement");
-        //     likes--;
-        //     p4.innerHTML = likes
-        //     p4.appendChild(heart);
-        //     likesTotalCount--;
-        //     document.querySelector(".like").innerHTML = likesTotalCount;
-
-        //     console.log(likesTotalCount)
-        // });
         return (photographWorkDiv);
     }
 

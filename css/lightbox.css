@@ -2,28 +2,6 @@
     width: 7px;
 }
 
-
-/* ::-webkit-scrollbar-track {
-    background: #FFF;
-    padding-left: 1px;
-} */
-
-
-/* ::-webkit-scrollbar-thumb {
-    background: #9ca2b0;
-    border-radius: 4px;
-} */
-
-
-/* .lightbox::-webkit-scrollbar-track {
-    background: black;
-} */
-
-
-/* .lightbox::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, .3);
-} */
-
 .lightbox {
     position: fixed;
     top: 3%;
@@ -97,6 +75,7 @@
     animation: lightboxIn .5s;
     border-radius: 5px;
     margin-top: 2%;
+    object-fit: cover;
 }
 
 .lightbox_container video {
@@ -108,15 +87,6 @@
     min-height: 76vh;
     animation: lightboxIn .5s;
     border-radius: 5px;
-}
-
-.lightbox_loader {
-    width: 38px;
-    height: 38px;
-    margin-top: 285px;
-    margin-left: 50%;
-    opacity: .5;
-    background: url(/assets/img_svg/loader.svg) center center no-repeat;
 }
 
 .title {

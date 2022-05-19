@@ -4,10 +4,13 @@ const formData = document.querySelectorAll(".formData");
 const modal = document.getElementById("contact_modal");
 const focusableSelector = 'img, input, button';
 let focusables = [];
-// let previouslyFocusedElement = null;
 const main = document.querySelector('main');
 const close = document.getElementById("close");
 const button = document.getElementById("button");
+const firstName = document.getElementById("first");
+const lastName = document.getElementById("last");
+const email = document.getElementById("email");
+const message = document.getElementById("message");
 
 
 
@@ -15,7 +18,6 @@ const button = document.getElementById("button");
 export function displayModal(e) {
     e.preventDefault();
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
-    // previouslyFocusedElement = document.querySelector(':focus')
     focusables[0].focus();
     modal.style.display = "flex";
     modal.removeAttribute('aria-hidden');
@@ -27,8 +29,6 @@ export function displayModal(e) {
 
 export function closeModal(e) {
     e.preventDefault();
-    // if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
-    // console.log(previouslyFocusedElement) 
     modal.style.display = "none";
     modal.setAttribute('aria-hidden', 'true');
     modal.removeAttribute('aria-modal');
@@ -37,10 +37,11 @@ export function closeModal(e) {
     button.focus();
 }
 
+
+// permet de garder le focus dans la modal
 export function focusInModal(e) {
     e.preventDefault()
     let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
-    console.log(index)
     if (e.shiftKey === true) {
         index--
     } else {
@@ -53,7 +54,6 @@ export function focusInModal(e) {
         index = focusables.length - 1
     }
     focusables[index].focus()
-    console.log(focusables[index])
 }
 
 
@@ -71,8 +71,11 @@ document.forms[0].addEventListener("submit", function(e) {
         document.querySelector('header').style.opacity = "0.6";
         document.getElementById("close").style.display = "none";
         main.style.opacity = "0.6";
-        form.reset(); // la croix n'est  plus la
+        form.reset();
         confirmMessage.style.display = "flex";
+
+        // CONSOLE.LOG DES INPUTS
+        console.log("Prénom:", firstName.value, "Nom:", lastName.value, "Email:", email.value, "Message:", message.value)
     }
 });
 
