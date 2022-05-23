@@ -57,6 +57,12 @@ export class Lightbox {
         }
         const title = document.querySelector(`.img_and_video[src="${url}"]`).getAttribute('data-title');
         document.querySelector('.title').textContent = title;
+
+        const tabHidden = document.querySelectorAll("header", "button", "select", "img", "video");
+        console.log(tabHidden)
+        tabHidden.forEach((elt) => {
+            elt.removeAttribute("tabindex")
+        })
     }
 
     /**
