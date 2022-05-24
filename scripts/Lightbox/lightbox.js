@@ -58,11 +58,14 @@ export class Lightbox {
         const title = document.querySelector(`.img_and_video[src="${url}"]`).getAttribute('data-title');
         document.querySelector('.title').textContent = title;
 
-        const tabHidden = document.querySelectorAll("header", "button", "select", "img", "video");
+        const tabHidden = document.querySelectorAll("header a , :is(main) :is(button, select, img, video, i)");
         console.log(tabHidden)
         tabHidden.forEach((elt) => {
-            elt.removeAttribute("tabindex")
-        })
+            elt.setAttribute("tabindex", "-1");
+            document.querySelector(".lightbox_close").setAttribute("tabindex", "0");
+            document.querySelector(".lightbox_next").setAttribute("tabindex", "0");
+            document.querySelector(".lightbox_prev").setAttribute("tabindex", "0");
+        });
     }
 
     /**
@@ -91,6 +94,13 @@ export class Lightbox {
             this.element.parentElement.removeChild(this.element)
         }, 500)
         document.removeEventListener('keyup', this.onKeyUp)
+        const tabHidden = document.querySelectorAll("header a , :is(main) :is(button, select, img, video, i)");
+        console.log(tabHidden)
+        tabHidden.forEach((elt) => {
+            elt.setAttribute("tabindex", "0");
+            document.querySelector(".photographer_photo").setAttribute("tabindex", "-1");
+            document.querySelector(".img_and_video").focus();
+        });
     }
 
     /**
@@ -120,7 +130,7 @@ export class Lightbox {
     buildDOM() {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')
-        dom.innerHTML = `<button class="lightbox_close" tabindex="0">Fermer</button>
+        dom.innerHTML = `<button class="lightbox_close">Fermer</button>
         <button class="lightbox_next">Suivant</button>
         <button class="lightbox_prev">Précédent</button>
         <div class="lightbox_container">
