@@ -12,6 +12,7 @@ export class Photographer {
         const article = document.createElement('article');
         const img = document.createElement('img');
         img.setAttribute("src", this.picture);
+        img.setAttribute("alt", "photo de présentation du photographe")
         img.classList.add("photographer_photo")
         const h1 = document.createElement('h1');
         h1.textContent = this.name;

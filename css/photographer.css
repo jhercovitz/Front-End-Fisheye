@@ -64,6 +64,11 @@
     padding-bottom: 18px;
 }
 
+#close_button {
+    border: none;
+    background: none;
+}
+
 #name {
     margin-top: -60px;
 }

@@ -43,6 +43,7 @@ h1 {
     width: 301px;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 a {

@@ -10,6 +10,7 @@ export class Lightbox {
         const gallery = links.map(link => link.getAttribute('src'))
 
         links.forEach(link => link.addEventListener('click', e => {
+            e.preventDefault();
             document.querySelector('main').style.opacity = "0";
             document.querySelector('header').style.opacity = "0";
             new Lightbox(e.currentTarget.getAttribute('src'), gallery)
@@ -94,7 +95,7 @@ export class Lightbox {
             this.element.parentElement.removeChild(this.element)
         }, 500)
         document.removeEventListener('keyup', this.onKeyUp)
-        const tabHidden = document.querySelectorAll("header a , :is(main) :is(button, select, img, video, i)");
+        const tabHidden = document.querySelectorAll("header a , main :is(button, select, img, video, i)");
         console.log(tabHidden)
         tabHidden.forEach((elt) => {
             elt.setAttribute("tabindex", "0");
@@ -130,9 +131,9 @@ export class Lightbox {
     buildDOM() {
         const dom = document.createElement('div')
         dom.classList.add('lightbox')
-        dom.innerHTML = `<button class="lightbox_close">Fermer</button>
-        <button class="lightbox_next">Suivant</button>
-        <button class="lightbox_prev">Précédent</button>
+        dom.innerHTML = `<button class="lightbox_close" aria-label="Fermer la lightbox"></button>
+        <button class="lightbox_next" aria-label="Aller au media suivant"></button>
+        <button class="lightbox_prev"aria-label="Revenir au media précédent"></button>
         <div class="lightbox_container">
         </div>
         <div class="title"></div>`;
