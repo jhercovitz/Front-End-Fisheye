@@ -150,6 +150,15 @@ article h1 {
     font-size: 21px;
 }
 
+.button_like {
+    border: none;
+    background: none;
+    font-weight: 500;
+    color: #901C1C;
+    font-size: 21px;
+    padding: 0px;
+}
+
 .photograph-header img {
     width: 200px;
     height: 200px;
