@@ -111,6 +111,7 @@ export class Media {
             // this.button_like.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
                 this.incrementLikes()
+                this.heart.focus();
             }
         });
         return (photographWorkDiv);
