@@ -52,8 +52,6 @@ export class Media {
         this.likes++;
         this.p4.textContent = this.likes
         this.p4.appendChild(this.heart)
-            // this.p4.appendChild(this.button_like)
-            // this.button_like.appendChild(this.heart);
         const likeDomList = [...document.querySelectorAll("p.p4")];
         let sum = 0;
         likeDomList.forEach((likeDom) => {
@@ -94,10 +92,7 @@ export class Media {
         this.p4.classList.add('p4');
         this.p4.textContent = this.likes;
         this.heart.setAttribute("tabindex", "0");
-        // this.button_like = document.createElement('button');
-        // this.button_like.classList.add("button_like");
-        // this.p4.appendChild(this.button_like)
-        // this.button_like.appendChild(this.heart);
+        this.heart.setAttribute("aria-label", "like");
         this.p4.appendChild(this.heart);
         photographWorkDiv.appendChild(workDiv1);
         workDiv1.appendChild(p1);
@@ -105,10 +100,8 @@ export class Media {
 
         // //INCREMENTATION DES LIKES
         this.heart.addEventListener("click", this.incrementLikes)
-            // this.button_like.addEventListener("click", this.incrementLikes)
 
         this.heart.addEventListener("keydown", (e) => {
-            // this.button_like.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
                 this.incrementLikes()
                 this.heart.focus();
