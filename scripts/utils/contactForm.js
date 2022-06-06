@@ -5,7 +5,7 @@ const modal = document.getElementById("contact_modal");
 const focusableSelector = 'img, input, button';
 let focusables = [];
 const main = document.querySelector('main');
-const close = document.getElementById("close");
+const close = document.getElementById("close_button");
 const button = document.getElementById("button");
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
@@ -59,6 +59,7 @@ export function focusInModal(e) {
 
 document.forms[0].addEventListener("submit", function(e) {
     e.preventDefault();
+
     const isFirstNameValid = checkFirstName(document.getElementById('first').value) // vérifie la valeur saisie par l'utlisateur
     const isLastNameValid = checkLastName(document.getElementById('last').value)
     const isEmailValid = checkEmail(document.getElementById('email').value)
@@ -71,11 +72,12 @@ document.forms[0].addEventListener("submit", function(e) {
         document.querySelector('header').style.opacity = "0.6";
         document.getElementById("close").style.display = "none";
         main.style.opacity = "0.6";
-        form.reset();
+
         confirmMessage.style.display = "flex";
 
         // CONSOLE.LOG DES INPUTS
         console.log("Prénom:", firstName.value, "Nom:", lastName.value, "Email:", email.value, "Message:", message.value)
+        form.reset();
     }
 });
 
